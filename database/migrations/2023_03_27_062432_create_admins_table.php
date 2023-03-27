@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('role_id')->nullable();
+            $table->text('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
