@@ -12,6 +12,26 @@
                         <form class="forms-sample" method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">Role</label>
+                                <div class="col-sm-9">
+                                    <select name="role_id" class="form-control" id="role_id">
+                                        <option value="">Select Role</option>
+                                        @if(count($roles))
+                                            @foreach($roles as $role)
+                                                <option
+                                                    @if($role->id === $user->role_id) selected @endif
+                                                    value="{{ $role->id }}">{{$role->role_name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('role_id')
+                                    <small class="text-danger">
+                                        <i>{{ $message }}</i>
+                                    </small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="name" class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="name" value="{{ $user->name }}" id="name" placeholder="Name">

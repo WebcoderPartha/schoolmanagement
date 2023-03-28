@@ -23,7 +23,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
                 <i class="typcn typcn-film menu-icon"></i>
-                <span class="menu-title">Users Section</span>
+                <span class="menu-title">Manage User</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="user">

@@ -65,7 +65,7 @@
                         <span class="count"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                        <a class="dropdown-item">
+                        <a href="{{ route('profile.setting') }}" class="dropdown-item">
                             <i class="typcn typcn-cog-outline text-primary"></i>
                             Settings
                         </a>

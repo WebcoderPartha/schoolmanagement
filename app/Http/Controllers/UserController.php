@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Role;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = Admin::orderBy('id', 'DESC')->get();
+
+        $users = Admin::with('role')->orderBy('id', 'DESC')->get();
         return view('user.index', compact('users'));
     }
 
@@ -25,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $roles = Role::all();
+        return view('user.create', compact('roles'));
     }
 
     /**
@@ -33,11 +36,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name'      =>  'required',
             'username'  =>  'required|unique:admins,username',
             'email'  =>  'required|unique:admins,email',
             'password'  =>  'required|confirmed',
+            'role_id' => 'required'
         ]);
 
         if ($request->file('image')){
@@ -49,6 +54,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->username = $request->username;
             $user->email = $request->email;
+            $user->role_id = $request->role_id;
             $user->password = Hash::make($request->password);
             $user->image = $directory.$image;
             $user->save();
@@ -62,6 +68,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->username = $request->username;
             $user->email = $request->email;
+            $user->role_id = $request->role_id;
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -84,8 +91,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $roles = Role::all();
         $user = Admin::find($id);
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user','roles'));
     }
 
     /**
@@ -101,6 +109,7 @@ class UserController extends Controller
             'username'  =>  'required|unique:admins,username,'.$user->id,
             'email'  =>  'required|unique:admins,email,'.$user->id,
             'password'  =>  'required|confirmed',
+            'role_id' => 'required'
         ]);
 
 
@@ -121,6 +130,7 @@ class UserController extends Controller
                     $user->name = $request->name;
                     $user->username = $request->username;
                     $user->email = $request->email;
+                    $user->role_id = $request->role_id;
                     $user->password = Hash::make($request->password);
                     $user->image = $directory.$imageName;
                     $user->save();
@@ -131,6 +141,7 @@ class UserController extends Controller
                     $user->name = $request->name;
                     $user->username = $request->username;
                     $user->email = $request->email;
+                    $user->role_id = $request->role_id;
                     $user->password = Hash::make($request->password);
                     $user->image = $directory.$imageName;
                     $user->save();
@@ -141,6 +152,7 @@ class UserController extends Controller
                 $user->name = $request->name;
                 $user->username = $request->username;
                 $user->email = $request->email;
+                $user->role_id = $request->role_id;
                 $user->password =Hash::make($request->password);
                 $user->image = $directory.$imageName;
                 $user->save();
@@ -153,6 +165,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->username = $request->username;
             $user->email = $request->email;
+            $user->role_id = $request->role_id;
             $user->password = Hash::make($request->password);
             $user->save();
             Toastr::success('User updated successfully!');

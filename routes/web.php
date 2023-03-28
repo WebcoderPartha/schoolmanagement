@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileSettingController;
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -28,6 +29,12 @@ Route::controller(UserController::class)->middleware('admin')->group(function ()
     Route::post('/user/update/{id}', 'update')->name('user.update');
     Route::get('/user/delete/{id}', 'destroy')->name('user.delete');
 });
+Route::controller(ProfileSettingController::class)->middleware('admin')->group(function (){
+    Route::get('/profile/settings', 'index')->name('profile.setting');
+    Route::post('/profile/update', 'updateProfile')->name('profile.update');
+    Route::post('/profile/update-password', 'updatePassword')->name('profile.update.password');
+});
+
 
 
 Route::controller(AuthController::class)->group(function (){

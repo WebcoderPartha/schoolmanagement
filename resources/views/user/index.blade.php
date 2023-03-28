@@ -10,7 +10,6 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">User List</h4>
-
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -40,7 +39,13 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->username }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->role }}</td>
+                                            <td>
+                                                @if($user->role_id !== NULL)
+                                                    {{$user->role->role_name}}
+                                                @else
+                                                    <span>Subscriber</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $user->created_at->format('d F Y') }}</td>
                                             <td>
                                                 @if(Auth::guard('admin')->id() !== $user->id)
