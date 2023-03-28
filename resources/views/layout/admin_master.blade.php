@@ -247,8 +247,8 @@
 <!-- Custom js for this page-->
 <script src="{{ asset('backend/js/dashboard.js') }}"></script>
 <!-- End custom js for this page-->
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 
 </body>

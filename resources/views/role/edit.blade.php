@@ -1,6 +1,6 @@
 @extends('layout.admin_master')
 @section('title')
-    All Role
+    Edit Role
 @endsection
 @section('content')
     <div class="content-wrapper">

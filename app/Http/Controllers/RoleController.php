@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -91,5 +92,14 @@ class RoleController extends Controller
         $role->delete();
         Toastr::success('Role deleted successfully!');
         return Redirect::route('role.index');
+    }
+
+    public function pdfGen(){
+        $data['data'] = Role::all();
+
+
+        $pdf = PDF::loadView('roleview', $data);
+        // download PDF file with download method
+        return $pdf->stream('pdf_file.pdf');
     }
 }

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title') - SLMS</title>
     <!-- base:css -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="{{ asset('backend/vendors/typicons/typicons.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
@@ -17,6 +18,11 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('backend/images/favicon.png') }}" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <style>
+        .form-group {
+            margin-bottom: 0px !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -35,8 +41,10 @@
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <ul class="navbar-nav mr-lg-2">
                 <li class="nav-item nav-profile dropdown">
+                    @if(Auth::guard('admin')->check())
+                        <img src="{{ asset(Auth::guard('admin')->user()->image) }}" alt="profile"/>
+                    @endif
 
-                    <img src="{{ asset('backend/images/faces/face5.jpg') }}" alt="profile"/>
                     <span class="nav-profile-name">{{ Auth::guard('admin')->name }}</span>
 
                 </li>
@@ -66,7 +74,6 @@
                             Logout
                         </a>
                     </div>
-                    <
                 </li>
                 <li class="nav-item dropdown mr-0">
                     <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">

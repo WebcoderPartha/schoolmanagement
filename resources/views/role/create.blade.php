@@ -14,7 +14,12 @@
                             <div class="form-group row">
                                 <label for="role_name" class="col-sm-3 col-form-label">Role Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="role_name" placeholder="Role name">
+                                    <input type="text" class="form-control" name="role_name" id="role_name" placeholder="Role name">
+                                    @error('role_name')
+                                    <small class="text-danger">
+                                        <i>{{ $message }}</i>
+                                    </small>
+                                    @enderror
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Add</button>

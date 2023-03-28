@@ -30,7 +30,7 @@
                                     <td>{{ $role->role_slug }}</td>
                                     <td>
 
-                                        <a href="{{ route('role.edit', $role->id) }}" type="button" class="btn btn-warning btn-icon-text">
+                                        <a href="{{ route('pdf') }}" type="button" class="btn btn-warning btn-icon-text">
                                             <i class="typcn typcn-edit btn-icon-prepend"></i>
                                             Edit
                                         </a>

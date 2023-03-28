@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -17,6 +18,15 @@ Route::controller(RoleController::class)->middleware('admin')->group(function ()
     Route::get('/role/edit/{id}', 'edit')->name('role.edit');
     Route::post('/role/update/{id}', 'update')->name('role.update');
     Route::get('/role/delete/{id}', 'destroy')->name('role.delete');
+    Route::get('/role/view/', 'pdfGen')->name('pdf');
+});
+Route::controller(UserController::class)->middleware('admin')->group(function (){
+    Route::get('/users', 'index')->name('user.index');
+    Route::get('/user/add', 'create')->name('user.create');
+    Route::post('/user/store', 'store')->name('user.store');
+    Route::get('/user/edit/{id}', 'edit')->name('user.edit');
+    Route::post('/user/update/{id}', 'update')->name('user.update');
+    Route::get('/user/delete/{id}', 'destroy')->name('user.delete');
 });
 
 
