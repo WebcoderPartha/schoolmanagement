@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileSettingController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
+use App\Http\Controllers\Backend\Setup\StudentShiftController;
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -39,7 +40,6 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
         // Student Classes
         Route::get('/student/class/view', 'StudentClassView')->name('student.class.view');
-//        Route::get('/student/class/add', 'StudentClassAdd')->name('student.class.add');
         Route::post('/student/class/store', 'StudentClassStore')->name('student.class.store');
         Route::get('/student/class/edit/{id}', 'StudentClassEdit')->name('student.class.edit');
         Route::post('/student/class/update/{id}', 'StudentClassUpdate')->name('student.class.update');
@@ -49,7 +49,6 @@ Route::prefix('setups')->middleware('admin')->group(function (){
     // Student Year
     Route::controller(StudentYearController::class)->group(function (){
         Route::get('/student/year/view', 'StudentYearView')->name('student.year.view');
-//        Route::get('/student/class/add', 'StudentClassAdd')->name('student.class.add');
         Route::post('/student/year/store', 'StudentYearStore')->name('student.year.store');
         Route::get('/student/year/edit/{id}', 'StudentYearEdit')->name('student.year.edit');
         Route::post('/student/year/update/{id}', 'StudentYearUpdate')->name('student.year.update');
@@ -59,11 +58,19 @@ Route::prefix('setups')->middleware('admin')->group(function (){
     // Student Group
     Route::controller(StudentGroupController::class)->group(function (){
         Route::get('/student/group/view', 'StudentGroupView')->name('student.group.view');
-//        Route::get('/student/class/add', 'StudentClassAdd')->name('student.class.add');
         Route::post('/student/group/store', 'StudentGroupStore')->name('student.group.store');
         Route::get('/student/group/edit/{id}', 'StudentGroupEdit')->name('student.group.edit');
         Route::post('/student/group/update/{id}', 'StudentGroupUpdate')->name('student.group.update');
         Route::get('/student/group/delete/{id}', 'StudentGroupDestroy')->name('student.group.delete');
+    });
+
+    // Student Shift
+    Route::controller(StudentShiftController::class)->group(function (){
+        Route::get('/student/shift/view', 'StudentShiftView')->name('student.shift.view');
+        Route::post('/student/shift/store', 'StudentShiftStore')->name('student.shift.store');
+        Route::get('/student/shift/edit/{id}', 'StudentShiftEdit')->name('student.shift.edit');
+        Route::post('/student/shift/update/{id}', 'StudentShiftUpdate')->name('student.shift.update');
+        Route::get('/student/shift/delete/{id}', 'StudentShiftDestroy')->name('student.shift.delete');
     });
 
 
