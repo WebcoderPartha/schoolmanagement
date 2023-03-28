@@ -42,6 +42,8 @@
             <div class="collapse" id="setups">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.class.view') }}">Student Classes</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.year.view') }}">Student Year</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.group.view') }}">Student Group</a></li>
                 </ul>
             </div>
         </li>

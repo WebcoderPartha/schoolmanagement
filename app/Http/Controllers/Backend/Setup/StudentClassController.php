@@ -13,7 +13,7 @@ class StudentClassController extends Controller
 
     public function StudentClassView(){
         $studentClasses = StudentClass::all();
-        return view('backend/setups/student/student_class_view', compact('studentClasses'));
+        return view('backend.setups.student.class.student_class_view', compact('studentClasses'));
     }
 
 //    public function StudentClassAdd(){
@@ -38,7 +38,7 @@ class StudentClassController extends Controller
     {
 
         $studentClass = StudentClass::find($id);
-        return view('backend/setups/student/student_class_edit', compact('studentClass'));
+        return view('backend.setups.student.class.student_class_edit', compact('studentClass'));
 
     }
 
@@ -61,6 +61,7 @@ class StudentClassController extends Controller
 
         $studentClass = StudentClass::find($id);
         $studentClass->delete();
+        Toastr::success('Student class deleted successfully!');
         return Redirect::route('student.class.view');
 
     }
