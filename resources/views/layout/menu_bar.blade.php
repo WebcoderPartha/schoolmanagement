@@ -34,14 +34,14 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+            <a class="nav-link" data-toggle="collapse" href="#setups" aria-expanded="false" aria-controls="setups">
                 <i class="typcn typcn-chart-pie-outline menu-icon"></i>
-                <span class="menu-title">Charts</span>
+                <span class="menu-title">Setup Management</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="charts">
+            <div class="collapse" id="setups">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.class.view') }}">Student Classes</a></li>
                 </ul>
             </div>
         </li>
