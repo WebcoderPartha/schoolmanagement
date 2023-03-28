@@ -18,11 +18,20 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('backend/images/favicon.png') }}" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+
     <style>
         .form-group {
             margin-bottom: 0px !important;
         }
     </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#delete").on("click", function(){
+
+            });
+        });
+    </script>
 </head>
 <body>
 

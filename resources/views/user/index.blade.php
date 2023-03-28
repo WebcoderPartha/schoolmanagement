@@ -60,12 +60,12 @@
                                                     </button>
                                                 @endif
                                                 @if(Auth::guard('admin')->id() !== $user->id)
-                                                    <a href="{{ route('user.delete', $user->id) }}" onclick="return confirm('Are you sure to delete?')" type="button" class="btn btn-danger btn-icon-text">
+                                                    <a id="delete" href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-icon-text">
                                                         <i class="typcn typcn-delete-outline btn-icon-prepend"></i>
                                                         Delete
                                                     </a>
                                                 @else
-                                                    <button disabled type="button" class="btn btn-danger btn-icon-text">
+                                                    <button  disabled type="button" class="btn btn-danger btn-icon-text">
                                                         <i class="typcn typcn-delete-outline btn-icon-prepend"></i>
                                                         Delete
                                                     </button>

@@ -244,13 +244,43 @@
 <script src="{{ asset('backend/js/settings.js') }}"></script>
 <script src="{{ asset('backend/js/todolist.js') }}"></script>
 <!-- endinject -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on("click","#delete",function(e) {
+            e.preventDefault();
+            var link = $(this).attr('href');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link;
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        });
+
+
+    })
+</script>
+
 <!-- Custom js for this page-->
 <script src="{{ asset('backend/js/dashboard.js') }}"></script>
 <!-- End custom js for this page-->
 <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-{!! Toastr::message() !!}
 
+{!! Toastr::message() !!}
 </body>
 
 </html>

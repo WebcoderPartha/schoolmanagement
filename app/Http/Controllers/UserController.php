@@ -47,7 +47,7 @@ class UserController extends Controller
 
         if ($request->file('image')){
             $file = $request->file('image');
-            $image = 'avatar'.date('d-m-Y').'.'.$file->getClientOriginalExtension();
+            $image = 'avatar-'.date('d-m-Y').'.'.$file->getClientOriginalExtension();
             $directory = 'uploads/profile/';
             Image::make($file)->resize('600', '600')->save($directory.$image);
             $user = new Admin();
@@ -116,7 +116,7 @@ class UserController extends Controller
         if ($request->file('image')){
 
             $image = $request->file('image');
-            $imageName = 'avatar'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+            $imageName = 'avatar-'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
             $directory = 'uploads/profile/';
 
             Image::make($image)->resize(600,600)->save($directory.$imageName);

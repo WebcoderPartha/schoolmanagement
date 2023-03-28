@@ -34,7 +34,7 @@
                                             <i class="typcn typcn-edit btn-icon-prepend"></i>
                                             Edit
                                         </a>
-                                        <a href="{{ route('role.delete', $role->id) }}" onclick="return confirm('Are you sure to delete?')" type="button" class="btn btn-danger btn-icon-text">
+                                        <a id="delete" href="{{ route('role.delete', $role->id) }}" type="button" class="btn btn-danger btn-icon-text">
                                             <i class="typcn typcn-delete-outline btn-icon-prepend"></i>
                                             Delete
                                         </a>
