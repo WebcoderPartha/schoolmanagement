@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
+use App\Http\Controllers\Backend\Setup\ExamTypeController;
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -84,6 +85,8 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/student/fee/category/delete/{id}', 'StudentFeeCategoryDestroy')->name('student.fcategory.delete');
     });
 
+
+
     // Student Fee Category Amount
     Route::controller(FeeCategoryAmountController::class)->group(function (){
         Route::get('/student/fee/amount/view', 'StudentFeeCategoryAmountView')->name('student.fcamount.view');
@@ -95,6 +98,15 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/student/fee/amount/single/{id}', 'FeeAmountDeleteSingle')->name('student.fcamount.single.del');
         Route::get('/student/fee/amount/details/{fee_category_id}', 'FeeAmountDetails')->name('student.fcamount.details');
         Route::get('/student/fee/amount/pdf/{fee_category_id}', 'FeeAmountDetailsPDF')->name('student.fcamount.pdf');
+    });
+
+    // Exam Type
+    Route::controller(ExamTypeController::class)->group(function (){
+        Route::get('/exam/type/view', 'ExamTypeView')->name('exam_type.view');
+        Route::post('/exam/type/store', 'ExamTypeStore')->name('exam_type.store');
+        Route::get('/exam/type/edit/{id}', 'ExamTypeEdit')->name('exam_type.edit');
+        Route::post('/exam/type/update/{id}', 'ExamTypeUpdate')->name('exam_type.update');
+        Route::get('/exam/type/delete/{id}', 'ExamTypeDestroy')->name('exam_type.delete');
     });
 
 

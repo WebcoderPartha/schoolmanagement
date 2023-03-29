@@ -1,6 +1,6 @@
 @extends('layout.admin_master')
 @section('title')
-    Student Classes
+    Exam Type
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -9,30 +9,30 @@
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Student Classes</h4>
+                        <h4 class="card-title">Exam Type List</h4>
 
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Class Name</th>
+                                    <th>Exam Type</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(count($studentClasses))
-                                    @foreach($studentClasses as $key => $studentClass)
+                                @if(count($examTypes))
+                                    @foreach($examTypes as $key => $exam)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $studentClass->class_name }}</td>
+                                            <td>{{ $exam->name }}</td>
                                             <td>
 
-                                                <a href="{{ route('student.class.edit', $studentClass->id) }}" type="button" class="btn btn-sm btn-warning btn-icon-text">
+                                                <a href="{{ route('exam_type.edit', $exam->id) }}" type="button" class="btn btn-warning btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-prepend"></i>
                                                     Edit
                                                 </a>
-                                                <a id="delete" href="{{ route('student.class.delete', $studentClass->id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
+                                                <a id="delete" href="{{ route('exam_type.delete', $exam->id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-prepend"></i>
                                                     Delete
                                                 </a>
@@ -41,7 +41,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="4">  <h4 class="text-center">No classes found.</h4></td>
+                                        <td colspan="4">  <h4 class="text-center">No exam found.</h4></td>
                                     </tr>
 
                                 @endif
@@ -55,14 +55,14 @@
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Add Class</h4>
-                        <form class="forms-sample" method="POST" action="{{ route('student.class.store') }}">
+                        <h4 class="card-title">Add Exam</h4>
+                        <form class="forms-sample" method="POST" action="{{ route('exam_type.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="class_name" class="col-sm-3 col-form-label">Class Name</label>
+                                <label for="name" class="col-sm-3 col-form-label">Exam Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="class_name" id="class_name" placeholder="Class name">
-                                    @error('class_name')
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Exam name">
+                                    @error('name')
                                     <small class="text-danger">
                                         <i>{{ $message }}</i>
                                     </small>
@@ -72,7 +72,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-3 col-form-label"></div>
                                 <div class="col-sm-9">
-                                    <button type="submit" class="btn btn-primary mr-2">Add</button>
+                                    <button type="submit" class="btn btn-primary mr-2">Add Exam</button>
                                 </div>
                             </div>
 
