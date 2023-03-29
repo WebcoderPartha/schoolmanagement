@@ -86,12 +86,15 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // Student Fee Category Amount
     Route::controller(FeeCategoryAmountController::class)->group(function (){
-        Route::get('/student/fee/category/amount/view', 'StudentFeeCategoryAmountView')->name('student.fcamount.view');
-        Route::post('/student/fee/category/amount/store', 'StudentFeeCategoryAmountStore')->name('student.fcamount.store');
-        Route::get('/student/fee/category/amount/new', 'StudentFeeCategoryAmountCreate')->name('student.fcamount.add');
-        Route::get('/student/fee/category/amount/edit/{id}', 'StudentFeeCategoryAmountEdit')->name('student.fcamount.edit');
-        Route::post('/student/fee/category/amount/update/{id}', 'StudentFeeCategoryAmountUpdate')->name('student.fcamount.update');
-        Route::get('/student/fee/category/amount/delete/{id}', 'StudentFeeCategoryAmountDestroy')->name('student.fcamount.delete');
+        Route::get('/student/fee/amount/view', 'StudentFeeCategoryAmountView')->name('student.fcamount.view');
+        Route::post('/student/fee/amount/store', 'StudentFeeCategoryAmountStore')->name('student.fcamount.store');
+        Route::get('/student/fee/amount/new', 'StudentFeeCategoryAmountCreate')->name('student.fcamount.add');
+        Route::get('/student/fee/amount/edit/{fee_category_id}', 'StudentFeeCategoryAmountEdit')->name('student.fcamount.edit');
+        Route::post('/student/fee/amount/update/{fee_category_id}', 'StudentFeeCategoryAmountUpdate')->name('student.fcamount.update');
+        Route::get('/student/fee/amount/delete/{fee_category_id}', 'StudentFeeCategoryAmountDestroy')->name('student.fcamount.delete');
+        Route::get('/student/fee/amount/single/{id}', 'FeeAmountDeleteSingle')->name('student.fcamount.single.del');
+        Route::get('/student/fee/amount/details/{fee_category_id}', 'FeeAmountDetails')->name('student.fcamount.details');
+        Route::get('/student/fee/amount/pdf/{fee_category_id}', 'FeeAmountDetailsPDF')->name('student.fcamount.pdf');
     });
 
 

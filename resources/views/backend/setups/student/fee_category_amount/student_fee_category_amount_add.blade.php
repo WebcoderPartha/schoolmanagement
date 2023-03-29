@@ -35,7 +35,7 @@
                                         <div class="form-group">
                                             <label for="student_class_id" >Student Class</label>
 
-                                                <select class="form-control" name="student_class_id" id="student_class_id">
+                                                <select class="form-control" name="student_class_id[]" id="student_class_id">
                                                     <option value="">Select Student Class</option>
                                                     @foreach($classes as $class)
                                                         <option value="{{ $class->id }}">{{ $class->class_name }}</option>
@@ -51,7 +51,7 @@
                                     <div class="col-sm-5">
                                         <div class="form-group">
                                             <label for="amount">Fee Amount</label>
-                                            <input type="text" class="form-control" name="amount" placeholder="amount" id="amount">
+                                            <input type="text" class="form-control" name="amount[]" placeholder="amount" id="amount">
                                                 @error('amount')
                                                 <small class="text-danger">
                                                     <i>{{ $message }}</i>
@@ -91,7 +91,7 @@
                     <div class="form-group">
                         <label for="student_class_id" >Student Class</label>
 
-                        <select class="form-control" name="student_class_id" id="student_class_id">
+                        <select class="form-control" name="student_class_id[]" id="student_class_id">
                             <option value="">Select Student Class</option>
                             @foreach($classes as $class)
                                 <option value="{{ $class->id }}">{{ $class->class_name }}</option>
@@ -107,7 +107,7 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label for="amount">Fee Amount</label>
-                        <input type="text" class="form-control" name="amount" placeholder="amount" id="amount">
+                        <input type="text" class="form-control" name="amount[]" placeholder="amount" id="amount">
                         @error('amount')
                         <small class="text-danger">
                             <i>{{ $message }}</i>

@@ -24,6 +24,10 @@
         .form-group {
             margin-bottom: 0px !important;
         }
+        select.form-control, .select2-container--default select.select2-selection--single, .select2-container--default .select2-selection--single select.select2-search__field, select.typeahead, select.tt-query, select.tt-hint {
+
+            color: #000;
+        }
     </style>
     <script type="text/javascript">
         $(document).ready(function(){
