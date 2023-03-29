@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
+use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -107,6 +108,15 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/exam/type/edit/{id}', 'ExamTypeEdit')->name('exam_type.edit');
         Route::post('/exam/type/update/{id}', 'ExamTypeUpdate')->name('exam_type.update');
         Route::get('/exam/type/delete/{id}', 'ExamTypeDestroy')->name('exam_type.delete');
+    });
+
+    // School Subject
+    Route::controller(SchoolSubjectController::class)->group(function (){
+        Route::get('/school/subject/view', 'SchoolSubjectView')->name('school_subject.view');
+        Route::post('/school/subject/store', 'SchoolSubjectStore')->name('school_subject.store');
+        Route::get('/school/subject/edit/{id}', 'SchoolSubjectEdit')->name('school_subject.edit');
+        Route::post('/school/subject/update/{id}', 'SchoolSubjectUpdate')->name('school_subject.update');
+        Route::get('/school/subject/delete/{id}', 'SchoolSubjectDestroy')->name('school_subject.delete');
     });
 
 
