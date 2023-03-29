@@ -49,14 +49,14 @@
                                             <td>{{ $user->created_at->format('d F Y') }}</td>
                                             <td>
                                                 @if(Auth::guard('admin')->id() !== $user->id)
-                                                <a href="{{ route('user.edit', $user->id) }}" type="button" class="btn btn-warning btn-icon-text">
-                                                    <i class="typcn typcn-edit btn-icon-prepend"></i>
+                                                <a href="{{ route('user.edit', $user->id) }}" type="button" class="btn btn-primary btn-sm btn-icon-text">
                                                     Edit
+                                                    <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
                                                 @else
-                                                    <button disabled href="{{ route('user.edit', $user->id) }}" type="button" class="btn btn-warning btn-icon-text">
-                                                        <i class="typcn typcn-edit btn-icon-prepend"></i>
+                                                    <button disabled href="{{ route('user.edit', $user->id) }}" type="button" class="btn btn-primary btn-sm btn-icon-text">
                                                         Edit
+                                                        <i class="typcn typcn-edit btn-icon-append"></i>
                                                     </button>
                                                 @endif
                                                 @if(Auth::guard('admin')->id() !== $user->id)

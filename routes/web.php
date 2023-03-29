@@ -10,6 +10,8 @@ use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
+use App\Http\Controllers\Backend\Setup\FeeCategoryController;
+use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -71,6 +73,25 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/student/shift/edit/{id}', 'StudentShiftEdit')->name('student.shift.edit');
         Route::post('/student/shift/update/{id}', 'StudentShiftUpdate')->name('student.shift.update');
         Route::get('/student/shift/delete/{id}', 'StudentShiftDestroy')->name('student.shift.delete');
+    });
+
+    // Student Fee Category
+    Route::controller(FeeCategoryController::class)->group(function (){
+        Route::get('/student/fee/category/view', 'StudentFeeCategoryView')->name('student.fcategory.view');
+        Route::post('/student/fee/category/store', 'StudentFeeCategoryStore')->name('student.fcategory.store');
+        Route::get('/student/fee/category/edit/{id}', 'StudentFeeCategoryEdit')->name('student.fcategory.edit');
+        Route::post('/student/fee/category/update/{id}', 'StudentFeeCategoryUpdate')->name('student.fcategory.update');
+        Route::get('/student/fee/category/delete/{id}', 'StudentFeeCategoryDestroy')->name('student.fcategory.delete');
+    });
+
+    // Student Fee Category Amount
+    Route::controller(FeeCategoryAmountController::class)->group(function (){
+        Route::get('/student/fee/category/amount/view', 'StudentFeeCategoryAmountView')->name('student.fcamount.view');
+        Route::post('/student/fee/category/amount/store', 'StudentFeeCategoryAmountStore')->name('student.fcamount.store');
+        Route::get('/student/fee/category/amount/new', 'StudentFeeCategoryAmountCreate')->name('student.fcamount.add');
+        Route::get('/student/fee/category/amount/edit/{id}', 'StudentFeeCategoryAmountEdit')->name('student.fcamount.edit');
+        Route::post('/student/fee/category/amount/update/{id}', 'StudentFeeCategoryAmountUpdate')->name('student.fcamount.update');
+        Route::get('/student/fee/category/amount/delete/{id}', 'StudentFeeCategoryAmountDestroy')->name('student.fcamount.delete');
     });
 
 

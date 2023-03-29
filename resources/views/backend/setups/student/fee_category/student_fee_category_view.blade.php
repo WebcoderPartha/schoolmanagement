@@ -1,6 +1,6 @@
 @extends('layout.admin_master')
 @section('title')
-    Student Shifts
+   Student Fee Category
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -9,30 +9,30 @@
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Student Shifts</h4>
+                        <h4 class="card-title">Student Fee Category</h4>
 
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Student Shift</th>
+                                    <th>Student Fee Category</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(count($studentShifts))
-                                    @foreach($studentShifts as $key => $studentShift)
+                                @if(count($feeCategories))
+                                    @foreach($feeCategories as $key => $feeCategory)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $studentShift->student_shift }}</td>
+                                            <td>{{ $feeCategory->name }}</td>
                                             <td>
 
-                                                <a href="{{ route('student.shift.edit', $studentShift->id) }}" type="button" class="btn btn-warning btn-icon-text">
+                                                <a href="{{ route('student.fcategory.edit', $feeCategory->id) }}" type="button" class="btn btn-warning btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-prepend"></i>
                                                     Edit
                                                 </a>
-                                                <a id="delete" href="{{ route('student.shift.delete', $studentShift->id) }}" type="button" class="btn btn-danger btn-icon-text">
+                                                <a id="delete" href="{{ route('student.fcategory.delete', $feeCategory->id) }}" type="button" class="btn btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-prepend"></i>
                                                     Delete
                                                 </a>
@@ -41,7 +41,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="4">  <h4 class="text-center">No student shifts found.</h4></td>
+                                        <td colspan="4">  <h4 class="text-center">No student fee category found.</h4></td>
                                     </tr>
 
                                 @endif
@@ -55,14 +55,14 @@
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Add Student Shift</h4>
-                        <form class="forms-sample" method="POST" action="{{ route('student.shift.store') }}">
+                        <h4 class="card-title">Add Student Fee Category</h4>
+                        <form class="forms-sample" method="POST" action="{{ route('student.fcategory.store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="student_shift" class="col-sm-3 col-form-label">Student Shift</label>
+                                <label for="name" class="col-sm-3 col-form-label">Student Fee Category</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="student_shift" id="student_shift" placeholder="Student year">
-                                    @error('student_year')
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Student fee category">
+                                    @error('name')
                                     <small class="text-danger">
                                         <i>{{ $message }}</i>
                                     </small>
@@ -72,7 +72,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-3 col-form-label"></div>
                                 <div class="col-sm-9">
-                                    <button type="submit" class="btn btn-primary mr-2">Add Shift</button>
+                                    <button type="submit" class="btn btn-primary mr-2">Add Fee Category</button>
                                 </div>
                             </div>
 

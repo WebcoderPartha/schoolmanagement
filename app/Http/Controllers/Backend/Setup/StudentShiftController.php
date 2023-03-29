@@ -64,4 +64,6 @@ class StudentShiftController extends Controller
         return Redirect::route('student.shift.view');
 
     }
+
+
 }

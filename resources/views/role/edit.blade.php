@@ -30,9 +30,9 @@
                                             <td>{{ $value->role_slug }}</td>
                                             <td>
 
-                                                <a href="{{ route('role.edit', $value->id) }}" type="button" class="btn btn-warning btn-icon-text">
-                                                    <i class="typcn typcn-edit btn-icon-prepend"></i>
+                                                <a href="{{ route('role.edit', $value->id) }}" type="button" class="btn btn-primary btn-sm btn-icon-text">
                                                     Edit
+                                                    <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
                                                 <a href="{{ route('role.delete', $value->id) }}" onclick="return confirm('Are you sure to delete?')" type="button" class="btn btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-prepend"></i>

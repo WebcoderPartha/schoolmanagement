@@ -45,6 +45,8 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.year.view') }}">Student Year</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.group.view') }}">Student Group</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.shift.view') }}">Student Shift</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.fcategory.view') }}">Fee Category</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.fcamount.view') }}">Fee Amount</a></li>
                 </ul>
             </div>
         </li>

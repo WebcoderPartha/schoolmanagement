@@ -30,9 +30,10 @@
                                     <td>{{ $role->role_slug }}</td>
                                     <td>
 
-                                        <a href="{{ route('pdf') }}" type="button" class="btn btn-warning btn-icon-text">
-                                            <i class="typcn typcn-edit btn-icon-prepend"></i>
+                                        <a href="{{ route('role.edit', $role->id) }}" type="button" class="btn btn-primary btn-sm btn-icon-text">
                                             Edit
+                                            <i class="typcn typcn-edit btn-icon-append"></i>
+
                                         </a>
                                         <a id="delete" href="{{ route('role.delete', $role->id) }}" type="button" class="btn btn-danger btn-icon-text">
                                             <i class="typcn typcn-delete-outline btn-icon-prepend"></i>
