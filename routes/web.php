@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
+use App\Http\Controllers\Backend\Setup\DesignationController;
 
 
 
@@ -133,6 +134,15 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/assign/subject/delete/{id}', 'assignSubjectDestroy')->name('assign_subject.delete');
         Route::get('/assign/subject/classes/list/pdf', 'assignClassSubjectListPDF')->name('assign_subject_classes.pdf');
         Route::get('/assign/subject/class/del/{class_id}', 'assignSubjectClassDelete')->name('assign_subject_class.delete');
+    });
+
+    // Designation
+    Route::controller(DesignationController::class)->group(function (){
+        Route::get('/designation/view', 'designationView')->name('designation.view');
+        Route::post('/designation/store', 'designationStore')->name('designation.store');
+        Route::get('/designation/edit/{id}', 'designationEdit')->name('designation.edit');
+        Route::post('/designation/update/{id}', 'designationUpdate')->name('designation.update');
+        Route::get('/designation/delete/{id}', 'designationDestroy')->name('designation.delete');
     });
 
 
