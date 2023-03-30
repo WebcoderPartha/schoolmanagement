@@ -14,6 +14,9 @@ use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
+use App\Http\Controllers\Backend\Setup\AssignSubjectController;
+
+
 
 Route::controller(AdminController::class)->middleware('admin')->group(function (){
     Route::get('/dashboard', 'Dashboard')->name('dashboard');
@@ -117,6 +120,15 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/school/subject/edit/{id}', 'SchoolSubjectEdit')->name('school_subject.edit');
         Route::post('/school/subject/update/{id}', 'SchoolSubjectUpdate')->name('school_subject.update');
         Route::get('/school/subject/delete/{id}', 'SchoolSubjectDestroy')->name('school_subject.delete');
+    });
+
+    // Assign Subject
+    Route::controller(SchoolSubjectController::class)->group(function (){
+        Route::get('/assign/subject/view', 'assignSubjectView')->name('assign_subject.view');
+        Route::post('/assign/subject/store', 'assignSubjectStore')->name('assign_subject.store');
+        Route::get('/assign/subject/edit/{class_id}', 'assignSubjectEdit')->name('assign_subject.edit');
+        Route::post('/assign/subject/update/{class_id}', 'assignSubjectUpdate')->name('assign_subject.update');
+        Route::get('/assign/subject/delete/{id}', 'assignSubjectDestroy')->name('assign_subject.delete');
     });
 
 
