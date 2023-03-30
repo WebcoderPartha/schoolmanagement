@@ -6,7 +6,8 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-body">
-                <form action="">
+                <form method="POST" action="{{ route('student.regi.store') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="row mt-2">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -39,6 +40,7 @@
                             <div class="form-group">
                                 <label for="religion">Religion</label>
                                 <select class="form-control" name="religion" id="religion">
+                                    <option value="">Select Religion</option>
                                     <option value="Islam">Islam</option>
                                     <option value="Hindu">Hindu</option>
                                     <option value="Buddhist">Buddhist</option>
@@ -50,6 +52,7 @@
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <select class="form-control" name="gender" id="gender">
+                                    <option value="">Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
@@ -138,6 +141,13 @@
                             </div>
                         </div>
                     </div> <!-- End Row -->
+                    <div class="row mt-4">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6">
+                            <input type="submit" class="btn btn-primary" value="Confirm Registration">
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
                 </form>
             </div>
         </div>

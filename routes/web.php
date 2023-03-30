@@ -155,7 +155,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
     Route::controller(StudentRegistrationController::class)->group(function (){
         Route::get('/view/all', 'AllStudentView')->name('student.all.view');
         Route::get('/registration/student/new', 'StudentRegistration')->name('student.registration');
-//        Route::post('/designation/store', 'designationStore')->name('designation.store');
+        Route::post('/registration/student/store', 'registrationStore')->name('student.regi.store');
 //        Route::get('/designation/edit/{id}', 'designationEdit')->name('designation.edit');
 //        Route::post('/designation/update/{id}', 'designationUpdate')->name('designation.update');
 //        Route::get('/designation/delete/{id}', 'designationDestroy')->name('designation.delete');
