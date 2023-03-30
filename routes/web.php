@@ -123,12 +123,16 @@ Route::prefix('setups')->middleware('admin')->group(function (){
     });
 
     // Assign Subject
-    Route::controller(SchoolSubjectController::class)->group(function (){
+    Route::controller(AssignSubjectController::class)->group(function (){
         Route::get('/assign/subject/view', 'assignSubjectView')->name('assign_subject.view');
+        Route::get('/assign/subject/add-assign-subject', 'assignSubjectAdd')->name('assign_subject.add');
         Route::post('/assign/subject/store', 'assignSubjectStore')->name('assign_subject.store');
+        Route::get('/assign/subject/details/class/{class_id}', 'assignSubjectClassDetails')->name('assign_subject.details');
         Route::get('/assign/subject/edit/{class_id}', 'assignSubjectEdit')->name('assign_subject.edit');
         Route::post('/assign/subject/update/{class_id}', 'assignSubjectUpdate')->name('assign_subject.update');
         Route::get('/assign/subject/delete/{id}', 'assignSubjectDestroy')->name('assign_subject.delete');
+        Route::get('/assign/subject/classes/list/pdf', 'assignClassSubjectListPDF')->name('assign_subject_classes.pdf');
+        Route::get('/assign/subject/class/del/{class_id}', 'assignSubjectClassDelete')->name('assign_subject_class.delete');
     });
 
 

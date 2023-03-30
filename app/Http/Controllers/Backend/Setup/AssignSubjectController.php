@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend\Setup;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignSubject;
+use App\Models\SchoolSubject;
 use App\Models\StudentClass;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -12,11 +14,17 @@ use Illuminate\Support\Facades\Redirect;
 class AssignSubjectController extends Controller
 {
     public function assignSubjectView(){
-        $classes = AssignSubject::with('student_class')->select('class_id')->groupBy('student_class')->get();
+        $classes = AssignSubject::with('class')->select('class_id')->groupBy('class_id')->get();
         return view('backend.setups.student.assign_subject.assign_subject_view', compact('classes'));
 
     }
 
+
+    public function assignSubjectAdd(){
+        $allClasses = StudentClass::all();
+        $allSubjects = SchoolSubject::all();
+        return view('backend.setups.student.assign_subject.assign_subject_add', compact('allSubjects', 'allClasses'));
+    }
     public function assignSubjectStore(Request $request){
 
         $this->validate($request, [
@@ -27,25 +35,21 @@ class AssignSubjectController extends Controller
             'subjective_mark' => 'required',
         ]);
 
-        $count_class = count($request->class_id);
+        $count = count($request->subject_id);
 
-        if ($count_class !== NULL){
+        if ($request->class_id !== null){
 
-            for ($i = 0; $i < $count_class; $i++){
-                $assign_subject = new AssignSubject();
-                $assign_subject->subject_id = $request->subject_id;
-                $assign_subject->class_id = $request->class_id[$i];
-                $assign_subject->pass_mark = $request->pass_mark[$i];
-                $assign_subject->full_mark = $request->full_mark[$i];
-                $assign_subject->subjective_mark = $request->subjective_mark[$i];
-                $assign_subject->save();
+            for ($i = 0; $i < $count ; $i++){
+                $assignSubject = new AssignSubject();
+                $assignSubject->class_id = $request->class_id;
+                $assignSubject->subject_id = $request->subject_id[$i];
+                $assignSubject->pass_mark = $request->pass_mark[$i];
+                $assignSubject->full_mark = $request->full_mark[$i];
+                $assignSubject->subjective_mark = $request->subjective_mark[$i];
+                $assignSubject->save();
             }
 
-        }else{
-            Toastr::error('Please select class!');
-            return Redirect::back();
         }
-
         Toastr::success('Assign subject added successfully!');
         return Redirect::route('assign_subject.view');
 
@@ -54,34 +58,70 @@ class AssignSubjectController extends Controller
 
     public function assignSubjectEdit($class_id){
         $classes = StudentClass::all();
+        $allSubject = SchoolSubject::all();
         $assignSubjects = AssignSubject::where('class_id', $class_id)->get();
-        return view('backend.setups.student.school_subject.school_subject_edit', compact('classes','assignSubjects'));
+        return view('backend.setups.student.assign_subject.assign_subject_edit', compact('classes','assignSubjects', 'allSubject'));
 
     }
 
     public function assignSubjectUpdate(Request $request, $class_id){
 
-        $this->validate($request, [
-            'subject_id' => 'required',
-            'class_id' => 'required',
-            'pass_mark' => 'required',
-            'full_mark' => 'required',
-            'subjective_mark' => 'required',
-        ]);
+//        $this->validate($request, [
+//            'subject_id' => 'required',
+//            'class_id' => 'required',
+//            'pass_mark' => 'required',
+//            'full_mark' => 'required',
+//            'subjective_mark' => 'required',
+//        ]);
+
+        if ($request->class_id !== NULL ){
+
+            $count = count($request->subject_id);
+            $oldClass = AssignSubject::where('class_id', $class_id)->delete();
+            for ($i = 0; $i < $count; $i++){
+                $assignSubject = new AssignSubject();
+                $assignSubject->class_id = $request->class_id;
+                $assignSubject->subject_id = $request->subject_id[$i];
+                $assignSubject->pass_mark = $request->pass_mark[$i];
+                $assignSubject->full_mark = $request->full_mark[$i];
+                $assignSubject->subjective_mark = $request->subjective_mark[$i];
+                $assignSubject->save();
+            }
 
 
+        }else{
+            Toastr::error('Please select class!');
+            return Redirect::back();
+        }
 
-
-        Toastr::success('Subject updated successfully!');
-        return Redirect::route('school_subject.view');
+        Toastr::success('Assign updated successfully!');
+        return Redirect::route('assign_subject.view');
 
     }
 
+    public function assignSubjectClassDetails($class_id){
+        $assSubjectsClass = AssignSubject::with('class', 'subject')->where('class_id', $class_id)->orderBy('subject_id', 'asc')->get();
+        return view('backend.setups.student.assign_subject.assign_subject_class_details', compact('assSubjectsClass'));
+    }
+
+    public function assignSubjectClassDelete($class_id){
+        $subject = AssignSubject::where('class_id', $class_id)->delete();
+        Toastr::success('Assign subject class deleted successfully!');
+        return Redirect::route('assign_subject.view');
+    }
     public function assignSubjectDestroy($id){
-        $subject = SchoolSubject::find($id);
+        $subject = AssignSubject::find($id);
         $subject->delete();
         Toastr::success('Subject deleted successfully!');
-        return Redirect::route('school_subject.view');
+        return Redirect::back();
+    }
+
+
+    public function assignClassSubjectListPDF(){
+
+        $data['allData'] = AssignSubject::orderBy('class_id', 'asc')->get()->groupBy('class_id');
+        $PDF = Pdf::loadView('backend.pdf.assign_class_subject_list', $data);
+        return $PDF->stream('assign_class_subject_list.pdf');
     }
 
 }

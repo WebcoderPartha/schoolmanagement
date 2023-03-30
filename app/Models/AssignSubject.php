@@ -16,7 +16,7 @@ class AssignSubject extends Model
         'subjective_mark'
     ];
 
-    public function student_class(){
+    public function class(){
         return $this->belongsTo(StudentClass::class, 'class_id', 'id');
     }
 
