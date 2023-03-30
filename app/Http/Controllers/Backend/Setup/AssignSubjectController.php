@@ -29,15 +29,19 @@ class AssignSubjectController extends Controller
 
         $this->validate($request, [
             'subject_id' => 'required',
+            'subject_id.*' => 'required',
             'class_id' => 'required',
             'pass_mark' => 'required',
+            'pass_mark.*' => 'required',
             'full_mark' => 'required',
+            'full_mark.*' => 'required',
             'subjective_mark' => 'required',
+            'subjective_mark.*' => 'required',
         ]);
 
         $count = count($request->subject_id);
 
-        if ($request->class_id !== null){
+        if ($count != null){
 
             for ($i = 0; $i < $count ; $i++){
                 $assignSubject = new AssignSubject();
@@ -49,6 +53,9 @@ class AssignSubjectController extends Controller
                 $assignSubject->save();
             }
 
+        }else{
+            Toastr::error('Subject must not be empty!');
+            return Redirect::back();
         }
         Toastr::success('Assign subject added successfully!');
         return Redirect::route('assign_subject.view');
