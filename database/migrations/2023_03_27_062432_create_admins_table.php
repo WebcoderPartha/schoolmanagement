@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('role_id')->nullable();
             $table->text('image')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

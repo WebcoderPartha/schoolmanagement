@@ -51,6 +51,19 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_subject.view') }}">School Subject</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('assign_subject.view') }}">Assign Subject</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('designation.view') }}">Designation</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('designation.view') }}">Designation</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#students" aria-expanded="false" aria-controls="students">
+                <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                <span class="menu-title">Manage Student</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="students">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.all.view') }}">Student Registration</a></li>
                 </ul>
             </div>
         </li>

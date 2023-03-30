@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
+use App\Http\Controllers\Backend\Student\StudentRegistrationController;
 
 
 
@@ -145,7 +146,20 @@ Route::prefix('setups')->middleware('admin')->group(function (){
         Route::get('/designation/delete/{id}', 'designationDestroy')->name('designation.delete');
     });
 
+    // Student Registration
 
+
+});
+
+Route::prefix('students')->middleware('admin')->group(function (){
+    Route::controller(StudentRegistrationController::class)->group(function (){
+        Route::get('/view/all', 'AllStudentView')->name('student.all.view');
+        Route::get('/registration/student/new', 'StudentRegistration')->name('student.registration');
+//        Route::post('/designation/store', 'designationStore')->name('designation.store');
+//        Route::get('/designation/edit/{id}', 'designationEdit')->name('designation.edit');
+//        Route::post('/designation/update/{id}', 'designationUpdate')->name('designation.update');
+//        Route::get('/designation/delete/{id}', 'designationDestroy')->name('designation.delete');
+    });
 });
 
 

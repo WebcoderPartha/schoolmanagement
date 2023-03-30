@@ -35,6 +35,7 @@ class DesignationController extends Controller
         $designation = Designation::find($id);
 
         return view('backend.setups.student.designation.designation_edit', compact('designation'));
+
     }
 
     public function designationUpdate(Request $request, $id){
