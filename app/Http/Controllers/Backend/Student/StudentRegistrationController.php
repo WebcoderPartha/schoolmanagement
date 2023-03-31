@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Discount;
+use App\Models\FeeCategory;
 use App\Models\Student;
 use App\Models\StudentClass;
 use App\Models\StudentGroup;
@@ -27,6 +29,7 @@ class StudentRegistrationController extends Controller
         $data['groups'] = StudentGroup::all();
         $data['shifts'] = StudentShift::all();
         $data['classes'] = StudentClass::all();
+        $data['fee_categories'] = FeeCategory::all();
         return view('backend.students.register_student', $data);
     }
 
@@ -76,6 +79,13 @@ class StudentRegistrationController extends Controller
             $student->group_id = $request->group_id;
             $student->image = $directory.$imageName;
             $student->save();
+
+            $discount = new Discount();
+            $discount->fee_category_id = $request->fee_category_id;
+            $discount->student_id = $student->id;
+            $discount->discount = $request->discount;
+            $discount->save();
+
             Toastr::success('Student registration successfully');
             return Redirect::route('student.all.view');
 
@@ -97,6 +107,14 @@ class StudentRegistrationController extends Controller
             $student->shift_id = $request->shift_id;
             $student->group_id = $request->group_id;
             $student->save();
+
+
+            $discount = new Discount();
+            $discount->fee_category_id = $request->fee_category_id;
+            $discount->student_id = $student->id;
+            $discount->discount = $request->discount;
+            $discount->save();
+
             Toastr::success('Student registration successfully');
             return Redirect::route('student.all.view');
         }
