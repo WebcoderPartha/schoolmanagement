@@ -15,7 +15,9 @@
                                     <option value="">Select year</option>
                                     @foreach($years as $year)
                                         <option
-                                            @if($allData[0]->year_id == $year->id) selected @endif
+                                            @if(count($allData) > 0)
+                                                @if($allData[0]->year_id == $year->id) selected @endif
+                                        @endif
                                         value="{{ $year->id }}">{{ $year->student_year }}</option>
                                     @endforeach
                                 </select>
@@ -29,7 +31,9 @@
                                     <option value="">Select class</option>
                                     @foreach($classes as $class)
                                         <option
-                                            @if($allData[0]->class_id == $class->id) selected @endif
+                                            @if(count($allData) > 0)
+                                                @if($allData[0]->class_id == $class->id) selected @endif
+                                            @endif
                                         value="{{ $class->id }}">{{ $class->class_name }}</option>
                                     @endforeach
                                 </select>
@@ -73,19 +77,20 @@
                                             <td>{{ $student->name }}</td>
                                             <td>{{ $student->id_number }}</td>
                                             <td>{{ $student->roll }}</td>
+                                            <td><img src="{{ (!empty($student->image))? asset($student->image) : '' }}" width="150" alt=""></td>
 
                                             <td>
 
                                                 <a href="{{ route('student.regi.edit', $student->id) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                <a href="" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('student.detail.get', $student->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
-                                                <a id="delete" href="" type="button" class="btn btn-sm btn-danger btn-icon-text">
+                                                <a id="delete" href="{{ route('registudent.delete', $student->id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-append"></i>
                                                 </a>
-                                                <a href="" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('student.detail.pdf', $student->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     <i class="typcn typcn-printer btn-icon-append"></i>
                                                 </a>
                                             </td>

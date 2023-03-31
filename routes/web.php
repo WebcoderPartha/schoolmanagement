@@ -158,8 +158,11 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::get('/registration/student/new', 'StudentRegistration')->name('student.registration');
         Route::post('/registration/student/store', 'registrationStore')->name('student.regi.store');
         Route::get('/registration/student/edit/{id}', 'StudentRegistrationEdit')->name('student.regi.edit');
-//        Route::post('/designation/update/{id}', 'designationUpdate')->name('designation.update');
-//        Route::get('/designation/delete/{id}', 'designationDestroy')->name('designation.delete');
+        Route::post('/registration/student/edit/{id}', 'StudentRegistrationUpdate')->name('student.regi.update');
+        Route::get('/detail/student/{id}', 'StudentDetailGetByID')->name('student.detail.get');
+        Route::get('/detail/student/pdf/{id}', 'PDFStudentDetailGetByID')->name('student.detail.pdf');
+        Route::get('/detail/student/download/{id}', 'downloadStudentPDF')->name('student.detail.download');
+        Route::get('/delete/student/{id}', 'regiStudentDestroy')->name('registudent.delete');
     });
 });
 
