@@ -61,11 +61,11 @@
 {{--                <th>Country</th>--}}
 {{--            </tr>--}}
             <tr>
-                <td colspan="4" align="center"><img width="250" src="{{ !(empty($student->image))? url($student->image) : '' }}" alt=""></td>
+                <td colspan="4" align="center"><img width="250" src="{{ !(empty($student->student->image))? url($student->student->image) : '' }}" alt=""></td>
             </tr>
             <tr>
                 <td colspan="2">Student ID:</td>
-                <td colspan="2"><b>{{ $student->id_number }}</b></td>
+                <td colspan="2"><b>{{ $student->student->id_number }}</b></td>
             </tr>
             <tr>
                 <td colspan="2">Roll Number:</td>
@@ -89,27 +89,27 @@
             </tr>
             <tr>
                 <td>Name:</td>
-                <td>{{ $student->name }}</td>
+                <td>{{ $student->student->name }}</td>
                 <td>Father Name:</td>
-                <td>{{ $student->father_name }}</td>
+                <td>{{ $student->student->father_name }}</td>
             </tr>
             <tr>
                 <td>Date Of Birth:</td>
-                <td>{{ $student->dateofbirth }}</td>
+                <td>{{ $student->student->dateofbirth }}</td>
                 <td>Religion:</td>
-                <td>{{ $student->religion }}</td>
+                <td>{{ $student->student->religion }}</td>
             </tr>
             <tr>
                 <td>Gender:</td>
-                <td>{{ $student->gender }}</td>
+                <td>{{ $student->student->gender }}</td>
                 <td>Email:</td>
-                <td>{{ $student->email }}</td>
+                <td>{{ $student->student->email }}</td>
             </tr>
             <tr>
                 <td>Mobile:</td>
-                <td>{{ $student->phone }}</td>
+                <td>{{ $student->student->phone }}</td>
                 <td>Address:</td>
-                <td>{{ $student->address }}</td>
+                <td>{{ $student->student->address }}</td>
             </tr>
 
 

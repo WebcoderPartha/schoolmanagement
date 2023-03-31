@@ -16,18 +16,33 @@
                             <div class="form-group">
                                 <label for="name">Student Name</label>
                                 <input type="text" value="{{ $student->name }}" class="form-control" name="name" id="name" placeholder="Student Name">
+                                @error('name')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="father_name">Father Name</label>
                                 <input type="text" value="{{ $student->father_name }}" class="form-control" name="father_name" id="father_name" placeholder="Father Name">
+                                @error('father_name')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="mother_name">Mother Name</label>
                                 <input type="text" value="{{ $student->mother_name }}" class="form-control" name="mother_name" id="mother_name" placeholder="Mother Name">
+                                @error('mother_name')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                     </div> <!-- End Row -->
@@ -37,6 +52,11 @@
                             <div class="form-group">
                                 <label for="dateofbirth">Date Of Birth</label>
                                 <input type="date" value="{{ $student->dateofbirth }}" class="form-control" name="dateofbirth" id="dateofbirth">
+                                @error('dateofbirth')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -50,6 +70,11 @@
                                     <option value="Buddhist">Buddhist</option>
                                     <option value="Christan">Christan</option>
                                 </select>
+                                @error('religion')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -61,6 +86,11 @@
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
+                                @error('gender')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                     </div> <!-- End Row -->
@@ -70,18 +100,33 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" value="{{ $student->email }}" class="form-control" name="email" id="email" placeholder="Email address">
+                                @error('email')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <input type="text" value="{{ $student->phone }}" class="form-control" name="phone" id="phone" placeholder="Phone number">
+                                @error('phone')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <textarea class="form-control" name="address" id="address" placeholder="Address">{{ $student->address }}</textarea>
+                                @error('address')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                     </div> <!-- End Row -->
@@ -94,10 +139,15 @@
                                     <option value="">Select year</option>
                                     @foreach($years as $year)
                                         <option
-                                            @if($student->year_id == $year->id) selected @endif
+                                            @if($assignStudent->year_id == $year->id) selected @endif
                                             value="{{ $year->id }}">{{ $year->student_year }}</option>
                                     @endforeach
                                 </select>
+                                @error('year_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -107,10 +157,15 @@
                                     <option value="">Select class</option>
                                     @foreach($classes as $class)
                                         <option
-                                            @if($student->class_id == $class->id) selected @endif
+                                            @if($assignStudent->class_id == $class->id) selected @endif
                                             value="{{ $class->id }}">{{ $class->class_name }}</option>
                                     @endforeach
                                 </select>
+                                @error('class_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -120,10 +175,15 @@
                                     <option value="">Select group</option>
                                     @foreach($groups as $group)
                                         <option
-                                            @if($student->group_id == $group->id) selected @endif
+                                            @if($assignStudent->group_id == $group->id) selected @endif
                                             value="{{ $group->id }}">{{ $group->student_group }}</option>
                                     @endforeach
                                 </select>
+                                @error('group_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                     </div> <!-- End Row -->
@@ -136,10 +196,15 @@
                                     <option value="">Select shift</option>
                                     @foreach($shifts as $shift)
                                         <option
-                                            @if($student->shift_id == $shift->id) selected @endif
+                                            @if($assignStudent->shift_id == $shift->id) selected @endif
                                             value="{{ $shift->id }}">{{ $shift->student_shift }}</option>
                                     @endforeach
                                 </select>
+                                @error('shift_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -153,12 +218,22 @@
                                             value="{{ $feecat->id }}">{{ $feecat->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('fee_category_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="discount">Discount (%)</label>
                                 <input type="text" value="{{ $discount->discount }}" class="form-control" name="discount" id="discount" placeholder="Discount percentage">
+                                @error('discount')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                     </div> <!-- End Row -->

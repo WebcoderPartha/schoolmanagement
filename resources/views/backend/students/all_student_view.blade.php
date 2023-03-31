@@ -62,6 +62,7 @@
                                     <th>Name</th>
                                     <th>Student ID</th>
                                     <th>Roll</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -74,24 +75,28 @@
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $student->year->student_year }}</td>
                                             <td>{{ $student->class->class_name }}</td>
-                                            <td>{{ $student->name }}</td>
-                                            <td>{{ $student->id_number }}</td>
+                                            <td>{{ $student->student->name }}</td>
+                                            <td>{{ $student->student->id_number }}</td>
                                             <td>{{ $student->roll }}</td>
-                                            <td><img src="{{ (!empty($student->image))? asset($student->image) : '' }}" width="150" alt=""></td>
+                                            <td><img src="{{ (!empty($student->student->image))? asset($student->student->image) : '' }}" width="150" alt=""></td>
 
                                             <td>
 
-                                                <a href="{{ route('student.regi.edit', $student->id) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
+                                                <a href="{{ route('student.regi.edit', $student->student_id) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('student.detail.get', $student->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('student.detail.get', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
-                                                <a id="delete" href="{{ route('registudent.delete', $student->id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
+
+                                                <a id="delete" href="{{ route('registudent.delete', $student->student_id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('student.detail.pdf', $student->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('student.detail.pdf', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     <i class="typcn typcn-printer btn-icon-append"></i>
+                                                </a>
+                                                <a href="{{ route('student.promotion', $student->student_id) }}" type="button" class="btn btn-sm btn-warning text-white">
+                                                    Promotion
                                                 </a>
                                             </td>
                                         </tr>

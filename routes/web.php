@@ -163,6 +163,8 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::get('/detail/student/pdf/{id}', 'PDFStudentDetailGetByID')->name('student.detail.pdf');
         Route::get('/detail/student/download/{id}', 'downloadStudentPDF')->name('student.detail.download');
         Route::get('/delete/student/{id}', 'regiStudentDestroy')->name('registudent.delete');
+        Route::get('/promote/student/{student_id}', 'studentPromotionView')->name('student.promotion');
+        Route::post('/promote/student/{student_id}', 'studentPromotionUpdate')->name('student.promotion.update');
     });
 });
 

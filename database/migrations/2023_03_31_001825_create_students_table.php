@@ -23,11 +23,6 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('id_number')->nullable();
-            $table->string('roll')->nullable();
-            $table->integer('class_id')->nullable();
-            $table->integer('year_id')->nullable();
-            $table->integer('shift_id')->nullable();
-            $table->integer('group_id')->nullable();
             $table->text('image')->nullable();
             $table->timestamps();
         });
