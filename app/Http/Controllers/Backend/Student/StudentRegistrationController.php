@@ -19,10 +19,20 @@ use Intervention\Image\Facades\Image;
 class StudentRegistrationController extends Controller
 {
     public function AllStudentView(){
-
-        return view('backend.students.all_student_view');
+        $data['years'] = StudentYear::all();
+        $data['classes'] = StudentClass::all();
+        $data['year_id'] = StudentYear::orderBy('id', 'asc')->first()->id;
+        $data['class_id'] = StudentClass::orderBy('id', 'asc')->first()->id;
+        $data['allData'] = Student::where('year_id', $data['year_id'])->where('class_id', $data['class_id'])->get();
+        return view('backend.students.all_student_view', $data);
     }
 
+    public function stentClassYearWise(Request $request){
+        $data['years'] = StudentYear::all();
+        $data['classes'] = StudentClass::all();
+        $data['allData'] = Student::where('year_id', $request->year_id)->where('class_id', $request->class_id)->get();
+        return view('backend.students.all_student_view', $data);
+    }
     public function StudentRegistration(){
 
         $data['years'] = StudentYear::all();
@@ -118,6 +128,17 @@ class StudentRegistrationController extends Controller
             Toastr::success('Student registration successfully');
             return Redirect::route('student.all.view');
         }
+
+    }
+
+    public function StudentRegistrationEdit($id){
+
+        $data['years'] = StudentYear::all();
+        $data['groups'] = StudentGroup::all();
+        $data['shifts'] = StudentShift::all();
+        $data['classes'] = StudentClass::all();
+        $data['fee_categories'] = FeeCategory::all();
+        return view('backend.students.register_student', $data);
 
     }
 

@@ -27,7 +27,7 @@
                                     @foreach($classes as $key => $class)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $class->class->class_name }}</td>
+                                            <td>{{ !(empty($class->class->class_name))? $class->class->class_name : '' }}</td>
 
                                             <td>
 

@@ -51,7 +51,6 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_subject.view') }}">School Subject</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('assign_subject.view') }}">Assign Subject</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('designation.view') }}">Designation</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('designation.view') }}">Designation</a></li>
                 </ul>
             </div>
         </li>

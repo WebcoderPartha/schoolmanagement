@@ -35,7 +35,7 @@ Route::controller(RoleController::class)->middleware('admin')->group(function ()
     Route::get('/role/view/', 'pdfGen')->name('pdf');
 });
 Route::prefix('users')->controller(UserController::class)->middleware('admin')->group(function (){
-    Route::get('/all', 'index')->name('user.index');
+    Route::get('/list', 'index')->name('user.index');
     Route::get('/user/add', 'create')->name('user.create');
     Route::post('/user/store', 'store')->name('user.store');
     Route::get('/user/edit/{id}', 'edit')->name('user.edit');
@@ -154,9 +154,10 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 Route::prefix('students')->middleware('admin')->group(function (){
     Route::controller(StudentRegistrationController::class)->group(function (){
         Route::get('/view/all', 'AllStudentView')->name('student.all.view');
+        Route::get('/view/search', 'stentClassYearWise')->name('student.search');
         Route::get('/registration/student/new', 'StudentRegistration')->name('student.registration');
         Route::post('/registration/student/store', 'registrationStore')->name('student.regi.store');
-//        Route::get('/designation/edit/{id}', 'designationEdit')->name('designation.edit');
+        Route::get('/registration/student/edit/{id}', 'StudentRegistrationEdit')->name('student.regi.edit');
 //        Route::post('/designation/update/{id}', 'designationUpdate')->name('designation.update');
 //        Route::get('/designation/delete/{id}', 'designationDestroy')->name('designation.delete');
     });

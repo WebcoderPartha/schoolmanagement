@@ -4,58 +4,99 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <form action="{{ route('student.search') }}" method="GET">
+                    <div class="row search">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="year_id">Year</label>
+                                <select class="form-control" name="year_id" id="year_id">
+                                    <option value="">Select year</option>
+                                    @foreach($years as $year)
+                                        <option
+                                            @if($allData[0]->year_id == $year->id) selected @endif
+                                        value="{{ $year->id }}">{{ $year->student_year }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
 
+                            <div class="form-group">
+                                <label for="class_id">Class</label>
+                                <select class="form-control" name="class_id" id="class_id">
+                                    <option value="">Select class</option>
+                                    @foreach($classes as $class)
+                                        <option
+                                            @if($allData[0]->class_id == $class->id) selected @endif
+                                        value="{{ $class->id }}">{{ $class->class_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4"><button type="submit" class="btn btn-primary" style="margin-top:30px">Search</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">All Student List <a href="{{ route('student.registration') }}" class="float-right btn btn-sm btn-primary">Register Student<i class="typcn typcn-plus btn-icon-append"></i></a></h4>
+                        <h4 class="card-title">Student List <a href="{{ route('student.registration') }}" class="float-right btn btn-sm btn-primary">Register Student<i class="typcn typcn-plus btn-icon-append"></i></a></h4>
+
+
 
                         <div class="table-respnsive">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Class Name</th>
+                                    <th>Year</th>
+                                    <th>Class</th>
+                                    <th>Name</th>
+                                    <th>Student ID</th>
+                                    <th>Roll</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-{{--                                @if(count($classes) > 0)--}}
+                                @if(count($allData) > 0)
 
-{{--                                    @foreach($classes as $key => $class)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{ $key+1 }}</td>--}}
-{{--                                            <td>{{ $class->class->class_name }}</td>--}}
+                                    @foreach($allData as $key => $student)
+                                        <tr>
+                                            <td>{{ $key+1 }}</td>
+                                            <td>{{ $student->year->student_year }}</td>
+                                            <td>{{ $student->class->class_name }}</td>
+                                            <td>{{ $student->name }}</td>
+                                            <td>{{ $student->id_number }}</td>
+                                            <td>{{ $student->roll }}</td>
 
-{{--                                            <td>--}}
+                                            <td>
 
-{{--                                                <a href="{{ route('assign_subject.edit', $class->class_id) }}" type="button" class="btn btn-success btn-sm btn-icon-text">--}}
-{{--                                                    Edit--}}
-{{--                                                    <i class="typcn typcn-edit btn-icon-append"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{ route('assign_subject.details', $class->class_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">--}}
-{{--                                                    Details--}}
-{{--                                                    <i class="typcn typcn-eye btn-icon-append"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a id="delete" href="{{ route('assign_subject_class.delete', $class->class_id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">--}}
-{{--                                                    Delete--}}
-{{--                                                    <i class="typcn typcn-delete-outline btn-icon-append"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{  route('assign_subject_classes.pdf') }}" type="button" class="btn btn-sm btn-primary btn-icon-text">--}}
-{{--                                                    Print--}}
-{{--                                                    <i class="typcn typcn-printer btn-icon-append"></i>--}}
-{{--                                                </a>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
-{{--                                @else--}}
-{{--                                    <tr>--}}
-{{--                                        <td colspan="4">  <h4 class="text-center">No subject class found.</h4></td>--}}
-{{--                                    </tr>--}}
+                                                <a href="{{ route('student.regi.edit', $student->id) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
+                                                    <i class="typcn typcn-edit btn-icon-append"></i>
+                                                </a>
+                                                <a href="" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                    <i class="typcn typcn-eye btn-icon-append"></i>
+                                                </a>
+                                                <a id="delete" href="" type="button" class="btn btn-sm btn-danger btn-icon-text">
+                                                    <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                </a>
+                                                <a href="" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                    <i class="typcn typcn-printer btn-icon-append"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4">  <h4 class="text-center">No student found.</h4></td>
+                                    </tr>
 
-{{--                                @endif--}}
+                                @endif
                                 </tbody>
                             </table>
                         </div>
