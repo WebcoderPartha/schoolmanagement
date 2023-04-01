@@ -63,6 +63,7 @@
             <div class="collapse" id="students">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.all.view') }}">Student Registration</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('role.generate.view') }}">Roll Generate</a></li>
                 </ul>
             </div>
         </li>

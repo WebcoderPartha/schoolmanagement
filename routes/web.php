@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Student\StudentRegistrationController;
+use App\Http\Controllers\Backend\Student\RollController;
 
 
 
@@ -166,6 +167,14 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::get('/promote/student/{student_id}', 'studentPromotionView')->name('student.promotion');
         Route::post('/promote/student/{student_id}', 'studentPromotionUpdate')->name('student.promotion.update');
     });
+
+
+    Route::controller(RollController::class)->group(function (){
+        Route::get('/roll/generate', 'RoleGenerateView')->name('role.generate.view');
+        Route::get('/roll/search', 'RoleGenerateSearch')->name('role.generate.search');
+        Route::post('/roll/generate', 'RoleGenerateStore')->name('role.generate.store');
+    });
+
 });
 
 
