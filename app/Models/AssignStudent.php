@@ -13,6 +13,11 @@ class AssignStudent extends Model
     public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }
+
+    public function discount(){
+        return $this->belongsTo(Discount::class, 'student_id', 'student_id');
+    }
+
     public function year(){
         return $this->belongsTo(StudentYear::class, 'year_id', 'id');
     }

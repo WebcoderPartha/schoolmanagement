@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Student\StudentRegistrationController;
 use App\Http\Controllers\Backend\Student\RollController;
+use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 
 
 
@@ -163,7 +164,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::get('/detail/student/{id}', 'StudentDetailGetByID')->name('student.detail.get');
         Route::get('/detail/student/pdf/{id}', 'PDFStudentDetailGetByID')->name('student.detail.pdf');
         Route::get('/detail/student/download/{id}', 'downloadStudentPDF')->name('student.detail.download');
-        Route::get('/delete/student/{id}', 'regiStudentDestroy')->name('registudent.delete');
+        Route::get('/delete/student/{year_id}/{class_id}/{student_id}', 'regiStudentDestroy')->name('registudent.delete');
         Route::get('/promote/student/{student_id}', 'studentPromotionView')->name('student.promotion');
         Route::post('/promote/student/{student_id}', 'studentPromotionUpdate')->name('student.promotion.update');
     });
@@ -173,6 +174,13 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::get('/roll/generate', 'RoleGenerateView')->name('role.generate.view');
         Route::get('/roll/search', 'RoleGenerateSearch')->name('role.generate.search');
         Route::post('/roll/generate', 'RoleGenerateStore')->name('role.generate.store');
+    });
+
+
+    Route::controller(RegistrationFeeController::class)->group(function (){
+        Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('regifee.view');
+        Route::get('/registration/fee', 'RegistrationFeeGetting')->name('registration.fee.getting');
+        Route::get('/registration/{year}/{class}/{student_id}', 'PaySlipPDF')->name('registration.pay.slip');
     });
 
 });

@@ -64,6 +64,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.all.view') }}">Student Registration</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('role.generate.view') }}">Roll Generate</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('regifee.view') }}">Registration Fee</a></li>
                 </ul>
             </div>
         </li>

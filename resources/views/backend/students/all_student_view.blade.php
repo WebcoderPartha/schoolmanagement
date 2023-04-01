@@ -71,11 +71,12 @@
                                 @if(count($allData) > 0)
 
                                     @foreach($allData as $key => $student)
+
                                         <tr>
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $student->year->student_year }}</td>
                                             <td>{{ $student->class->class_name }}</td>
-                                            <td>{{ $student->student->name }}</td>
+                                            <td>{{ (!empty($student)) ? $student->student->name : '' }}</td>
                                             <td>{{ $student->student->id_number }}</td>
                                             <td>{{ $student->roll }}</td>
                                             <td><img src="{{ (!empty($student->student->image))? asset($student->student->image) : '' }}" width="150" alt=""></td>
@@ -89,7 +90,7 @@
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
 
-                                                <a id="delete" href="{{ route('registudent.delete', $student->student_id) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
+                                                <a id="delete" href="{{ route('registudent.delete', ['year_id' =>$student->year->id, 'class_id'=> $student->class->id, 'student_id' =>$student->student->id]) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-append"></i>
                                                 </a>
                                                 <a href="{{ route('student.detail.pdf', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">

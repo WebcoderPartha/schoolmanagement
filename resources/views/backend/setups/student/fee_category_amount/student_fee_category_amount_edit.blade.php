@@ -47,7 +47,7 @@
                                                 <option value="">Select Student Class</option>
                                                 @foreach($classes as $class)
                                                     <option
-                                                        {{ ($amount[0]->student_class_id == $class->id) ? 'selected': '' }}
+                                                        {{ ($value->student_class_id == $class->id) ? 'selected': '' }}
                                                         value="{{ $class->id }}">{{ $class->class_name }}</option>
                                                 @endforeach
                                             </select>

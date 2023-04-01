@@ -5,6 +5,9 @@
 @section('content')
     <div class="content-wrapper">
         <div class="card">
+            <div class="card-header">
+               <h4> Roll Generate</h4>
+            </div>
             <div class="card-body">
                     <div class="row search">
                         <div class="col-sm-4">
@@ -128,14 +131,14 @@
                     url: "{{ route('role.generate.store') }}",
                     data: {roll_number,student_id ,class_id, year_id, _token: '{{csrf_token()}}'},
                     success: function (response){
+
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
                             title: response.success,
                             showConfirmButton: false,
-                            timer: 2000
+                            timer: 3000
                         });
-                       window.location = "{{ route('role.generate.view') }}"
 
                     }
                 });

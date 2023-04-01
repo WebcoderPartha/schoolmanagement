@@ -53,7 +53,7 @@ class RollController extends Controller
                   $assignStudent->roll_number = $request->roll_number[$i];
                   $assignStudent->save();
                 }else{
-                    return 'errror';
+                    return \response()->json(['error' => 'Roll field must not be empty!']);
                 }
             }
         }
