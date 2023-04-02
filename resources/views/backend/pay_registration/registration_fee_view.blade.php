@@ -6,10 +6,10 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-header">
-                <h4> Registration Fee</h4>
+                <h4>Pay Registration Fee</h4>
             </div>
             <div class="card-body">
-                <form action="{{route('registration.fee.getting')}}" method="GET">
+                <form action="{{route('payRegistrationFee.search')}}" method="GET">
                 <div class="row search">
                     <div class="col-sm-4">
                         <div class="form-group">

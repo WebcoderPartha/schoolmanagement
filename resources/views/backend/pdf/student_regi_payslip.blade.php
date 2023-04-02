@@ -72,25 +72,27 @@
         </tr>
 
         <tr>
+
             @php
-                $discount = \App\Models\Discount::where('student_id', $student->student->id)->first();
-                $discountParcent = $discount->discount;
-                $regiFee = \App\Models\FeeCategoryAmount::where('fee_category_id', $discount->fee_category_id)->where('student_class_id', $student->class_id)->first();
-                $RegistrationFee = $regiFee->amount;
-                $parentAmount = ((float)$RegistrationFee*(float)$discountParcent)/100;
-                $finalAmount = $RegistrationFee - $parentAmount;
+                $discount = \App\Models\Discount::where('student_id', $student->student_id)->where('student_year_id', $student->year_id)->where('student_class_id', $student->class_id)->first();
+
+                $discountAmount = $discount->discount_percentage;
+                $regi_fee = \App\Models\Backend\RegistrationFee::where('student_year_id', $student->year_id)->where('student_class_id', $student->class_id)->first();
+                $originalAmount = $regi_fee->fee_amount;
+                $percentage = ((float)$originalAmount*(float)$discountAmount)/100;
+                $finalAmount = $originalAmount-$percentage;
             @endphp
             <td rowspan="3">{{ $student->student->id_number }}</td>
             <td rowspan="3">{{ $student->year->student_year }}</td>
             <td rowspan="3">{{ $student->class->class_name }}</td>
             <td rowspan="3">{{ $student->student->name }}</td>
             <td>{{ $student->roll_number }}</td>
-            <td>{{$RegistrationFee}}</td>
+            <td>{{$originalAmount}}</td>
         </tr>
 
         <tr>
-            <td>Discount({{$discountParcent}}%)</td>
-            <td>{{$parentAmount}}</td>
+            <td>Discount({{$discountAmount}}%)</td>
+            <td>{{$percentage}}</td>
         </tr>
         <tr>
             <td>Total Fee</td>

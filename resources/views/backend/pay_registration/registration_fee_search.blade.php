@@ -9,7 +9,7 @@
                 <h4> Registration Fee</h4>
             </div>
             <div class="card-body">
-                <form action="{{route('registration.fee.getting')}}" method="GET">
+                <form action="{{route('payRegistrationFee.search')}}" method="GET">
                     <div class="row search">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -72,16 +72,14 @@
                                     @foreach($students as $key => $student)
 
 
-
                                         @php
-                                            $discount = \App\Models\Discount::where('student_id', $student->student_id)->first();
-                                            $discount_amount = $discount->discount;
-                                            $dis_fee_cat_id = $discount->fee_category_id;
-                                            $feeCatAmount = \App\Models\FeeCategoryAmount::where('student_class_id', $student->class_id)->where('fee_category_id', $dis_fee_cat_id)->first();
-                                            $origianAmount = $feeCatAmount->amount;
-                                            $parcentage = ((float)$origianAmount*(float)$discount_amount)/100;
-                                            $finalAmount = $origianAmount-$parcentage;
+                                            $discount = \App\Models\Discount::where('student_id', $student->student_id)->where('student_year_id', $student->year_id)->where('student_class_id', $student->class_id)->first();
 
+                                            $discountAmount = $discount->discount_percentage;
+                                            $regi_fee = \App\Models\Backend\RegistrationFee::where('student_year_id', $student->year_id)->where('student_class_id', $student->class_id)->first();
+                                            $originalAmount = $regi_fee->fee_amount;
+                                            $percentage = ((float)$originalAmount*(float)$discountAmount)/100;
+                                            $finalAmount = $originalAmount-$percentage;
                                         @endphp
 
                                         <tr>
@@ -89,9 +87,9 @@
                                             <td>{{$student->student->name}}</td>
                                             <td>{{$student->student->id_number}}</td>
                                             <td>{{$student->roll_number}}</td>
-                                            <td>{{ $discount->discount }}%</td>
+                                            <td>{{ $discountAmount }}%</td>
                                             <td>{{ $finalAmount }}</td>
-                                            <td><a class="btn btn-sm btn-primary" href="{{ route('registration.pay.slip',['year'=>$student->year_id, 'class' => $student->class_id, 'student_id' => $student->student_id]) }}">Pay Slip</a></td>
+                                            <td><a class="btn btn-sm btn-primary" href="{{ route('registration.pay.slip',['year_id'=>$student->year_id, 'class_id' => $student->class_id, 'student_id' => $student->student_id]) }}">Pay Slip</a></td>
                                         </tr>
 
 

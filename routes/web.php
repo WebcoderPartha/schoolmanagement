@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Student\StudentRegistrationController;
 use App\Http\Controllers\Backend\Student\RollController;
 use App\Http\Controllers\Backend\Student\RegistrationFeeController;
+use App\Http\Controllers\Backend\Student\RegistrationPayController;
 
 
 
@@ -177,12 +178,12 @@ Route::prefix('students')->middleware('admin')->group(function (){
     });
 
 
- //   Route::controller(RegistrationFeeController::class)->group(function (){
-//        Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('regifee.view');
-//        Route::get('/registration/fee', 'RegistrationFeeGetting')->name('registration.fee.getting');
-//        Route::get('/registration/{year}/{class}/{student_id}', 'PaySlipPDF')->name('registration.pay.slip');
+    Route::controller(RegistrationPayController::class)->group(function (){
+        Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('payRegistration_view');
+        Route::get('/registration/fee/pay', 'RegistrationFeeGetting')->name('payRegistrationFee.search');
+        Route::get('/registration/{year_id}/{class_id}/{student_id}/pay', 'PaySlipPDF')->name('registration.pay.slip');
 
-  //  });
+    });
 
 });
 
