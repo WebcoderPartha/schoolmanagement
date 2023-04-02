@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\Student\StudentRegistrationController;
 use App\Http\Controllers\Backend\Student\RollController;
 use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 use App\Http\Controllers\Backend\Student\RegistrationPayController;
+use App\Http\Controllers\Backend\ManageFee\MonthlyFeeController;
 
 
 
@@ -189,6 +190,8 @@ Route::prefix('students')->middleware('admin')->group(function (){
 
 
 Route::prefix('fees')->middleware('admin')->group(function (){
+
+    // Registration Fee
     Route::controller(RegistrationFeeController::class)->group(function (){
         Route::get('/registration/fees/', 'RegiFeeView')->name('regi.fees.view');
         Route::get('/registration/add/', 'RegiFeeAdd')->name('regi.fees.add');
@@ -199,7 +202,22 @@ Route::prefix('fees')->middleware('admin')->group(function (){
         Route::get('/registration/year/{student_year_id}/class/{student_class_id}', 'regiDelByYearClassId')->name('regiDelbyYearClassId');
         Route::get('/registration/year/{student_year_id}/pdf', 'RegistrationFeeYearWisePDF')->name('RegYearwisePDF');
     });
+
+    // Monthly Fee
+    Route::controller(MonthlyFeeController::class)->group(function (){
+        Route::get('/monthly/feelist/', 'MonthlyFeeView')->name('monthly.fees.view');
+        Route::get('/monthly/assign/', 'monthlyFeeAdd')->name('monthly.fees.add');
+        Route::post('/monthly/assign/', 'monthlyFeeStore')->name('monthly.fees.store');
+//        Route::get('/registration/year/fee/{student_year_id}', 'monthlyFeeEdit')->name('monthly.fees.edit');
+//        Route::post('/registration/year/fee/{student_year_id}', 'monthlyFeeUpdate')->name('monthly.fees.update');
+//        Route::get('/registration/year/fee/{student_year_id}/details', 'monthlyFeeDetails')->name('monthly.fees.details');
+//        Route::get('/registration/year/{student_year_id}/class/{student_class_id}', 'monthlyDelByYearClassId')->name('monthlyDelbyYearClassId');
+//        Route::get('/registration/year/{student_year_id}/pdf', 'RegistrationFeeYearWisePDF')->name('monthlyYearwisePDF');
+    });
+
+
 });
+
 
 
 Route::controller(ProfileSettingController::class)->middleware('admin')->group(function (){

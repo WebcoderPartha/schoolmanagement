@@ -63,7 +63,7 @@
             <div class="collapse" id="managefees">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('regi.fees.view') }}">Registration Fee</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Monthly Fee</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('monthly.fees.view') }}">Monthly Fee</a></li>
                     <li class="nav-item"> <a class="nav-link" href="">Exam Fee</a></li>
                 </ul>
             </div>
