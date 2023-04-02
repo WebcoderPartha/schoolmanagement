@@ -177,12 +177,27 @@ Route::prefix('students')->middleware('admin')->group(function (){
     });
 
 
-    Route::controller(RegistrationFeeController::class)->group(function (){
-        Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('regifee.view');
-        Route::get('/registration/fee', 'RegistrationFeeGetting')->name('registration.fee.getting');
-        Route::get('/registration/{year}/{class}/{student_id}', 'PaySlipPDF')->name('registration.pay.slip');
-    });
+ //   Route::controller(RegistrationFeeController::class)->group(function (){
+//        Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('regifee.view');
+//        Route::get('/registration/fee', 'RegistrationFeeGetting')->name('registration.fee.getting');
+//        Route::get('/registration/{year}/{class}/{student_id}', 'PaySlipPDF')->name('registration.pay.slip');
 
+  //  });
+
+});
+
+
+Route::prefix('fees')->middleware('admin')->group(function (){
+    Route::controller(RegistrationFeeController::class)->group(function (){
+        Route::get('/registration/fees/', 'RegiFeeView')->name('regi.fees.view');
+        Route::get('/registration/add/', 'RegiFeeAdd')->name('regi.fees.add');
+        Route::post('/registration/add/', 'RegistrationFeeStore')->name('regi.fees.store');
+        Route::get('/registration/year/fee/{student_year_id}', 'RegistrationFeeEdit')->name('regi.fees.edit');
+        Route::post('/registration/year/fee/{student_year_id}', 'RegistrationFeeUpdate')->name('regi.fees.update');
+        Route::get('/registration/year/fee/{student_year_id}/details', 'RegistrationFeeDetails')->name('regi.fees.details');
+        Route::get('/registration/year/{student_year_id}/class/{student_class_id}', 'regiDelByYearClassId')->name('regiDelbyYearClassId');
+        Route::get('/registration/year/{student_year_id}/pdf', 'RegistrationFeeYearWisePDF')->name('RegYearwisePDF');
+    });
 });
 
 

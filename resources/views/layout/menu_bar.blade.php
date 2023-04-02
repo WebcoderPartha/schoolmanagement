@@ -55,6 +55,20 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#managefees" aria-expanded="false" aria-controls="managefees">
+                <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                <span class="menu-title">Manage Fee</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="managefees">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('regi.fees.view') }}">Registration Fee</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Monthly Fee</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">Exam Fee</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#students" aria-expanded="false" aria-controls="students">
                 <i class="typcn typcn-chart-pie-outline menu-icon"></i>
                 <span class="menu-title">Manage Student</span>
@@ -64,9 +78,10 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.all.view') }}">Student Registration</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('role.generate.view') }}">Roll Generate</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('regifee.view') }}">Registration Fee</a></li>
+{{--                    <li class="nav-item"> <a class="nav-link" href="{{ route('regifee.view') }}">Registration Fee</a></li>--}}
                 </ul>
             </div>
         </li>
+
     </ul>
 </nav>
