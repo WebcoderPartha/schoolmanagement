@@ -15,7 +15,7 @@
 
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('monthly.fees.add') }}" class="float-right btn btn-sm btn-primary"><i class="typcn typcn-plus btn-icon-append"></i> Add Monthly Fee</a>
+                        <a href="{{ route('monthly.fees.view') }}" class="float-right btn btn-sm btn-primary"><i class="typcn typcn-arrow-left btn-icon-append"></i> Back</a>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -38,7 +38,7 @@
 
                                             <td>
 
-                                                <a href="{{ route('monthlyFeeDel', ['student_year_id' =>$monthFee->year->id, 'month_id' => $monthFee->month->id, 'student_class_id' =>$monthFee->class->id]) }}" id="delete" type="button" class="btn btn-sm btn-danger btn-icon-text">
+                                                <a href="{{ route('monthlyFeeDel', ['student_year_id' =>$monthFee->year->id, 'month_id' => $monthFee->month->id, 'student_class_id' =>$monthFee->class->id]) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
                                                     Delete
                                                     <i class="typcn typcn-delete btn-icon-append"></i>
                                                 </a>

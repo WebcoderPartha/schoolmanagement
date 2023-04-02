@@ -212,7 +212,7 @@ Route::prefix('fees')->middleware('admin')->group(function (){
         Route::post('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeUpdate')->name('monthly.fees.update');
         Route::get('/monthly/details/{student_year_id}/{month_id}', 'monthlyFeeDetails')->name('monthly.fees.details');
         Route::get('/monthly/fee/{student_year_id}/{month_id}/{student_class_id}', 'monthlyFeeDelete')->name('monthlyFeeDel');
-//        Route::get('/registration/year/{student_year_id}/pdf', 'RegistrationFeeYearWisePDF')->name('monthlyYearwisePDF');
+        Route::get('/monthly/pdf/{student_year_id}/{month_id}', 'monthlyFeesWisePDF')->name('monthly.fee.wise.pdf');
     });
 
 

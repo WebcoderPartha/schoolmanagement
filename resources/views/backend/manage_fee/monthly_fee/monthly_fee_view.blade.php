@@ -44,7 +44,7 @@
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
 
-                                                <a href="{{ route('RegYearwisePDF', ['student_year_id'=> $year->student_year_id]) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('monthly.fee.wise.pdf',['student_year_id'=>$year->student_year_id, 'month_id' => $year->month_id]) }}" class="btn btn-sm btn-primary btn-icon-text">
                                                     Print
                                                     <i class="typcn typcn-printer btn-icon-append"></i>
                                                 </a>

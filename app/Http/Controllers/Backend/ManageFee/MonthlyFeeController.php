@@ -7,6 +7,7 @@ use App\Models\Month;
 use App\Models\MonthlyFee;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -127,6 +128,12 @@ class MonthlyFeeController extends Controller
 
         Toastr::success('Monthly fee deleted successfully');
         return Redirect::back();
+    }
+
+    public function monthlyFeesWisePDF($student_year_id, $month_id){
+        $data['allData'] = MonthlyFee::with(['class', 'year', 'month'])->where(['student_year_id' =>$student_year_id, 'month_id' => $month_id])->get();
+        $PDF = Pdf::loadView('backend.pdf.monthly_fee_year_month_wise', $data);
+        return $PDF->stream($data['allData'][0]->month->name.'-'.$data['allData'][0]->year->student_year.'.php');
     }
 
 
