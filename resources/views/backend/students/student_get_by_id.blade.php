@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <td colspan="2">Roll Number:</td>
-                <td colspan="2">{{ $student->roll }}</td>
+                <td colspan="2">{{ $student->roll_number }}</td>
             </tr>
             <tr>
                 <td colspan="2">Year:</td>
@@ -115,7 +115,7 @@
 
 
         </table>
-        <a href="{{  route('student.detail.download', $student->id) }}">Download</a>
+        <a href="{{  route('student.detail.download', $student->student_id) }}">Download</a>
     </div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,11 +57,7 @@
     </div>
 
     <table id="customers">
-        {{--            <tr>--}}
-        {{--                <th>Company</th>--}}
-        {{--                <th>Contact</th>--}}
-        {{--                <th>Country</th>--}}
-        {{--            </tr>--}}
+
         <tr>
             <td colspan="4" align="center"><img width="250" src="data:image/jpg;base64,{{ $image }}" alt=""></td>
         </tr>
@@ -70,7 +67,7 @@
         </tr>
         <tr>
             <td colspan="2">Roll Number:</td>
-            <td colspan="2">{{ $student->roll }}</td>
+            <td colspan="2">{{ $student->roll_number }}</td>
         </tr>
         <tr>
             <td colspan="2">Year:</td>

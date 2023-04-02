@@ -197,26 +197,17 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="fee_category_id">Discount Category</label>
-                                <select class="form-control" name="fee_category_id" id="fee_category_id">
-                                    <option value="">Select discount category</option>
-                                    @foreach($fee_categories as $feecat)
-                                        <option value="{{ $feecat->id }}">{{ $feecat->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('fee_category_id')
-                                <small class="text-danger">
-                                    <i>{{ $message }}</i>
-                                </small>
-                                @enderror
+                                <label for="discount_percentage">Registration Fee (Discount %)</label>
+                                <input type="text" class="form-control" name="discount_percentage" id="discount_percentage" placeholder="Discount percentage">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="discount">Discount (%)</label>
-                                <input type="text" class="form-control" name="discount" id="discount" placeholder="Discount percentage">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file" name="image" id="image">
                             </div>
                         </div>
                     </div> <!-- End Row -->
@@ -224,19 +215,14 @@
                     <div class="row mt-2">
 
                         <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="image">Image</label>
-                                <input type="file" class="form-control-file" name="image" id="image">
-                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <img src="" width="150" id="showImage" alt="">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-
                             </div>
                         </div>
                     </div> <!-- End Row -->

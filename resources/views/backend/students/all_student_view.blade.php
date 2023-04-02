@@ -78,7 +78,7 @@
                                             <td>{{ $student->class->class_name }}</td>
                                             <td>{{ (!empty($student)) ? $student->student->name : '' }}</td>
                                             <td>{{ $student->student->id_number }}</td>
-                                            <td>{{ $student->roll }}</td>
+                                            <td>{{ $student->roll_number }}</td>
                                             <td><img src="{{ (!empty($student->student->image))? asset($student->student->image) : '' }}" width="150" alt=""></td>
 
                                             <td>

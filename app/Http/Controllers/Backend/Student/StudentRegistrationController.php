@@ -41,7 +41,6 @@ class StudentRegistrationController extends Controller
         $data['groups'] = StudentGroup::all();
         $data['shifts'] = StudentShift::all();
         $data['classes'] = StudentClass::all();
-        $data['fee_categories'] = FeeCategory::all();
         return view('backend.students.register_student', $data);
     }
 
@@ -101,9 +100,10 @@ class StudentRegistrationController extends Controller
 
             // Discount
             $discount = new Discount();
-            $discount->fee_category_id = $request->fee_category_id;
+            $discount->discount_percentage = $request->discount_percentage;
             $discount->student_id = $student->id; // Register Id
-            $discount->discount = $request->discount;
+            $discount->student_class_id = $request->class_id;
+            $discount->student_year_id = $request->year_id;
             $discount->save();
 
             Toastr::success('Student registration successfully');
@@ -133,11 +133,14 @@ class StudentRegistrationController extends Controller
             $assignStudent->shift_id = $request->shift_id;
             $assignStudent->save();
 
+            // Discount
             $discount = new Discount();
-            $discount->fee_category_id = $request->fee_category_id;
+            $discount->discount_percentage = $request->discount_percentage;
             $discount->student_id = $student->id; // Register Id
-            $discount->discount = $request->discount;
+            $discount->student_class_id = $request->class_id;
+            $discount->student_year_id = $request->year_id;
             $discount->save();
+
 
             Toastr::success('Student registration successfully');
             return Redirect::route('student.all.view');
@@ -153,8 +156,9 @@ class StudentRegistrationController extends Controller
         $data['classes'] = StudentClass::all();
         $data['fee_categories'] = FeeCategory::all();
         $data['student'] = Student::find($id);
-        $data['discount'] = Discount::where('student_id', $id)->first();
+
         $data['assignStudent'] = AssignStudent::where('student_id', $id)->first();
+        $data['discount'] = Discount::where('student_id', $data['assignStudent']->student_id)->where('student_class_id',$data['assignStudent']->class_id)->where('student_year_id',$data['assignStudent']->year_id)->first();
         return view('backend.students.register_student_edit', $data);
 
     }
@@ -214,10 +218,13 @@ class StudentRegistrationController extends Controller
             $assignStudent->save();
 
             $discount = Discount::where('student_id', $id)->first();
-            $discount->fee_category_id = $request->fee_category_id;
-            $discount->student_id = $student->id;
-            $discount->discount = $request->discount;
+            // Discount
+            $discount->discount_percentage = $request->discount_percentage;
+            $discount->student_id = $student->id; // Register Id
+            $discount->student_class_id = $request->class_id;
+            $discount->student_year_id = $request->year_id;
             $discount->save();
+
 
             Toastr::success('Student update successfully');
             return Redirect::route('student.all.view');
@@ -245,9 +252,10 @@ class StudentRegistrationController extends Controller
             $assignStudent->save();
 
             $discount = Discount::where('student_id', $id)->first();
-            $discount->fee_category_id = $request->fee_category_id;
-            $discount->student_id = $student->id;
-            $discount->discount = $request->discount;
+            $discount->discount_percentage = $request->discount_percentage;
+            $discount->student_id = $student->id; // Register Id
+            $discount->student_class_id = $request->class_id;
+            $discount->student_year_id = $request->year_id;
             $discount->save();
 
             Toastr::success('Student updated successfully');
@@ -262,8 +270,10 @@ class StudentRegistrationController extends Controller
     }
 
     public function downloadStudentPDF($id){
-        $data['student'] = AssignStudent::where('student_id', $id)->first();
-        $data['path']  =$data['student']->student->image;
+        $data['student'] = AssignStudent::with('student')->where('student_id', $id)->first();
+
+        $data['path']  = isset($data['student']->student->image)? $data['student']->student->image: 'uploads/student/studentProfile.png';
+
         $studentId  =$data['student']->student->id_number;
 
         $data['image'] = base64_encode(file_get_contents(public_path($data['path'])));
@@ -271,17 +281,17 @@ class StudentRegistrationController extends Controller
         $pdf = Pdf::loadView('backend.pdf.student_get_by_id', $data);
         return $pdf->download($studentId.'.pdf');
     }
-    public function PDFStudentDetailGetByID($id){
-        $data['student'] = AssignStudent::where('student_id', $id)->first();
-        $data['path']  =$data['student']->student->image;
-        $studentId  =$data['student']->id_number;
-//        return view('backend.pdf.student_get_by_id', compact('student'));
-
-        $data['image'] = base64_encode(file_get_contents(public_path($data['path'])));
-
-        $pdf = Pdf::loadView('backend.pdf.student_get_by_id', $data);
-        return $pdf->stream($studentId.'.pdf');
-    }
+//    public function PDFStudentDetailGetByID($id){
+//        $data['student'] = AssignStudent::where('student_id', $id)->first();
+//        $data['path']  =$data['student']->student->image;
+//        $studentId  =$data['student']->id_number;
+////        return view('backend.pdf.student_get_by_id', compact('student'));
+//
+//        $data['image'] = base64_encode(file_get_contents(public_path($data['path'])));
+//
+//        $pdf = Pdf::loadView('backend.pdf.student_get_by_id', $data);
+//        return $pdf->stream($studentId.'.pdf');
+//    }
 
     public function regiStudentDestroy($year_id, $class_id, $student_id){
 

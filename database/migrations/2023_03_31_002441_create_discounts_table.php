@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->integer('student_id')->nullable();
-            $table->integer('fee_category_id')->nullable();
-            $table->double('discount')->nullable();
+            $table->integer('student_year_id')->nullable();
+            $table->integer('student_class_id')->nullable();
+            $table->double('discount_percentage')->nullable();
             $table->timestamps();
         });
     }
