@@ -207,11 +207,11 @@ Route::prefix('fees')->middleware('admin')->group(function (){
     Route::controller(MonthlyFeeController::class)->group(function (){
         Route::get('/monthly/feelist/', 'MonthlyFeeView')->name('monthly.fees.view');
         Route::get('/monthly/assign/', 'monthlyFeeAdd')->name('monthly.fees.add');
-        Route::post('/monthly/assign/', 'monthlyFeeStore')->name('monthly.fees.store');
-//        Route::get('/registration/year/fee/{student_year_id}', 'monthlyFeeEdit')->name('monthly.fees.edit');
-//        Route::post('/registration/year/fee/{student_year_id}', 'monthlyFeeUpdate')->name('monthly.fees.update');
-//        Route::get('/registration/year/fee/{student_year_id}/details', 'monthlyFeeDetails')->name('monthly.fees.details');
-//        Route::get('/registration/year/{student_year_id}/class/{student_class_id}', 'monthlyDelByYearClassId')->name('monthlyDelbyYearClassId');
+        Route::post('/monthly/assign/store', 'monthlyFeeStore')->name('monthly.fees.store');
+        Route::get('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeEdit')->name('monthly.fees.edit');
+        Route::post('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeUpdate')->name('monthly.fees.update');
+        Route::get('/monthly/details/{student_year_id}/{month_id}', 'monthlyFeeDetails')->name('monthly.fees.details');
+        Route::get('/monthly/fee/{student_year_id}/{month_id}/{student_class_id}', 'monthlyFeeDelete')->name('monthlyFeeDel');
 //        Route::get('/registration/year/{student_year_id}/pdf', 'RegistrationFeeYearWisePDF')->name('monthlyYearwisePDF');
     });
 

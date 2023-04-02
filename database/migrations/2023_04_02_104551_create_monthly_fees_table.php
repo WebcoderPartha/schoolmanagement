@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('student_year_id')->nullable();
             $table->string('month_id')->nullable();
             $table->double('fee_amount')->nullable();
+            $table->timestamps();
         });
     }
 

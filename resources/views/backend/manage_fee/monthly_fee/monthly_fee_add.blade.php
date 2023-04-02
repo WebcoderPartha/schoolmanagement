@@ -15,8 +15,8 @@
 
                                 <div class="row">
                                     <div class="form-group col-sm-12">
-                                        <label for="fee_category_id">Student Year</label>
-                                        <select name="student_year_id" class="form-control" id="fee_category_id">
+                                        <label for="student_year_id">Student Year</label>
+                                        <select name="student_year_id" class="form-control" id="student_year_id">
                                             <option value="">Select student year</option>
                                             @foreach($years as $year)
                                                 <option value="{{ $year->id }}">{{ $year->student_year }}</option>

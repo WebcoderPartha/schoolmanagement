@@ -20,25 +20,26 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Year</th>
+                                    <th>Month</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
                                 @if(count($years) > 0)
 
                                     @foreach($years as $key => $year)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $year->year->student_year }}</td>
+                                            <td>{{ $year->month->name }}</td>
 
                                             <td>
 
-                                                <a href="{{ route('regi.fees.edit', ['student_year_id'=>$year->student_year_id]) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
+                                                <a href="{{ route('monthly.fees.edit', ['student_year_id'=>$year->student_year_id, 'month_id' => $year->month_id]) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
                                                     Edit
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('regi.fees.details',['student_year_id'=>$year->student_year_id]) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('monthly.fees.details',['student_year_id'=>$year->student_year_id, 'month_id' => $year->month_id]) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     Details
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
