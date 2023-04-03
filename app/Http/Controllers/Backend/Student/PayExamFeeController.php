@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\AssignStudent;
 use App\Models\ExamFee;
 use App\Models\ExamType;
-use App\Models\Month;
+use App\Models\MonthlyFee;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class PayExamFeeController extends Controller
@@ -44,6 +45,26 @@ class PayExamFeeController extends Controller
         return view('backend.pay_exam_fee.pay_exam_fee_search', $data);
     }
     public function payExamFeePDF($year_id, $exam_type_id, $class_id, $student_id){
+
+        $data['examFee'] = ExamFee::where([
+            'class_id' => $class_id,
+            'year_id' => $year_id,
+            'exam_type_id' => $exam_type_id
+        ])->first();
+
+        $data['student'] = AssignStudent::with([
+            'student',
+            'year',
+            'class'
+        ])->where([
+            'student_id' => $student_id,
+            'year_id' => $year_id,
+            'class_id' => $class_id
+        ])->first();
+
+//        return view('backend.pdf.student_exam_fee_payslip', $data);
+        $PDF = Pdf::loadView('backend.pdf.student_exam_fee_payslip', $data);
+        return $PDF->stream($data['student']->student->id_number.'-'.$data['examFee']->exam->name.'.pdf');
 
     }
 

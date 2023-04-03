@@ -204,7 +204,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
     // Pay Exam Fee
     Route::controller(PayExamFeeController::class)->group(function (){
         Route::get('/exam/fee-view', 'ExamFeeSearchView')->name('payExamFee_view');
-        Route::get('/exam/fee-pay', 'payExamFeeSearch')->name('payExamFee.search');
+        Route::get('/exam/fee-pay', 'payExaregistration/feemFeeSearch')->name('payExamFee.search');
         Route::get('/exam/{year_id}/{exam_type_id}/{class_id}/{student_id}/pay', 'payExamFeePDF')->name('payExamFee.pay.slip');
 
     });
