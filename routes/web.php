@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Backend\Student\MonthlyFeePayController;
 use App\Http\Controllers\Backend\ManageFee\ExamFeeController;
 use App\Http\Controllers\Backend\Student\PayExamFeeController;
+use App\Http\Controllers\Backend\Employee\EmployeeRegisterController;
 
 
 
@@ -43,7 +44,7 @@ Route::controller(RoleController::class)->middleware('admin')->group(function ()
     Route::get('/role/view/', 'pdfGen')->name('pdf');
 });
 Route::prefix('users')->controller(UserController::class)->middleware('admin')->group(function (){
-    Route::get('/list', 'index')->name('user.index');
+    Route::get('/list-view', 'index')->name('user.index');
     Route::get('/user/add', 'create')->name('user.create');
     Route::post('/user/store', 'store')->name('user.store');
     Route::get('/user/edit/{id}', 'edit')->name('user.edit');
@@ -56,7 +57,7 @@ Route::prefix('setups')->middleware('admin')->group(function (){
     Route::controller(StudentClassController::class)->group(function (){
 
         // Student Classes
-        Route::get('/student/class/view', 'StudentClassView')->name('student.class.view');
+        Route::get('/student/class-list', 'StudentClassView')->name('student.class.view');
         Route::post('/student/class/store', 'StudentClassStore')->name('student.class.store');
         Route::get('/student/class/edit/{id}', 'StudentClassEdit')->name('student.class.edit');
         Route::post('/student/class/update/{id}', 'StudentClassUpdate')->name('student.class.update');
@@ -65,7 +66,7 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // Student Year
     Route::controller(StudentYearController::class)->group(function (){
-        Route::get('/student/year/view', 'StudentYearView')->name('student.year.view');
+        Route::get('/student/year-list', 'StudentYearView')->name('student.year.view');
         Route::post('/student/year/store', 'StudentYearStore')->name('student.year.store');
         Route::get('/student/year/edit/{id}', 'StudentYearEdit')->name('student.year.edit');
         Route::post('/student/year/update/{id}', 'StudentYearUpdate')->name('student.year.update');
@@ -74,7 +75,7 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // Student Group
     Route::controller(StudentGroupController::class)->group(function (){
-        Route::get('/student/group/view', 'StudentGroupView')->name('student.group.view');
+        Route::get('/student/group-list', 'StudentGroupView')->name('student.group.view');
         Route::post('/student/group/store', 'StudentGroupStore')->name('student.group.store');
         Route::get('/student/group/edit/{id}', 'StudentGroupEdit')->name('student.group.edit');
         Route::post('/student/group/update/{id}', 'StudentGroupUpdate')->name('student.group.update');
@@ -83,40 +84,40 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // Student Shift
     Route::controller(StudentShiftController::class)->group(function (){
-        Route::get('/student/shift/view', 'StudentShiftView')->name('student.shift.view');
+        Route::get('/student/shift-view', 'StudentShiftView')->name('student.shift.view');
         Route::post('/student/shift/store', 'StudentShiftStore')->name('student.shift.store');
         Route::get('/student/shift/edit/{id}', 'StudentShiftEdit')->name('student.shift.edit');
         Route::post('/student/shift/update/{id}', 'StudentShiftUpdate')->name('student.shift.update');
         Route::get('/student/shift/delete/{id}', 'StudentShiftDestroy')->name('student.shift.delete');
     });
 
-    // Student Fee Category
-    Route::controller(FeeCategoryController::class)->group(function (){
-        Route::get('/student/fee/category/view', 'StudentFeeCategoryView')->name('student.fcategory.view');
-        Route::post('/student/fee/category/store', 'StudentFeeCategoryStore')->name('student.fcategory.store');
-        Route::get('/student/fee/category/edit/{id}', 'StudentFeeCategoryEdit')->name('student.fcategory.edit');
-        Route::post('/student/fee/category/update/{id}', 'StudentFeeCategoryUpdate')->name('student.fcategory.update');
-        Route::get('/student/fee/category/delete/{id}', 'StudentFeeCategoryDestroy')->name('student.fcategory.delete');
-    });
+//    // Student Fee Category
+//    Route::controller(FeeCategoryController::class)->group(function (){
+//        Route::get('/student/fee/category-list', 'StudentFeeCategoryView')->name('student.fcategory.view');
+//        Route::post('/student/fee/category/store', 'StudentFeeCategoryStore')->name('student.fcategory.store');
+//        Route::get('/student/fee/category/edit/{id}', 'StudentFeeCategoryEdit')->name('student.fcategory.edit');
+//        Route::post('/student/fee/category/update/{id}', 'StudentFeeCategoryUpdate')->name('student.fcategory.update');
+//        Route::get('/student/fee/category/delete/{id}', 'StudentFeeCategoryDestroy')->name('student.fcategory.delete');
+//    });
 
 
-
-    // Student Fee Category Amount
-    Route::controller(FeeCategoryAmountController::class)->group(function (){
-        Route::get('/student/fee/amount/view', 'StudentFeeCategoryAmountView')->name('student.fcamount.view');
-        Route::post('/student/fee/amount/store', 'StudentFeeCategoryAmountStore')->name('student.fcamount.store');
-        Route::get('/student/fee/amount/new', 'StudentFeeCategoryAmountCreate')->name('student.fcamount.add');
-        Route::get('/student/fee/amount/edit/{fee_category_id}', 'StudentFeeCategoryAmountEdit')->name('student.fcamount.edit');
-        Route::post('/student/fee/amount/update/{fee_category_id}', 'StudentFeeCategoryAmountUpdate')->name('student.fcamount.update');
-        Route::get('/student/fee/amount/delete/{fee_category_id}', 'StudentFeeCategoryAmountDestroy')->name('student.fcamount.delete');
-        Route::get('/student/fee/amount/single/{id}', 'FeeAmountDeleteSingle')->name('student.fcamount.single.del');
-        Route::get('/student/fee/amount/details/{fee_category_id}', 'FeeAmountDetails')->name('student.fcamount.details');
-        Route::get('/student/fee/amount/pdf/{fee_category_id}', 'FeeAmountDetailsPDF')->name('student.fcamount.pdf');
-    });
+//
+//    // Student Fee Category Amount
+//    Route::controller(FeeCategoryAmountController::class)->group(function (){
+//        Route::get('/student/fee/amount-list', 'StudentFeeCategoryAmountView')->name('student.fcamount.view');
+//        Route::post('/student/fee/amount/store', 'StudentFeeCategoryAmountStore')->name('student.fcamount.store');
+//        Route::get('/student/fee/amount/new', 'StudentFeeCategoryAmountCreate')->name('student.fcamount.add');
+//        Route::get('/student/fee/amount/edit/{fee_category_id}', 'StudentFeeCategoryAmountEdit')->name('student.fcamount.edit');
+//        Route::post('/student/fee/amount/update/{fee_category_id}', 'StudentFeeCategoryAmountUpdate')->name('student.fcamount.update');
+//        Route::get('/student/fee/amount/delete/{fee_category_id}', 'StudentFeeCategoryAmountDestroy')->name('student.fcamount.delete');
+//        Route::get('/student/fee/amount/single/{id}', 'FeeAmountDeleteSingle')->name('student.fcamount.single.del');
+//        Route::get('/student/fee/amount/details/{fee_category_id}', 'FeeAmountDetails')->name('student.fcamount.details');
+//        Route::get('/student/fee/amount/pdf/{fee_category_id}', 'FeeAmountDetailsPDF')->name('student.fcamount.pdf');
+//    });
 
     // Exam Type
     Route::controller(ExamTypeController::class)->group(function (){
-        Route::get('/exam/type/view', 'ExamTypeView')->name('exam_type.view');
+        Route::get('/exam/type-list', 'ExamTypeView')->name('exam_type.view');
         Route::post('/exam/type/store', 'ExamTypeStore')->name('exam_type.store');
         Route::get('/exam/type/edit/{id}', 'ExamTypeEdit')->name('exam_type.edit');
         Route::post('/exam/type/update/{id}', 'ExamTypeUpdate')->name('exam_type.update');
@@ -125,7 +126,7 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // School Subject
     Route::controller(SchoolSubjectController::class)->group(function (){
-        Route::get('/school/subject/view', 'SchoolSubjectView')->name('school_subject.view');
+        Route::get('/school/subject-list', 'SchoolSubjectView')->name('school_subject.view');
         Route::post('/school/subject/store', 'SchoolSubjectStore')->name('school_subject.store');
         Route::get('/school/subject/edit/{id}', 'SchoolSubjectEdit')->name('school_subject.edit');
         Route::post('/school/subject/update/{id}', 'SchoolSubjectUpdate')->name('school_subject.update');
@@ -134,7 +135,7 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // Assign Subject
     Route::controller(AssignSubjectController::class)->group(function (){
-        Route::get('/assign/subject/view', 'assignSubjectView')->name('assign_subject.view');
+        Route::get('/assign/subject-list', 'assignSubjectView')->name('assign_subject.view');
         Route::get('/assign/subject/add-assign-subject', 'assignSubjectAdd')->name('assign_subject.add');
         Route::post('/assign/subject/store', 'assignSubjectStore')->name('assign_subject.store');
         Route::get('/assign/subject/details/class/{class_id}', 'assignSubjectClassDetails')->name('assign_subject.details');
@@ -147,7 +148,7 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 
     // Designation
     Route::controller(DesignationController::class)->group(function (){
-        Route::get('/designation/view', 'designationView')->name('designation.view');
+        Route::get('/designation-list', 'designationView')->name('designation.view');
         Route::post('/designation/store', 'designationStore')->name('designation.store');
         Route::get('/designation/edit/{id}', 'designationEdit')->name('designation.edit');
         Route::post('/designation/update/{id}', 'designationUpdate')->name('designation.update');
@@ -163,7 +164,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
 
     // Student Registration
     Route::controller(StudentRegistrationController::class)->group(function (){
-        Route::get('/view/all', 'AllStudentView')->name('student.all.view');
+        Route::get('/view-all', 'AllStudentView')->name('student.all.view');
         Route::get('/view/search', 'stentClassYearWise')->name('student.search');
         Route::get('/registration/student/new', 'StudentRegistration')->name('student.registration');
         Route::post('/registration/student/store', 'registrationStore')->name('student.regi.store');
@@ -187,7 +188,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
 
     // Pay Registration Fee
     Route::controller(RegistrationPayController::class)->group(function (){
-        Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('payRegistration_view');
+        Route::get('/registration-pay-fees', 'RegistrationFeeSearchView')->name('payRegistration_view');
         Route::get('/registration/fee/pay', 'RegistrationFeeGetting')->name('payRegistrationFee.search');
         Route::get('/registration/{year_id}/{class_id}/{student_id}/pay', 'PaySlipPDF')->name('registration.pay.slip');
 
@@ -195,7 +196,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
 
      // Pay Monthly Fee
     Route::controller(MonthlyFeePayController::class)->group(function (){
-        Route::get('/monthly/fees', 'MonthlyFeeSearchView')->name('payMonthlyFee_view');
+        Route::get('/monthly-fees', 'MonthlyFeeSearchView')->name('payMonthlyFee_view');
         Route::get('/monthly/fee/pay', 'payMonthlyFeeSearch')->name('payMonthlyFee.search');
         Route::get('/monthly/{year_id}/{month_id}/{class_id}/{student_id}/pay', 'payMonthlyFeePDF')->name('payMonthlyFee.pay.slip');
 
@@ -204,7 +205,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
     // Pay Exam Fee
     Route::controller(PayExamFeeController::class)->group(function (){
         Route::get('/exam/fee-view', 'ExamFeeSearchView')->name('payExamFee_view');
-        Route::get('/exam/fee-pay', 'payExaregistration/feemFeeSearch')->name('payExamFee.search');
+        Route::get('/exam/fee-pay', 'payExamFeeSearch')->name('payExamFee.search');
         Route::get('/exam/{year_id}/{exam_type_id}/{class_id}/{student_id}/pay', 'payExamFeePDF')->name('payExamFee.pay.slip');
 
     });
@@ -216,7 +217,7 @@ Route::prefix('fees')->middleware('admin')->group(function (){
 
     // Registration Fee
     Route::controller(RegistrationFeeController::class)->group(function (){
-        Route::get('/registration/fees/', 'RegiFeeView')->name('regi.fees.view');
+        Route::get('/registration-fees/', 'RegiFeeView')->name('regi.fees.view');
         Route::get('/registration/add/', 'RegiFeeAdd')->name('regi.fees.add');
         Route::post('/registration/add/', 'RegistrationFeeStore')->name('regi.fees.store');
         Route::get('/registration/year/fee/{student_year_id}', 'RegistrationFeeEdit')->name('regi.fees.edit');
@@ -251,8 +252,6 @@ Route::prefix('fees')->middleware('admin')->group(function (){
     });
 
 
-
-
 });
 
 
@@ -264,13 +263,25 @@ Route::controller(ProfileSettingController::class)->middleware('admin')->group(f
 });
 
 
-
-
 Route::controller(AuthController::class)->group(function (){
     Route::get('/', 'Login')->name('login');
     Route::post('/', 'LoginAttempt')->name('login.attempt');
     Route::get('/register', 'Register')->name('register');
     Route::post('/register', 'RegisterAttempt')->name('register.post');
+});
+
+
+// Employee Management
+Route::prefix('employees')->middleware('admin')->group(function (){
+
+    Route::controller(EmployeeRegisterController::class)->group(function (){
+        Route::get('/view-employees', 'EmployeeViews')->name('employees.view');
+        Route::get('/register/employee', 'RegisterEmployee')->name('employees.register');
+        Route::post('/register/employee', 'RegisterEmployeeStore')->name('employee.register.store');
+        Route::get('/register/employee/{id_number}/edit', 'EmployeeEdit')->name('employee.edit');
+        Route::post('/register/employee/{id_number}/edit', 'EmployeeUpdate')->name('employee.update');
+    });
+
 });
 
 

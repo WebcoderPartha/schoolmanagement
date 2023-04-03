@@ -36,7 +36,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#setups" aria-expanded="false" aria-controls="setups">
                 <i class="typcn typcn-chart-pie-outline menu-icon"></i>
-                <span class="menu-title">Setup Management</span>
+                <span class="menu-title">Manage Setup</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="setups">
@@ -45,8 +45,8 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.year.view') }}">Student Year</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.group.view') }}">Student Group</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('student.shift.view') }}">Student Shift</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.fcategory.view') }}">Fee Category</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.fcamount.view') }}">Fee Amount</a></li>
+{{--                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.fcategory.view') }}">Fee Category</a></li>--}}
+{{--                    <li class="nav-item"> <a class="nav-link" href="{{ route('student.fcamount.view') }}">Fee Amount</a></li>--}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('exam_type.view') }}">Exam Type</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_subject.view') }}">School Subject</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('assign_subject.view') }}">Assign Subject</a></li>
@@ -81,6 +81,19 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('payRegistration_view') }}">Pay Registration Fee</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('payMonthlyFee_view') }}">Pay Monthly Fee</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('payExamFee_view') }}">Pay Exam Fee</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#Employee" aria-expanded="false" aria-controls="Employee">
+                <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                <span class="menu-title">Manage Employee</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="Employee">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('employees.view') }}">Employee List</a></li>
                 </ul>
             </div>
         </li>

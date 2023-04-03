@@ -17,13 +17,18 @@ return new class extends Migration
             $table->string('father_name')->nullable();
             $table->string('mother_name')->nullable();
             $table->string('email')->nullable();
-            $table->string('date_of_birth')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('date_of_birth')->nullable();
             $table->string('gender')->nullable();
             $table->string('religion')->nullable();
             $table->string('address')->nullable();
             $table->string('id_number')->nullable();
             $table->string('password')->nullable();
+            $table->string('save_password')->nullable();
             $table->integer('designation_id')->nullable();
+            $table->text('joining_date')->nullable();
+            $table->double('salary')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
