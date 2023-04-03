@@ -64,7 +64,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('regi.fees.view') }}">Registration Fee</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('monthly.fees.view') }}">Monthly Fee</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Exam Fee</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('exam.fees.view') }}">Exam Fee</a></li>
                 </ul>
             </div>
         </li>

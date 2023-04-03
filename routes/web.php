@@ -22,6 +22,8 @@ use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 use App\Http\Controllers\Backend\Student\RegistrationPayController;
 use App\Http\Controllers\Backend\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Backend\Student\MonthlyFeePayController;
+use App\Http\Controllers\Backend\ManageFee\ExamFeeController;
+
 
 
 
@@ -222,6 +224,20 @@ Route::prefix('fees')->middleware('admin')->group(function (){
         Route::get('/monthly/fee/{student_year_id}/{month_id}/{student_class_id}', 'monthlyFeeDelete')->name('monthlyFeeDel');
         Route::get('/monthly/pdf/{student_year_id}/{month_id}', 'monthlyFeesWisePDF')->name('monthly.fee.wise.pdf');
     });
+
+    // Monthly Fee
+    Route::controller(ExamFeeController::class)->group(function (){
+        Route::get('/exam/fee-list/', 'ExamFeeView')->name('exam.fees.view');
+//        Route::get('/monthly/assign/', 'monthlyFeeAdd')->name('monthly.fees.add');
+//        Route::post('/monthly/assign/store', 'monthlyFeeStore')->name('monthly.fees.store');
+//        Route::get('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeEdit')->name('monthly.fees.edit');
+//        Route::post('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeUpdate')->name('monthly.fees.update');
+//        Route::get('/monthly/details/{student_year_id}/{month_id}', 'monthlyFeeDetails')->name('monthly.fees.details');
+//        Route::get('/monthly/fee/{student_year_id}/{month_id}/{student_class_id}', 'monthlyFeeDelete')->name('monthlyFeeDel');
+//        Route::get('/monthly/pdf/{student_year_id}/{month_id}', 'monthlyFeesWisePDF')->name('monthly.fee.wise.pdf');
+    });
+
+
 
 
 });

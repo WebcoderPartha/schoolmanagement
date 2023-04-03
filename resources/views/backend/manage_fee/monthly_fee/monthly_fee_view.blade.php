@@ -9,7 +9,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Monthly Fee <a href="{{ route('monthly.fees.add') }}" class="float-right btn btn-sm btn-primary"><i class="typcn typcn-plus btn-icon-append"></i> Add Monthly Fee</a></h4>
+                        <h4 class="card-title">Monthly Fee <a href="" class="float-right btn btn-sm btn-primary"><i class="typcn typcn-plus btn-icon-append"></i> Add Monthly Fee</a></h4>
 
                     </div>
                     <div class="card-body">
