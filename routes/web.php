@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\Student\RegistrationPayController;
 use App\Http\Controllers\Backend\ManageFee\MonthlyFeeController;
 use App\Http\Controllers\Backend\Student\MonthlyFeePayController;
 use App\Http\Controllers\Backend\ManageFee\ExamFeeController;
+use App\Http\Controllers\Backend\Student\PayExamFeeController;
 
 
 
@@ -159,6 +160,8 @@ Route::prefix('setups')->middleware('admin')->group(function (){
 });
 
 Route::prefix('students')->middleware('admin')->group(function (){
+
+    // Student Registration
     Route::controller(StudentRegistrationController::class)->group(function (){
         Route::get('/view/all', 'AllStudentView')->name('student.all.view');
         Route::get('/view/search', 'stentClassYearWise')->name('student.search');
@@ -174,7 +177,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::post('/promote/student/{student_id}', 'studentPromotionUpdate')->name('student.promotion.update');
     });
 
-
+    // Roll Generator
     Route::controller(RollController::class)->group(function (){
         Route::get('/roll/generate', 'RoleGenerateView')->name('role.generate.view');
         Route::get('/roll/search', 'RoleGenerateSearch')->name('role.generate.search');
@@ -182,6 +185,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
     });
 
 
+    // Pay Registration Fee
     Route::controller(RegistrationPayController::class)->group(function (){
         Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('payRegistration_view');
         Route::get('/registration/fee/pay', 'RegistrationFeeGetting')->name('payRegistrationFee.search');
@@ -189,10 +193,19 @@ Route::prefix('students')->middleware('admin')->group(function (){
 
     });
 
+     // Pay Monthly Fee
     Route::controller(MonthlyFeePayController::class)->group(function (){
         Route::get('/monthly/fees', 'MonthlyFeeSearchView')->name('payMonthlyFee_view');
         Route::get('/monthly/fee/pay', 'payMonthlyFeeSearch')->name('payMonthlyFee.search');
         Route::get('/monthly/{year_id}/{month_id}/{class_id}/{student_id}/pay', 'payMonthlyFeePDF')->name('payMonthlyFee.pay.slip');
+
+    });
+
+    // Pay Exam Fee
+    Route::controller(PayExamFeeController::class)->group(function (){
+        Route::get('/exam/fee-view', 'ExamFeeSearchView')->name('payExamFee_view');
+        Route::get('/exam/fee-pay', 'payExamFeeSearch')->name('payExamFee.search');
+        Route::get('/exam/{year_id}/{exam_type_id}/{class_id}/{student_id}/pay', 'payExamFeePDF')->name('payExamFee.pay.slip');
 
     });
 
@@ -228,13 +241,13 @@ Route::prefix('fees')->middleware('admin')->group(function (){
     // Monthly Fee
     Route::controller(ExamFeeController::class)->group(function (){
         Route::get('/exam/fee-list/', 'ExamFeeView')->name('exam.fees.view');
-//        Route::get('/monthly/assign/', 'monthlyFeeAdd')->name('monthly.fees.add');
-//        Route::post('/monthly/assign/store', 'monthlyFeeStore')->name('monthly.fees.store');
-//        Route::get('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeEdit')->name('monthly.fees.edit');
-//        Route::post('/monthly/assign/{student_year_id}/{month_id}', 'monthlyFeeUpdate')->name('monthly.fees.update');
-//        Route::get('/monthly/details/{student_year_id}/{month_id}', 'monthlyFeeDetails')->name('monthly.fees.details');
-//        Route::get('/monthly/fee/{student_year_id}/{month_id}/{student_class_id}', 'monthlyFeeDelete')->name('monthlyFeeDel');
-//        Route::get('/monthly/pdf/{student_year_id}/{month_id}', 'monthlyFeesWisePDF')->name('monthly.fee.wise.pdf');
+        Route::get('/exam/assign/', 'ExamFeeAdd')->name('exam.fees.add');
+        Route::post('/exam/assign/store', 'ExamFeeStore')->name('exam.fees.store');
+        Route::get('/exam/assign/{year_id}/{exam_type_id}', 'ExamFeeEdit')->name('exam.fees.edit');
+        Route::post('/exam/assign/{year_id}/{exam_type_id}', 'ExamFeeUpdate')->name('exam.fees.update');
+        Route::get('/exam/details/{year_id}/{exam_type_id}', 'ExamFeeDetails')->name('exam.fees.details');
+        Route::get('/exam/fee/{year_id}/{exam_type_id}/{class_id}', 'ExamFeeDelete')->name('examFeeDel');
+        Route::get('/exam/pdf/{year_id}/{exam_type_id}', 'examFeesWisePDF')->name('exam.fee.wise.pdf');
     });
 
 

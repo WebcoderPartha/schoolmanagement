@@ -8,6 +8,7 @@ use App\Models\Month;
 use App\Models\MonthlyFee;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -59,7 +60,8 @@ class MonthlyFeePayController extends Controller
             'class_id' => $class_id
         ])->first();
 
-        return view('backend.pdf.student_monthly_feee_payslip', $data);
+         $PDF = Pdf::loadView('backend.pdf.student_monthly_feee_payslip', $data);
+         return $PDF->stream($data['student']->student->id_number.'-'.$data['monthlyFee']->month->name.'.pdf');
     }
 
 

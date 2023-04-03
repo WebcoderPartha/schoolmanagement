@@ -80,6 +80,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('role.generate.view') }}">Roll Generate</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('payRegistration_view') }}">Pay Registration Fee</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('payMonthlyFee_view') }}">Pay Monthly Fee</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('payExamFee_view') }}">Pay Exam Fee</a></li>
                 </ul>
             </div>
         </li>
