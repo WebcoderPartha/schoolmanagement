@@ -22,34 +22,28 @@ class RegistrationPayController extends Controller
 
     }
 
-    public function RegistrationFeeGetting(Request $request){
-        $class_id = $request->class_id;
-        $year_id = $request->year_id;
-        $data['years'] = StudentYear::all();
-        $data['classes'] = StudentClass::all();
+        public function RegistrationFeeGetting(Request $request){
+            $this->validate($request, [
+                'class_id' => 'required',
+                'year_id' => 'required'
+            ]);
+            $class_id = $request->class_id;
+            $year_id = $request->year_id;
+            $data['years'] = StudentYear::all();
+            $data['classes'] = StudentClass::all();
 
-        if ($class_id !== null && !empty($class_id) && $year_id !== null && !empty($year_id)){
             $data['students'] = AssignStudent::with('student', 'year', 'class', 'discount')->where('class_id', $class_id)->where('year_id', $year_id)->get();
-            if (count($data['students']) > 0){
-                return view('backend.pay_registration.registration_fee_search', $data);
-            }else{
-                Toastr::warning('Search Result Not Found');
-                return Redirect::back();
-            }
+            return view('backend.pay_registration.registration_fee_search', $data);
 
-        }else{
-            Toastr::warning('Select Year & Class!');
-            return Redirect::back();
         }
-    }
 
-    public function PaySlipPDF($year_id, $class_id, $student_id){
-        $data['student'] = AssignStudent::with('class', 'year','student', 'discount')->where('year_id', $year_id)->where('class_id', $class_id)->where('student_id', $student_id)->first();
+        public function PaySlipPDF($year_id, $class_id, $student_id){
+            $data['student'] = AssignStudent::with('class', 'year','student', 'discount')->where('year_id', $year_id)->where('class_id', $class_id)->where('student_id', $student_id)->first();
 
-        $std = $data['student']->student->id_number;
+            $std = $data['student']->student->id_number;
 
-        $PDF = Pdf::loadView('backend.pdf.student_regi_payslip', $data);
-        return $PDF->stream('payslip-'.$std.'.pdf');
-    }
+            $PDF = Pdf::loadView('backend.pdf.student_regi_payslip', $data);
+            return $PDF->stream('payslip-'.$std.'.pdf');
+        }
 
 }

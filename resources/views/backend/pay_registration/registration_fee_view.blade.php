@@ -23,6 +23,11 @@
                                         value="{{ $year->id }}">{{ $year->student_year }}</option>
                                 @endforeach
                             </select>
+                            @error('year_id')
+                            <small class="text-danger">
+                                <i>{{ $message }}</i>
+                            </small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -38,6 +43,11 @@
                                         value="{{ $class->id }}">{{ $class->class_name }}</option>
                                 @endforeach
                             </select>
+                            @error('class_id')
+                            <small class="text-danger">
+                                <i>{{ $message }}</i>
+                            </small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-sm-4"><button type="submit" class="btn btn-primary" id="searchButton" style="margin-top:30px">Search</button></div>

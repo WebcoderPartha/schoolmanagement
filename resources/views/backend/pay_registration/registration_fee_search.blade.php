@@ -18,11 +18,16 @@
                                     <option value="">Select year</option>
                                     @foreach($years as $year)
                                         <option
-                                            @if(isset($students))
+                                            @if(count($students) > 0)
                                                 {{ ($students[0]->year_id == $year->id) ? 'selected' : '' }} @endif
                                             value="{{ $year->id }}">{{ $year->student_year }}</option>
                                     @endforeach
                                 </select>
+                                @error('year_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -33,11 +38,16 @@
                                     <option value="">Select class</option>
                                     @foreach($classes as $class)
                                         <option
-                                            @if(isset($students))
+                                            @if(count($students) > 0)
                                                 {{ ($students[0]->class_id == $class->id) ? 'selected' : '' }} @endif
                                             value="{{ $class->id }}">{{ $class->class_name }}</option>
                                     @endforeach
                                 </select>
+                                @error('class_id')
+                                <small class="text-danger">
+                                    <i>{{ $message }}</i>
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4"><button type="submit" class="btn btn-primary" id="searchButton" style="margin-top:30px">Search</button></div>
@@ -45,15 +55,15 @@
                 </form>
             </div>
         </div>
-        @if(isset($students))
+        @if(count($students) > 0)
             <div class="row">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Student List </h4>
+
                             <div class="table-respnsive">
                                 <table class="table table-hover">
-
                                     <thead>
                                     <tr>
                                         <th>SL</th>
@@ -68,7 +78,6 @@
                                     </thead>
 
                                     <tbody>
-                                    @if($students)
                                     @foreach($students as $key => $student)
 
 
@@ -94,13 +103,23 @@
 
 
                                     @endforeach
-                                        @else
-                                        <h2>Not</h2>
-                                    @endif
+
                                     </tbody>
                                 </table>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end Row -->
+        @else
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <h4 class="card-header text-center">Student List </h4>
+                        <div class="card-body text-center">
+
+                            <h5>No registration fee student found</h5>
                         </div>
                     </div>
                 </div>
