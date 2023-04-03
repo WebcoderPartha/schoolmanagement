@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\Student\RollController;
 use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 use App\Http\Controllers\Backend\Student\RegistrationPayController;
 use App\Http\Controllers\Backend\ManageFee\MonthlyFeeController;
+use App\Http\Controllers\Backend\Student\MonthlyFeePayController;
 
 
 
@@ -183,6 +184,13 @@ Route::prefix('students')->middleware('admin')->group(function (){
         Route::get('/registration/fees', 'RegistrationFeeSearchView')->name('payRegistration_view');
         Route::get('/registration/fee/pay', 'RegistrationFeeGetting')->name('payRegistrationFee.search');
         Route::get('/registration/{year_id}/{class_id}/{student_id}/pay', 'PaySlipPDF')->name('registration.pay.slip');
+
+    });
+
+    Route::controller(MonthlyFeePayController::class)->group(function (){
+        Route::get('/monthly/fees', 'MonthlyFeeSearchView')->name('payMonthlyFee_view');
+        Route::get('/monthly/fee/pay', 'payMonthlyFeeSearch')->name('payMonthlyFee.search');
+        Route::get('/monthly/{year_id}/{month_id}/{class_id}/{student_id}/pay', 'payMonthlyFeePDF')->name('payMonthlyFee.pay.slip');
 
     });
 
