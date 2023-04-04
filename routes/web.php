@@ -291,6 +291,8 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::get('/salary-increment/employee/{id}', 'SalaryIncrement')->name('employee.salary_increment');
         Route::post('/salary-increment/employee/{id}', 'SalaryIncrementStore')->name('employee.salary_increment_store');
         Route::get('/salary/employee/{id}', 'EmployeeSalaryDetail')->name('employee.salary_detail');
+        Route::get('/salary/employee/{id}/pdf', 'EmployeeSalaryPDF')->name('employee.salary_pdf');
+        Route::get('/salary/employee/{id}/pdf/download', 'EmployeeSalaryPDFDownload')->name('employee.salary_pdf_download');
     });
 
 

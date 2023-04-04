@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\EmployeeSalary;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -55,6 +56,27 @@ class SalaryController extends Controller
     }
 
     public function EmployeeSalaryDetail($id){
+
+        $data['employee_salaries'] = EmployeeSalary::with('employee')->where('employee_id', $id)->get();
+
+        return view('backend.manage_employee.employee_salary.salary_details_by_employee_ID', $data);
+    }
+
+    public function EmployeeSalaryPDF($id){
+
+        $data['allData'] = EmployeeSalary::with('employee')->where('employee_id', $id)->get();
+        //        return view('backend.pdf.employee_salary_details_pdf', $data);
+        $PDF = Pdf::loadView('backend.pdf.employee_salary_details_pdf', $data);
+        return $PDF->stream($data['allData'][0]->employee->id_number.'-'.$data['allData'][0]->employee->name.'.pdf');
+
+
+    }
+    public function EmployeeSalaryPDFDownload($id){
+
+        $data['allData'] = EmployeeSalary::with('employee')->where('employee_id', $id)->get();
+        //        return view('backend.pdf.employee_salary_details_pdf', $data);
+        $PDF = Pdf::loadView('backend.pdf.employee_salary_details_pdf', $data);
+        return $PDF->download($data['allData'][0]->employee->id_number.'-'.$data['allData'][0]->employee->name.'.pdf');
 
 
     }
