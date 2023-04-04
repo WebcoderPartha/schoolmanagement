@@ -45,20 +45,20 @@ class StudentRegistrationController extends Controller
     }
 
     public function registrationStore(Request $request){
-//        $this->validate($request, [
-//            'name' => 'required',
-//            'father_name' => 'required',
-//            'mother_name' => 'required',
-//            'dateofbirth' => 'required',
-//            'religion' => 'required',
-//            'gender' => 'required',
-//            'phone' => 'required',
-//            'address' => 'required',
-//            'class_id' => 'required',
-//            'year_id' => 'required',
-//            'shift_id' => 'required',
-//            'group_id' => 'required'
-//        ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'father_name' => 'required',
+            'mother_name' => 'required',
+            'dateofbirth' => 'required',
+            'religion' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'class_id' => 'required',
+            'year_id' => 'required',
+            'shift_id' => 'required',
+            'group_id' => 'required'
+        ]);
 
         $id_number = IdGenerator::generate([
             'table' => 'students',
@@ -298,7 +298,7 @@ class StudentRegistrationController extends Controller
         $student = AssignStudent::where('year_id', $year_id)->where('class_id', $class_id)->where('student_id', $student_id)->first();
         $student->delete();
         Toastr::success('Student deleted successfully');
-            return Redirect::route('student.all.view');
+        return Redirect::route('student.all.view');
 //        $assignStudent = AssignStudent::where('student_id', $id)->first();
 //        $discount = Discount::where('student_id', $id)->first();
 

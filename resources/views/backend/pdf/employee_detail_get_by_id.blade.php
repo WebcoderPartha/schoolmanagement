@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Detail</title>
+    <title>Employee Detail</title>
     <style>
         #customers {
             font-family: Arial, Helvetica, sans-serif;
@@ -53,7 +53,7 @@
 <div class="main_container">
     <div class="header">
         <h2>STUDENT MANAGEMENT SYSTEM</h2>
-        <p>Student Details</p>
+        <p>Employee Details</p>
     </div>
 
     <table id="customers">
@@ -62,52 +62,60 @@
             <td colspan="4" align="center"><img width="250" src="data:image/jpg;base64,{{ $image }}" alt=""></td>
         </tr>
         <tr>
-            <td colspan="2">Student ID:</td>
-            <td colspan="2"><b>{{ $student->student->id_number }}</b></td>
+            <td colspan="2">Employee ID:</td>
+            <td colspan="2"><b>{{ $employee->id_number }}</b></td>
         </tr>
         <tr>
-            <td colspan="2">Roll Number:</td>
-            <td colspan="2">{{ $student->roll_number }}</td>
+            <td colspan="2">Designation:</td>
+            <td colspan="2"><b>{{ $employee->designation->name }}</b></td>
         </tr>
         <tr>
-            <td colspan="2">Year:</td>
-            <td colspan="2"><b>{{ $student->year->student_year }}</b></td>
+            <td colspan="2">Salary:</td>
+            <td colspan="2"><b>{{ $employee->salary }}</b></td>
         </tr>
         <tr>
-            <td colspan="2">Class:</td>
-            <td colspan="2"><b>{{ $student->class->class_name }}</b></td>
+            <td colspan="2">Joining Date:</td>
+            <td colspan="2"><b>{{ $employee->joining_date }}</b></td>
         </tr>
-        <tr>
-            <td colspan="2">Group:</td>
-            <td colspan="2"><b>{{ $student->group->student_group }}</b></td>
-        </tr>
-        <tr>
-            <td colspan="2">Shift:</td>
-            <td colspan="2"><b>{{ $student->shift->student_shift }}</b></td>
-        </tr>
+{{--        <tr>--}}
+{{--            <td colspan="2">Year:</td>--}}
+{{--            <td colspan="2"><b>{{ $student->year->student_year }}</b></td>--}}
+{{--        </tr>--}}
+{{--        <tr>--}}
+{{--            <td colspan="2">Class:</td>--}}
+{{--            <td colspan="2"><b>{{ $student->class->class_name }}</b></td>--}}
+{{--        </tr>--}}
+{{--        <tr>--}}
+{{--            <td colspan="2">Group:</td>--}}
+{{--            <td colspan="2"><b>{{ $student->group->student_group }}</b></td>--}}
+{{--        </tr>--}}
+{{--        <tr>--}}
+{{--            <td colspan="2">Shift:</td>--}}
+{{--            <td colspan="2"><b>{{ $student->shift->student_shift }}</b></td>--}}
+{{--        </tr>--}}
         <tr>
             <td>Name:</td>
-            <td>{{ $student->student->name }}</td>
+            <td>{{ $employee->name }}</td>
             <td>Father Name:</td>
-            <td>{{ $student->student->father_name }}</td>
+            <td>{{ $employee->father_name }}</td>
         </tr>
         <tr>
             <td>Date Of Birth:</td>
-            <td>{{ $student->student->dateofbirth }}</td>
+            <td>{{ $employee->date_of_birth }}</td>
             <td>Religion:</td>
-            <td>{{ $student->student->religion }}</td>
+            <td>{{ $employee->religion }}</td>
         </tr>
         <tr>
             <td>Gender:</td>
-            <td>{{ $student->student->gender }}</td>
+            <td>{{ $employee->gender }}</td>
             <td>Email:</td>
-            <td>{{ $student->student->email }}</td>
+            <td>{{ (!empty($employee->email)) ? $employee->email : '' }}</td>
         </tr>
         <tr>
             <td>Mobile:</td>
-            <td>{{ $student->student->phone }}</td>
+            <td>{{ $employee->phone }}</td>
             <td>Address:</td>
-            <td>{{ $student->student->address }}</td>
+            <td>{{ $employee->address }}</td>
         </tr>
 
 

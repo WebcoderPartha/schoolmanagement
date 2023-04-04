@@ -44,7 +44,7 @@
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
 
-                                                <a href="{{ route('exam.fee.wise.pdf',['year_id'=>$exam->year_id, 'exam_type_id' => $exam->exam_type_id]) }}" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a target="_blank" href="{{ route('exam.fee.wise.pdf',['year_id'=>$exam->year_id, 'exam_type_id' => $exam->exam_type_id]) }}" class="btn btn-sm btn-primary btn-icon-text">
                                                     Print
                                                     <i class="typcn typcn-printer btn-icon-append"></i>
                                                 </a>

@@ -40,22 +40,20 @@
 
                                             <td>
 
-                                                <a href="{{ route('employee.edit', $employee->id_number) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
+                                                <a href="{{ route('employee.edit', $employee->id_number) }}" class="btn btn-success btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-{{--                                                <a href="{{ route('student.detail.get', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">--}}
-{{--                                                    <i class="typcn typcn-eye btn-icon-append"></i>--}}
-{{--                                                </a>--}}
+                                                <a href="{{ route('employee.detail', $employee->id_number) }}" class="btn btn-sm btn-primary btn-icon-text">
+                                                    <i class="typcn typcn-eye btn-icon-append"></i>
+                                                </a>
 
-{{--                                                <a id="delete" href="{{ route('registudent.delete', ['year_id' =>$student->year->id, 'class_id'=> $student->class->id, 'student_id' =>$student->student->id]) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">--}}
-{{--                                                    <i class="typcn typcn-delete-outline btn-icon-append"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{ route('student.detail.pdf', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">--}}
-{{--                                                    <i class="typcn typcn-printer btn-icon-append"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{ route('student.promotion', $student->student_id) }}" type="button" class="btn btn-sm btn-warning text-white">--}}
-{{--                                                    Promotion--}}
-{{--                                                </a>--}}
+                                                <a id="delete" href="{{ route('employee.delete', $employee->id_number) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
+                                                    <i class="typcn typcn-trash btn-icon-append"></i>
+                                                </a>
+                                                <a href="{{ route('employee.idCard', $employee->id_number) }}" target="_blank" class="btn btn-sm btn-primary btn-icon-text">
+                                                    <i class="typcn typcn-printer btn-icon-append"> ID Card</i>
+                                                </a>
+
                                             </td>
                                         </tr>
                                     @endforeach

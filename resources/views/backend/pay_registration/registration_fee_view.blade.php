@@ -95,7 +95,7 @@
                                         <td>{{$student->roll_number}}</td>
                                         <td>{{ $discount->discount }}%</td>
                                         <td>{{ $finalAmount }}</td>
-                                        <td><a href="{{ route('registration.pay.slip',['year'=>$student->year_id, 'class' => $student->class_id, 'student_id' => $student->id]) }}">Pay Slip</a></td>
+                                        <td><a target="_blank" href="{{ route('registration.pay.slip',['year'=>$student->year_id, 'class' => $student->class_id, 'student_id' => $student->id]) }}">Pay Slip</a></td>
                                     </tr>
 
 

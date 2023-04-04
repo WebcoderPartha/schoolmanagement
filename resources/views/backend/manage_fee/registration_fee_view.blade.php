@@ -35,12 +35,12 @@
                                                     Edit
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('regi.fees.details',['student_year_id'=>$year->student_year_id]) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a target="_blank" href="{{ route('regi.fees.details',['student_year_id'=>$year->student_year_id]) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     Details
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
 
-                                                <a href="{{ route('RegYearwisePDF', ['student_year_id'=> $year->student_year_id]) }}" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a target="_blank" href="{{ route('RegYearwisePDF', ['student_year_id'=> $year->student_year_id]) }}" class="btn btn-sm btn-primary btn-icon-text">
                                                     Print
                                                     <i class="typcn typcn-printer btn-icon-append"></i>
                                                 </a>

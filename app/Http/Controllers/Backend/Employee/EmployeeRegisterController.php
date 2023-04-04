@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmployeeSalary;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Brian2694\Toastr\Facades\Toastr;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -30,20 +31,20 @@ class EmployeeRegisterController extends Controller
     }
 
     public function RegisterEmployeeStore(Request $request){
-        //        $this->validate($request, [
-//            'name' => 'required',
-//            'father_name' => 'required',
-//            'mother_name' => 'required',
-//            'dateofbirth' => 'required',
-//            'religion' => 'required',
-//            'gender' => 'required',
-//            'phone' => 'required',
-//            'address' => 'required',
-//            'class_id' => 'required',
-//            'year_id' => 'required',
-//            'shift_id' => 'required',
-//            'group_id' => 'required'
-//        ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'father_name' => 'required',
+            'mother_name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+            'religion' => 'required',
+            'address' => 'required',
+            'designation_id' => 'required',
+            'joining_date' => 'required',
+            'salary' => 'required'
+        ]);
 
         $id_number = IdGenerator::generate([
             'table' => 'employees',
@@ -142,20 +143,18 @@ class EmployeeRegisterController extends Controller
 
     public function EmployeeUpdate(Request $request, $id_number){
 
-//        $this->validate($request, [
-//            'name' => 'required',
-//            'father_name' => 'required',
-//            'mother_name' => 'required',
-//            'dateofbirth' => 'required',
-//            'religion' => 'required',
-//            'gender' => 'required',
-//            'phone' => 'required',
-//            'address' => 'required',
-//            'class_id' => 'required',
-//            'year_id' => 'required',
-//            'shift_id' => 'required',
-//            'group_id' => 'required'
-//        ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'father_name' => 'required',
+            'mother_name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+            'religion' => 'required',
+            'address' => 'required',
+            'designation_id' => 'required',
+        ]);
 
         $employee = Employee::where('id_number', $id_number)->first();
 
@@ -212,6 +211,59 @@ class EmployeeRegisterController extends Controller
         }
 
 
+    }
+
+    public function EmployeeDelete($id_number){
+
+        $employee = Employee::where('id_number', $id_number)->first();
+        $employee_salary = EmployeeSalary::where('employee_id', $employee->id)->first();
+
+        if ($employee->image !== NULL){
+
+            if (file_exists(public_path($employee->image))) {
+
+                unlink(public_path($employee->image));
+                $employee->delete();
+                $employee_salary->delete();
+                Toastr::success('Employee deleted successfully');
+                return Redirect::route('employees.view');
+
+            }else{
+
+                $employee->delete();
+                $employee_salary->delete();
+                Toastr::success('Employee deleted successfully');
+                return Redirect::route('employees.view');
+
+            }
+
+        }else{
+
+            $employee->delete();
+            $employee_salary->delete();
+            Toastr::success('Employee deleted successfully');
+            return Redirect::route('employees.view');
+
+        }
+
+    }
+
+    public function EmployeeDetail($id_number){
+        $data['employee'] = Employee::where('id_number', $id_number)->first();
+        $data['image_path'] = $data['employee']->image;
+        $data['image'] = base64_encode(file_get_contents(public_path($data['image_path'])));
+
+        $pdf = Pdf::loadView('backend.pdf.employee_detail_get_by_id', $data);
+        return $pdf->stream($data['employee']->id_number.'.pdf');
+    }
+
+    public function EmployeeIDCard($id_number){
+        $data['employee'] = Employee::where('id_number', $id_number)->first();
+        $data['image_path'] = $data['employee']->image;
+        $data['image'] = base64_encode(file_get_contents(public_path($data['image_path'])));
+//        return view('backend.pdf.employee_id_card', $data);
+        $pdf = Pdf::loadView('backend.pdf.employee_id_card', $data);
+        return $pdf->stream($data['employee']->id_number.'.pdf');
     }
 
 

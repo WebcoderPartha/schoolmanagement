@@ -280,7 +280,11 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::post('/register/employee', 'RegisterEmployeeStore')->name('employee.register.store');
         Route::get('/register/employee/{id_number}/edit', 'EmployeeEdit')->name('employee.edit');
         Route::post('/register/employee/{id_number}/edit', 'EmployeeUpdate')->name('employee.update');
+        Route::get('/register/employee/{id_number}/delete', 'EmployeeDelete')->name('employee.delete');
+        Route::get('/detail/employee/{id_number}', 'EmployeeDetail')->name('employee.detail');
+        Route::get('/detail/employee/{id_number}/idCard', 'EmployeeIDCard')->name('employee.idCard');
     });
+
 
 });
 

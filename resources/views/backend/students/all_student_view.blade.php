@@ -86,17 +86,17 @@
                                                 <a href="{{ route('student.regi.edit', $student->student_id) }}" type="button" class="btn btn-success btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('student.detail.get', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('student.detail.get', $student->student_id) }}" target="_blank" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                 </a>
 
                                                 <a id="delete" href="{{ route('registudent.delete', ['year_id' =>$student->year->id, 'class_id'=> $student->class->id, 'student_id' =>$student->student->id]) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
                                                     <i class="typcn typcn-delete-outline btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('student.detail.pdf', $student->student_id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('student.detail.pdf', $student->student_id) }}" target="_blank" type="button" class="btn btn-sm btn-primary btn-icon-text">
                                                     <i class="typcn typcn-printer btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('student.promotion', $student->student_id) }}" type="button" class="btn btn-sm btn-warning text-white">
+                                                <a href="{{ route('student.promotion', $student->student_id) }}" target="_blank" class="btn btn-sm btn-warning text-white">
                                                     Promotion
                                                 </a>
                                             </td>
