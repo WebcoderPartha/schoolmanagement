@@ -93,7 +93,8 @@
             </a>
             <div class="collapse" id="Employee">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('employees.view') }}">Employee List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('employees.view') }}">Employee Registration</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('employees.salary_view') }}">Employee Salary</a></li>
                 </ul>
             </div>
         </li>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->double('previous_salary')->nullable();
             $table->double('present_salary')->nullable();
             $table->double('increment_salary')->nullable();
-            $table->string('effected_salary')->nullable();
+            $table->string('effected_salary_date')->nullable();
             $table->timestamps();
         });
     }

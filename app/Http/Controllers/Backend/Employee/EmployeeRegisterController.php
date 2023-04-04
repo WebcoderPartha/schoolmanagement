@@ -216,7 +216,7 @@ class EmployeeRegisterController extends Controller
     public function EmployeeDelete($id_number){
 
         $employee = Employee::where('id_number', $id_number)->first();
-        $employee_salary = EmployeeSalary::where('employee_id', $employee->id)->first();
+        $employee_salary = EmployeeSalary::where('employee_id', $employee->id)->delete();
 
         if ($employee->image !== NULL){
 

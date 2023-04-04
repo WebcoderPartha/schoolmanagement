@@ -10,8 +10,8 @@ use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
-use App\Http\Controllers\Backend\Setup\FeeCategoryController;
-use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
+//use App\Http\Controllers\Backend\Setup\FeeCategoryController;
+//use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\Student\MonthlyFeePayController;
 use App\Http\Controllers\Backend\ManageFee\ExamFeeController;
 use App\Http\Controllers\Backend\Student\PayExamFeeController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegisterController;
+use App\Http\Controllers\Backend\Employee\SalaryController;
 
 
 
@@ -283,6 +284,13 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::get('/register/employee/{id_number}/delete', 'EmployeeDelete')->name('employee.delete');
         Route::get('/detail/employee/{id_number}', 'EmployeeDetail')->name('employee.detail');
         Route::get('/detail/employee/{id_number}/idCard', 'EmployeeIDCard')->name('employee.idCard');
+    });
+
+    Route::controller(SalaryController::class)->group(function (){
+        Route::get('/view-salaries', 'SalaryViews')->name('employees.salary_view');
+        Route::get('/salary-increment/employee/{id}', 'SalaryIncrement')->name('employee.salary_increment');
+        Route::post('/salary-increment/employee/{id}', 'SalaryIncrementStore')->name('employee.salary_increment_store');
+        Route::get('/salary/employee/{id}', 'EmployeeSalaryDetail')->name('employee.salary_detail');
     });
 
 
