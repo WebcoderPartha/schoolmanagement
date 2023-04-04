@@ -15,4 +15,7 @@ class EmployeeSalary extends Model
     }
 
 
+    
+
+
 }

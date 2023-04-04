@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\ManageFee\ExamFeeController;
 use App\Http\Controllers\Backend\Student\PayExamFeeController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegisterController;
 use App\Http\Controllers\Backend\Employee\SalaryController;
+use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 
 
 
@@ -293,6 +294,15 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::get('/salary/employee/{id}', 'EmployeeSalaryDetail')->name('employee.salary_detail');
         Route::get('/salary/employee/{id}/pdf', 'EmployeeSalaryPDF')->name('employee.salary_pdf');
         Route::get('/salary/employee/{id}/pdf/download', 'EmployeeSalaryPDFDownload')->name('employee.salary_pdf_download');
+    });
+
+    Route::controller(EmployeeLeaveController::class)->group(function (){
+        Route::get('/leave-view', 'EmployeeLeaveView')->name('employees.leave_view');
+        Route::get('/leave/add', 'EmployeeLeaveAdd')->name('employee.leave_add');
+        Route::post('/leave/store', 'EmployeeLeaveStore')->name('employee.leave_store');
+//        Route::get('/salary/employee/{id}', 'EmployeeSalaryDetail')->name('employee.salary_detail');
+//        Route::get('/salary/employee/{id}/pdf', 'EmployeeSalaryPDF')->name('employee.salary_pdf');
+//        Route::get('/salary/employee/{id}/pdf/download', 'EmployeeSalaryPDFDownload')->name('employee.salary_pdf_download');
     });
 
 

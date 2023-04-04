@@ -95,6 +95,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('employees.view') }}">Employee Registration</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('employees.salary_view') }}">Employee Salary</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('employees.leave_view') }}">Employee Leave</a></li>
                 </ul>
             </div>
         </li>
