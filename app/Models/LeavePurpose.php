@@ -9,4 +9,5 @@ class LeavePurpose extends Model
 {
     use HasFactory;
     protected $fillable = [];
+
 }

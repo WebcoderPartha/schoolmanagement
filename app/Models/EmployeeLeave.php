@@ -13,4 +13,8 @@ class EmployeeLeave extends Model
     public function leave(){
         return $this->belongsTo(LeavePurpose::class, 'leave_purpose_id', 'id');
     }
+
+    public function employee(){
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
+    }
 }

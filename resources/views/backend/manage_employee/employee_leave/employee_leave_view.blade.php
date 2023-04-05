@@ -31,29 +31,29 @@
                                     @foreach($employees as $key => $employee)
 
                                         <tr>
-                                            <td>{{ $employee->id_number }}</td>
-                                            <td>{{ $employee->name }}</td>
+                                            <td>{{ $employee->employee->id_number }}</td>
+                                            <td>{{ $employee->employee->name }}</td>
+                                            <td>{{ $employee->employee->designation->name }}</td>
                                             <td>{{ $employee->leave->name }}</td>
-                                            <td>{{ $employee->designation->name }}</td>
                                             <td>{{ $employee->start_date }}</td>
                                             <td>{{ $employee->end_date }}</td>
                                             <td><img src="{{ (!empty($employee->image))? asset($employee->image) : '' }}" width="150" alt=""></td>
 
                                             <td>
 
-                                                <a href="{{ route('employee.edit', $employee->id_number) }}" class="btn btn-success btn-sm btn-icon-text">
-                                                    <i class="typcn typcn-edit btn-icon-append"></i>
-                                                </a>
-                                                <a href="{{ route('employee.detail', $employee->id_number) }}" class="btn btn-sm btn-primary btn-icon-text">
-                                                    <i class="typcn typcn-eye btn-icon-append"></i>
-                                                </a>
+{{--                                                <a href="{{ route('employee.edit', $employee->id_number) }}" class="btn btn-success btn-sm btn-icon-text">--}}
+{{--                                                    <i class="typcn typcn-edit btn-icon-append"></i>--}}
+{{--                                                </a>--}}
+{{--                                                <a href="{{ route('employee.detail', $employee->id_number) }}" class="btn btn-sm btn-primary btn-icon-text">--}}
+{{--                                                    <i class="typcn typcn-eye btn-icon-append"></i>--}}
+{{--                                                </a>--}}
 
-                                                <a id="delete" href="{{ route('employee.delete', $employee->id_number) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
-                                                    <i class="typcn typcn-trash btn-icon-append"></i>
-                                                </a>
-                                                <a href="{{ route('employee.idCard', $employee->id_number) }}" target="_blank" class="btn btn-sm btn-primary btn-icon-text">
-                                                    <i class="typcn typcn-printer btn-icon-append"> ID Card</i>
-                                                </a>
+{{--                                                <a id="delete" href="{{ route('employee.delete', $employee->id_number) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">--}}
+{{--                                                    <i class="typcn typcn-trash btn-icon-append"></i>--}}
+{{--                                                </a>--}}
+{{--                                                <a href="{{ route('employee.idCard', $employee->id_number) }}" target="_blank" class="btn btn-sm btn-primary btn-icon-text">--}}
+{{--                                                    <i class="typcn typcn-printer btn-icon-append"> ID Card</i>--}}
+{{--                                                </a>--}}
 
                                             </td>
                                         </tr>
