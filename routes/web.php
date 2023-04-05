@@ -300,9 +300,9 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::get('/leave-view', 'EmployeeLeaveView')->name('employees.leave_view');
         Route::get('/leave/add', 'EmployeeLeaveAdd')->name('employee.leave_add');
         Route::post('/leave/store', 'EmployeeLeaveStore')->name('employee.leave_store');
-//        Route::get('/salary/employee/{id}', 'EmployeeSalaryDetail')->name('employee.salary_detail');
-//        Route::get('/salary/employee/{id}/pdf', 'EmployeeSalaryPDF')->name('employee.salary_pdf');
-//        Route::get('/salary/employee/{id}/pdf/download', 'EmployeeSalaryPDFDownload')->name('employee.salary_pdf_download');
+        Route::get('/leave/edit/{employee_id}', 'EmployeeLeaveEdit')->name('employee.leave_edit');
+        Route::post('/leave/edit/{employee_id}', 'EmployeeLeaveUpdate')->name('employee.leave_update');
+        Route::get('/leave/delete/{employee_id}', 'EmployeeLeaveDelete')->name('employee.leave_delete');
     });
 
 

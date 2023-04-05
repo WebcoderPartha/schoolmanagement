@@ -89,7 +89,7 @@ class EmployeeRegisterController extends Controller
             $employSalary->previous_salary = $request->salary;
             $employSalary->present_salary = $request->salary;
             $employSalary->increment_salary = '0';
-            $employSalary->effected_salary = date('d-m-Y', strtotime($request->joining_date));
+            $employSalary->effected_salary_date = date('d-m-Y', strtotime($request->joining_date));
             $employSalary->save();
 
 
@@ -123,7 +123,7 @@ class EmployeeRegisterController extends Controller
             $employSalary->previous_salary = $request->salary;
             $employSalary->present_salary = $request->salary;
             $employSalary->increment_salary = '0';
-            $employSalary->effected_salary = date('d-M-Y', strtotime($request->joining_date));
+            $employSalary->effected_salary_date = date('d-M-Y', strtotime($request->joining_date));
             $employSalary->save();
 
 

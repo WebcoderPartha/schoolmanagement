@@ -72,5 +72,56 @@ class EmployeeLeaveController extends Controller
 
     }
 
+    public function EmployeeLeaveEdit($employee_id){
+        $data['employees'] = Employee::all();
+        $data['leave_purposes'] = LeavePurpose::all();
+        $data['employeeLeave'] = EmployeeLeave::where('employee_id', $employee_id)->first();
+
+        return view('backend.manage_employee.employee_leave.employee_leave_edit', $data);
+    }
+
+    public function EmployeeLeaveUpdate(Request $request, $employee_id){
+
+        if ($request->name !== NULL){
+
+            $leavePurpose = new LeavePurpose();
+            $leavePurpose->name = $request->name;
+            $leavePurpose->save();
+            $leave_purpose_id = $leavePurpose->id;
+
+            $leaveEmployee = EmployeeLeave::where('employee_id', $employee_id)->first();
+            $leaveEmployee->employee_id = $request->employee_id;
+            $leaveEmployee->leave_purpose_id = $leave_purpose_id;
+            $leaveEmployee->start_date = $request->start_date;
+            $leaveEmployee->end_date = $request->end_date;
+            $leaveEmployee->save();
+
+            Toastr::success('Employee leave updated successfully!');
+            return Redirect::route('employees.leave_view');
+
+
+        }else{
+
+            $leaveEmployee = EmployeeLeave::where('employee_id', $employee_id)->first();
+            $leaveEmployee->employee_id = $request->employee_id;
+            $leaveEmployee->leave_purpose_id = $request->leave_purpose_id;
+            $leaveEmployee->start_date = $request->start_date;
+            $leaveEmployee->end_date = $request->end_date;
+            $leaveEmployee->save();
+
+            Toastr::success('Employee leave updated successfully!');
+            return Redirect::route('employees.leave_view');
+
+        }
+    }
+
+    public function EmployeeLeaveDelete($employee_id){
+
+        $employeeLeave = EmployeeLeave::where('employee_id', $employee_id)->first();
+        $employeeLeave->delete();
+        Toastr::success('Employee leave deleted successfully!');
+        return Redirect::route('employees.leave_view');
+    }
+
 
 }
