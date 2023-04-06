@@ -32,10 +32,10 @@
 
                                             <td>
 
-                                                <a title="Edit employee" href="" class="btn btn-success btn-sm btn-icon-text">
+                                                <a title="Edit Attendance" href="{{ route('employee.attendance_edit', ['date'=> date('d-F-Y', strtotime($attendance->date))]) }}" class="btn btn-success btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                                                                <a href="" class="btn btn-sm btn-primary btn-icon-text">
+                                                <a href="{{ route('employee.attendance_detail', ['date'=> date('d-F-Y', strtotime($attendance->date))]) }}" class="btn btn-sm btn-primary btn-icon-text">
                                                                                                     <i class="typcn typcn-eye btn-icon-append"></i>
                                                                                                 </a>
 

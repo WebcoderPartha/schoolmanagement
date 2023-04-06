@@ -14,17 +14,18 @@
 </style>
 @section('content')
     <div class="content-wrapper">
-        <form action="{{ route('employee.attendance_store') }}" method="POST">
+        <form action="{{ route('employee.attendance_update', ['date' => date('d-F-Y', strtotime($attendances[0]->date))]) }}" method="POST">
             @csrf
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header text-center">
-                       <h4> Employee Attendance</h4>
+                       <h4>Edit Employee Attendance</h4>
+                       <h5> {{date('d-F-Y', strtotime($attendances[0]->date))}}</h5>
                         <hr>
                         <div class="form-group col-4 mx-auto ">
                             <label for="date"> <b>Attendance Date</b></label>
-                            <input type="date" name="date" value="{{ date('Y-m-d') }}" class="form-control">
+                            <input type="date" name="date" value="{{ date('Y-m-d', strtotime($attendances[0]->date)) }}" class="form-control">
                         </div>
                     </div>
                     <div class="card-body">
@@ -41,19 +42,17 @@
                                     <td>Absent</td>
                                     <td>Leave</td>
                                 </tr>
-                                @foreach($employees as $key => $employee)
-                                <tr id="employee-{{$employee->id}}">
-                                    <input type="hidden" name="employee_id[]" value="{{$employee->id}}">
+                                @foreach($attendances as $key => $attendance)
+                                <tr id="employee-{{$attendance->employee_id}}">
+                                    <input type="hidden" name="employee_id[]" value="{{$attendance->employee_id}}">
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $employee->id_number }}</td>
-                                    <td>{{$employee->name}}</td>
+                                    <td>{{ $attendance->employee->id_number }}</td>
+                                    <td>{{$attendance->employee->name}}</td>
                                     <td>
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input
-                                                           checked
-                                                            type="radio" class="form-check-input" name="attendance_status{{$key}}" id="present{{$key}}" value="Present">
+                                                    <input  {{($attendance->attendance_status == 'Present') ? 'checked' : '' }} type="radio" class="form-check-input" name="attendance_status{{$key}}" id="present{{$key}}" value="Present">
                                                     Present
                                                 </label>
                                             </div>
@@ -64,7 +63,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="radio"   class="form-check-input" name="attendance_status{{$key }}" id="absent{{$key}}" value="Absent">
+                                                    <input {{($attendance->attendance_status == 'Absent') ? 'checked' : '' }} type="radio" class="form-check-input" name="attendance_status{{$key }}" id="absent{{$key}}" value="Absent">
                                                     Absent
                                                 </label>
                                             </div>
@@ -75,7 +74,7 @@
                                         <div class="form-group">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="radio"  class="form-check-input" name="attendance_status{{$key}}" id="leave{{$key}}" value="Leave">
+                                                    <input {{($attendance->attendance_status == 'Leave') ? 'checked' : '' }} type="radio" class="form-check-input" name="attendance_status{{$key}}" id="leave{{$key}}" value="Leave">
                                                     Leave
                                                 </label>
                                             </div>
@@ -87,7 +86,7 @@
                             </table>
                         </div>
                             <div class="form-group text-center mt-4">
-                                <input class="btn btn-primary" type="submit" value="Confirm Attendance">
+                                <input class="btn btn-primary" type="submit" value="Update Attendance">
                             </div>
                     </div>
 

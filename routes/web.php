@@ -315,7 +315,9 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::get('/attendance-view', 'EmployeeAttendanceView')->name('employees.attendance_view');
         Route::get('/add-attendance', 'AddEmployeeAttendance')->name('employee.attendance_add');
         Route::post('/add-attendance', 'StoreEmployeeAttendance')->name('employee.attendance_store');
-        Route::get('/add-attendance', 'StoreEmployeeAttendance')->name('employee.attendance_edit');
+        Route::get('/edit-attendance/{date}', 'EditEmployeeAttendance')->name('employee.attendance_edit');
+        Route::post('/update-attendance/{date}', 'UpdateEmployeeAttendance')->name('employee.attendance_update');
+        Route::get('/attendance-detail/{date}', 'DetailEmployeeAttendance')->name('employee.attendance_detail');
 
     });
 
