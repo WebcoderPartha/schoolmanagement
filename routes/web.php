@@ -27,6 +27,7 @@ use App\Http\Controllers\Backend\Student\PayExamFeeController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegisterController;
 use App\Http\Controllers\Backend\Employee\SalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
+use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 
 
 
@@ -288,21 +289,32 @@ Route::prefix('employees')->middleware('admin')->group(function (){
     });
 
     Route::controller(SalaryController::class)->group(function (){
+
         Route::get('/view-salaries', 'SalaryViews')->name('employees.salary_view');
         Route::get('/salary-increment/employee/{id}', 'SalaryIncrement')->name('employee.salary_increment');
         Route::post('/salary-increment/employee/{id}', 'SalaryIncrementStore')->name('employee.salary_increment_store');
         Route::get('/salary/employee/{id}', 'EmployeeSalaryDetail')->name('employee.salary_detail');
         Route::get('/salary/employee/{id}/pdf', 'EmployeeSalaryPDF')->name('employee.salary_pdf');
         Route::get('/salary/employee/{id}/pdf/download', 'EmployeeSalaryPDFDownload')->name('employee.salary_pdf_download');
+
     });
 
     Route::controller(EmployeeLeaveController::class)->group(function (){
+
         Route::get('/leave-view', 'EmployeeLeaveView')->name('employees.leave_view');
         Route::get('/leave/add', 'EmployeeLeaveAdd')->name('employee.leave_add');
         Route::post('/leave/store', 'EmployeeLeaveStore')->name('employee.leave_store');
         Route::get('/leave/edit/{employee_id}', 'EmployeeLeaveEdit')->name('employee.leave_edit');
         Route::post('/leave/edit/{employee_id}', 'EmployeeLeaveUpdate')->name('employee.leave_update');
         Route::get('/leave/delete/{employee_id}', 'EmployeeLeaveDelete')->name('employee.leave_delete');
+
+    });
+
+    Route::controller(EmployeeAttendanceController::class)->group(function (){
+
+        Route::get('/attendance-view', 'EmployeeAttendanceView')->name('employees.attendance_view');
+        Route::get('/add-attendance', 'AddEmployeeAttendance')->name('employee.attendance_add');
+
     });
 
 
