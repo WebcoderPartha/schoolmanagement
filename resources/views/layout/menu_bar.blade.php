@@ -97,6 +97,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('employees.salary_view') }}">Employee Salary</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('employees.leave_view') }}">Employee Leave</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('employees.attendance_view') }}">Employee Attendance</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('employees.monthlySalary_view') }}">Monthly Salary</a></li>
                 </ul>
             </div>
         </li>

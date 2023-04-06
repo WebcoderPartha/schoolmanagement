@@ -28,6 +28,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeRegisterController;
 use App\Http\Controllers\Backend\Employee\SalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
+use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 
 
 
@@ -320,6 +321,16 @@ Route::prefix('employees')->middleware('admin')->group(function (){
         Route::get('/attendance-detail/{date}', 'DetailEmployeeAttendance')->name('employee.attendance_detail');
 
     });
+
+    Route::controller(MonthlySalaryController::class)->group(function (){
+
+        Route::get('/monthly-salary', 'MonthlySalaryView')->name('employees.monthlySalary_view');
+        Route::get('/search/monthly-salary', 'SearchMonthlySalary')->name('employees.monthlySalary_search');
+        Route::get('/pay/salary/{date}/employee/{employee_id}', 'MonthlySalaryPaySlip')->name('employees.paySlipmonthlySalary_search');
+
+    });
+
+
 
 
 });
