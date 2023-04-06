@@ -16,10 +16,7 @@
                                 <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Date</th>
-                                    <th>Employee ID</th>
-                                    <th>Employee Name</th>
-                                    <th>Status</th>
+                                    <th>Attendance Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -31,23 +28,20 @@
 
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ date('d-F-Y', strtotime($attendance->date)) }}</td>
-                                            <td>{{ $employeeAttendances->employee->name }}</td>
-                                            <td>{{ $employee->employee->designation->name }}</td>
-                                            <td>{{ $employee->status }}</td>
+                                            <td>{{ date('d-F-Y', strtotime($attendance->date)) }}</td>>
 
                                             <td>
 
-                                                <a title="Edit employee" href="{{ route('employee.leave_edit', ['employee_id' => $employee->employee->id]) }}" class="btn btn-success btn-sm btn-icon-text">
+                                                <a title="Edit employee" href="" class="btn btn-success btn-sm btn-icon-text">
                                                     <i class="typcn typcn-edit btn-icon-append"></i>
                                                 </a>
-                                                {{--                                                <a href="{{ route('employee.detail', $employee->id_number) }}" class="btn btn-sm btn-primary btn-icon-text">--}}
-                                                {{--                                                    <i class="typcn typcn-eye btn-icon-append"></i>--}}
-                                                {{--                                                </a>--}}
+                                                                                                <a href="" class="btn btn-sm btn-primary btn-icon-text">
+                                                                                                    <i class="typcn typcn-eye btn-icon-append"></i>
+                                                                                                </a>
 
-                                                <a title="Delete Employee" id="delete" href="{{ route('employee.leave_delete', ['employee_id' => $employee->employee->id]) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">
-                                                    <i class="typcn typcn-trash btn-icon-append"></i>
-                                                </a>
+{{--                                                <a title="Delete Employee" id="delete" href="{{ route('employee.leave_delete', ['employee_id' => $employee->employee->id]) }}" type="button" class="btn btn-sm btn-danger btn-icon-text">--}}
+{{--                                                    <i class="typcn typcn-trash btn-icon-append"></i>--}}
+{{--                                                </a>--}}
                                                 {{--                                                <a href="{{ route('employee.idCard', $employee->id_number) }}" target="_blank" class="btn btn-sm btn-primary btn-icon-text">--}}
                                                 {{--                                                    <i class="typcn typcn-printer btn-icon-append"> ID Card</i>--}}
                                                 {{--                                                </a>--}}

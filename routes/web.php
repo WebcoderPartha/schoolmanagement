@@ -314,6 +314,8 @@ Route::prefix('employees')->middleware('admin')->group(function (){
 
         Route::get('/attendance-view', 'EmployeeAttendanceView')->name('employees.attendance_view');
         Route::get('/add-attendance', 'AddEmployeeAttendance')->name('employee.attendance_add');
+        Route::post('/add-attendance', 'StoreEmployeeAttendance')->name('employee.attendance_store');
+        Route::get('/add-attendance', 'StoreEmployeeAttendance')->name('employee.attendance_edit');
 
     });
 
