@@ -49,55 +49,17 @@
                         <div class="table-respnsive text-center">
                             <table class="table table-hover" border="1">
                                 <tr>
-                                    <td rowspan="2">SL</td>
-                                    <td rowspan="2">Employee ID</td>
-                                    <td rowspan="2">Employee Name</td>
-                                    <td colspan="3">Attendance Status</td>
-                                </tr>
-                                <tr bgcolor="#00c8bf" style="color: #fff !important;">
-                                    <td>Present</td>
-                                    <td>Absent</td>
-                                    <td>Leave</td>
+                                    <td><b>SL</b></td>
+                                    <td><b>Employee ID</b></td>
+                                    <td><b>Employee Name</b></td>
+                                    <td><b>Attendance Status</b></td>
                                 </tr>
                                 @foreach($attendances as $key => $attendance)
                                 <tr id="employee-{{$attendance->employee_id}}">
-                                    <input type="hidden" name="employee_id[]" value="{{$attendance->employee_id}}">
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $attendance->employee->id_number }}</td>
                                     <td>{{$attendance->employee->name}}</td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input  {{($attendance->attendance_status == 'Present') ? 'checked' : '' }} type="radio" class="form-check-input" name="attendance_status{{$key}}" id="present{{$key}}" value="Present">
-                                                    Present
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input {{($attendance->attendance_status == 'Absent') ? 'checked' : '' }} type="radio" class="form-check-input" name="attendance_status{{$key }}" id="absent{{$key}}" value="Absent">
-                                                    Absent
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input {{($attendance->attendance_status == 'Leave') ? 'checked' : '' }} type="radio" class="form-check-input" name="attendance_status{{$key}}" id="leave{{$key}}" value="Leave">
-                                                    Leave
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </td>
+                                    <td>{{$attendance->attendance_status}}</td>
                                 </tr>
                                 @endforeach
                             </table>

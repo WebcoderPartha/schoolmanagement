@@ -14,7 +14,7 @@ class EmployeeAttendanceController extends Controller
 {
 
     public function EmployeeAttendanceView(){
-        $data['employeeAttendances'] = EmployeeAttendance::select('date')->groupBy('date')->get();
+        $data['employeeAttendances'] = EmployeeAttendance::select('date')->groupBy('date')->orderBy('id', 'DESC')->get();
 
         return view('backend.manage_employee.employee_attendance.employee_attendance_view', $data);
 
