@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('marks', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
-            $table->string('id_number');
-            $table->integer('year_id');
-            $table->integer('class_id');
-            $table->integer('exam_type_id');
-            $table->integer('subject_id');
-            $table->double('marks');
+            $table->integer('student_id')->nullable();
+            $table->string('id_number')->nullable();
+            $table->integer('year_id')->nullable();
+            $table->integer('class_id')->nullable();
+            $table->integer('exam_type_id')->nullable();
+            $table->integer('subject_id')->nullable();
+            $table->double('marks')->nullable();
             $table->timestamps();
         });
     }

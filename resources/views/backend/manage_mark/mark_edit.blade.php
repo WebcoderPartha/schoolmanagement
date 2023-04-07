@@ -1,6 +1,6 @@
 @extends('layout.admin_master')
 @section('title')
-    Marks Entry
+    Marks Edit
 @endsection
 <style type="text/css">
     input#marks {
@@ -9,7 +9,7 @@
 </style>
 @section('content')
     <div class="content-wrapper">
-        <form action="{{ route('marks.store') }}" method="POST">
+        <form action="{{ route('marks.update') }}" method="POST">
             @csrf
             <div class="card">
                 <div class="card-body">
@@ -68,7 +68,7 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Student Marks Entry</h4>
+                            <h4 class="card-title">Student Mark Edit</h4>
 
 
 
@@ -90,7 +90,7 @@
                                 </table>
                             </div>
                            <div class="submit mx-auto text-center">
-                               <input class="btn btn-success" type="submit" value="Marks Entry">
+                               <input class="btn btn-success" type="submit" value="Marks Update">
                            </div>
                         </div>
                     </div>
@@ -131,22 +131,26 @@
                 e.preventDefault();
                 let year_id = $('#year_id').val();
                 let class_id = $('#class_id').val();
+                let subject_id = $('#subject_id').val();
+                let exam_type_id = $('#exam_type_id').val();
                 $.ajax({
                     type: 'GET',
-                    url: '{{ route('assignStudentGet') }}',
+                    url: '{{ route('marks.edit.get') }}',
                     dataType: 'JSON',
-                    data: {year_id, class_id},
+                    data: {year_id, class_id, exam_type_id, subject_id},
                     success:function (data){
+                        console.log(data[0].year.student_year)
                         let html = '';
                         $('#studentMarkContent').show();
                         $.each(data, function(index, item){
 
+
                             html += "<tr>";
-                            html += "<td>"+item.student.id_number+" <input type='hidden' value="+item.student.id_number+" name='id_number[]'></td>";
-                            html += "<td>"+item.student.name+"<input type='hidden' value="+item.student.id+" name='student_id[]'></td></td>";
+                            html += "<td>"+item.id_number+" <input type='hidden' value="+item.id_number+" name='id_number[]'></td>";
+                            html += "<td>"+item.student.name+"<input type='hidden' value="+item.student_id+" name='student_id[]'></td></td>";
                             html += "<td>"+item.year.student_year+"</td>";
                             html += "<td>"+item.class.class_name+"</td>";
-                            html += "<td><input style='width: 130px !important;' type='text' value=''  id='marks' class='form-control' placeholder='Enter mark' name='marks[]'></td>";
+                            html += "<td><input style='width: 130px !important;' type='text' value='"+item.marks+"'  id='marks' class='form-control' placeholder='Enter mark' name='marks[]'></td>";
                             html += "</tr>";
                         });
                         $('.markGenerate').html(html);

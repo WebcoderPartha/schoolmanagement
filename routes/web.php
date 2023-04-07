@@ -336,10 +336,13 @@ Route::prefix('employees')->middleware('admin')->group(function (){
 Route::prefix('marks')->middleware('admin')->group(function (){
 
     Route::controller(MarkController::class )->group(function(){
-        Route::get('mark-view', 'MarkView')->name('mark.view');
+        Route::get('mark-entry', 'MarkView')->name('mark.view');
         Route::get('mark-subject', 'ClassSubjectGet')->name('mark.class.subject');
         Route::get('mark-student', 'GetAssignStudent')->name('assignStudentGet');
         Route::post('mark-store', 'AssignStudentMarkStore')->name('marks.store');
+        Route::get('mark-edit', 'MarkEdit')->name('marks.edit');
+        Route::get('/geteditmarks', 'GetEditMarks')->name('marks.edit.get');
+        Route::post('/mark-update', 'MarkUpdate')->name('marks.update');
     });
 
 });

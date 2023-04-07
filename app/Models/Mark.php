@@ -11,4 +11,17 @@ class Mark extends Model
 
     protected $fillable = [];
 
+    public function student(){
+        return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
+    public function year(){
+        return $this->belongsTo(StudentYear::class, 'year_id', 'id');
+    }
+
+    public function class(){
+        return $this->belongsTo(StudentClass::class, 'class_id', 'id');
+    }
+
+
 }
