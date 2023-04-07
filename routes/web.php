@@ -29,6 +29,7 @@ use App\Http\Controllers\Backend\Employee\SalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
+use App\Http\Controllers\Backend\Mark\MarkController;
 
 
 
@@ -330,8 +331,14 @@ Route::prefix('employees')->middleware('admin')->group(function (){
 
     });
 
+});
 
+Route::prefix('marks')->middleware('admin')->group(function (){
 
+    Route::controller(MarkController::class )->group(function(){
+        Route::get('mark-view', 'MarkView')->name('mark.view');
+        Route::get('mark-subject', 'ClassSubjectGet')->name('mark.class.subject');
+    });
 
 });
 
