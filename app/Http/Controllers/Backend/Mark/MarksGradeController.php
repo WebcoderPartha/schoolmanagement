@@ -52,9 +52,8 @@ class MarksGradeController extends Controller
     }
 
     public function GradeEdit($id){
-        $grade = MarksGrade::find($id);
-
-
+        $data['grade'] = MarksGrade::find($id);
+        return view('backend.manage_grade.grade_edit', $data);
     }
 
     public function GradeUpdate(Request $request, $id){
