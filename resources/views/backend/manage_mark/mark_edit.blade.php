@@ -139,21 +139,28 @@
                     dataType: 'JSON',
                     data: {year_id, class_id, exam_type_id, subject_id},
                     success:function (data){
-                        console.log(data[0].year.student_year)
-                        let html = '';
-                        $('#studentMarkContent').show();
-                        $.each(data, function(index, item){
+                        if (data.length > 0){
+                            let html = '';
+                            $('#studentMarkContent').show();
+                            $.each(data, function(index, item){
 
 
+                                html += "<tr>";
+                                html += "<td>"+item.id_number+" <input type='hidden' value="+item.id_number+" name='id_number[]'></td>";
+                                html += "<td>"+item.student.name+"<input type='hidden' value="+item.student_id+" name='student_id[]'></td></td>";
+                                html += "<td>"+item.year.student_year+"</td>";
+                                html += "<td>"+item.class.class_name+"</td>";
+                                html += "<td><input style='width: 130px !important;' type='text' value='"+item.marks+"'  id='marks' class='form-control' placeholder='Enter mark' name='marks[]'></td>";
+                                html += "</tr>";
+                            });
+                            $('.markGenerate').html(html);
+                        }else{
+                            let html = '';
                             html += "<tr>";
-                            html += "<td>"+item.id_number+" <input type='hidden' value="+item.id_number+" name='id_number[]'></td>";
-                            html += "<td>"+item.student.name+"<input type='hidden' value="+item.student_id+" name='student_id[]'></td></td>";
-                            html += "<td>"+item.year.student_year+"</td>";
-                            html += "<td>"+item.class.class_name+"</td>";
-                            html += "<td><input style='width: 130px !important;' type='text' value='"+item.marks+"'  id='marks' class='form-control' placeholder='Enter mark' name='marks[]'></td>";
+                            html += "<td colspan='5'><h4 class='text-center'>No data found!</h4></td>";
                             html += "</tr>";
-                        });
-                        $('.markGenerate').html(html);
+                            $('.markGenerate').html(html);
+                        }
                     }
                 });
             });

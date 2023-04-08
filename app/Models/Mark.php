@@ -9,7 +9,7 @@ class Mark extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
 
     public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'id');

@@ -112,6 +112,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('mark.view') }}">Marks Entry</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('marks.edit') }}">Marks Edit</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('grade.view.all') }}">Grade Management</a></li>
                 </ul>
             </div>
         </li>

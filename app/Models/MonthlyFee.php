@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MonthlyFee extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $guarded = [];
 
     public function year(){
         return $this->belongsTo(StudentYear::class,'student_year_id', 'id');

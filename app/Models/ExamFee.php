@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExamFee extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $guarded = [];
 
     public function exam(){
         return $this->belongsTo(ExamType::class, 'exam_type_id', 'id');

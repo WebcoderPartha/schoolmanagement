@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Mark\MarkController;
+use App\Http\Controllers\Backend\Mark\MarksGradeController;
 
 
 
@@ -343,6 +344,15 @@ Route::prefix('marks')->middleware('admin')->group(function (){
         Route::get('mark-edit', 'MarkEdit')->name('marks.edit');
         Route::get('/geteditmarks', 'GetEditMarks')->name('marks.edit.get');
         Route::post('/mark-update', 'MarkUpdate')->name('marks.update');
+    });
+
+    Route::controller(MarksGradeController::class )->group(function(){
+        Route::get('grade-view', 'GradeView')->name('grade.view.all');
+        Route::get('grade-add', 'GradeAdd')->name('grades.add');
+        Route::post('grade-store', 'GradeStore')->name('grades.store');
+        Route::get('grade-edit/{id}', 'GradeEdit')->name('grades.edit');
+        Route::post('grade-update/{id}', 'GradeUpdate')->name('grades.update');
+        Route::get('grade-delete/{id}', 'GradeDelete')->name('grades.delete');
     });
 
 });

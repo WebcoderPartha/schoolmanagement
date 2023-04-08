@@ -21,7 +21,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(count($allDesignation))
+                                @if(count($allDesignation) > 0)
                                     @foreach($allDesignation as $key => $designation)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
