@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Mark\MarkController;
 use App\Http\Controllers\Backend\Mark\MarksGradeController;
+use App\Http\Controllers\Backend\Accounts\AccountStudentFeeController;
 
 
 
@@ -356,6 +357,21 @@ Route::prefix('marks')->middleware('admin')->group(function (){
     });
 
 });
+
+
+Route::prefix('accounts')->middleware('admin')->group(function (){
+
+    Route::controller(AccountStudentFeeController::class )->group(function(){
+        Route::get('/students-fee', 'AccountStudentFeeView')->name('accounts.student_fee_view');
+        Route::get('/add-student-fee', 'addStudentFees')->name('accounts.student_fee_add');
+        Route::get('/search/student-fee', 'SearchStudentFee')->name('accounts.student.search');
+    });
+
+
+
+});
+
+
 
 
 

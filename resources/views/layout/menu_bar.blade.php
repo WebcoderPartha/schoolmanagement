@@ -117,5 +117,18 @@
             </div>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#manage_account" aria-expanded="false" aria-controls="manage_account">
+                <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                <span class="menu-title">Manage Accounts</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="manage_account">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('accounts.student_fee_view') }}">Student Fees</a></li>
+                </ul>
+            </div>
+        </li>
+
     </ul>
 </nav>

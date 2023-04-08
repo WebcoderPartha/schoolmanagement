@@ -8,6 +8,9 @@
         <form action="{{ route('grades.update', $grade->id) }}" method="POST">
             @csrf
             <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">Edit Grade</h4>
+                </div>
                 <div class="card-body">
                     <div class="row search">
                         <div class="col-sm-6">

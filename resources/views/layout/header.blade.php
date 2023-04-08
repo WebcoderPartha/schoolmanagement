@@ -28,7 +28,11 @@
 
             color: #000;
         }
+        input[type='text'], input[type='password'], input[type='email'],input[type='file'],input[type='files'] {
+            box-shadow: 2px 1px 3px 2px #ddd;
+        }
     </style>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $("#delete").on("click", function(){
