@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('class_id')->nullable();
             $table->integer('student_id')->nullable();
             $table->string('fee_name')->nullable();
-            $table->double('fee_amount')->nullable();
             $table->text('date')->nullable();
+            $table->double('amount')->nullable();
             $table->timestamps();
         });
     }

@@ -38,7 +38,8 @@
                                             <td>{{ $studentFee->class->class_name }}</td>
                                             <td>{{ $studentFee->student->id_number }}</td>
                                             <td>{{ $studentFee->student->name }}</td>
-                                            <td>{{ $studentFee->fee_amount }}</td>
+                                            <td>{{ $studentFee->fee_name }}</td>
+                                            <td>{{ $studentFee->amount }}</td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -51,6 +52,8 @@
                             </table>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 

@@ -19,7 +19,6 @@
                                     <option value="">Select year</option>
                                     @foreach($years as $year)
                                         <option
-                                                {{ (isset($_GET['year_id']) == $year->id) ? 'selected' : '' }}
                                                 value="{{ $year->id }}">{{ $year->student_year }}</option>
                                     @endforeach
                                 </select>
@@ -37,7 +36,7 @@
                                 <select class="form-control" name="class_id" id="class_id">
                                     <option value="">Select class</option>
                                     @foreach($classes as $class)
-                                        <option {{ (!empty($_GET['class_id']) == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->class_name }}</option>
+                                        <option  value="{{ $class->id }}">{{ $class->class_name }}</option>
                                     @endforeach
                                 </select>
                                 @error('class_id')
@@ -53,9 +52,9 @@
                                 <label for="choose_fee">Choose Fee</label>
                                 <select class="form-control" name="choose_fee" id="choose_fee">
                                     <option value="">Select class</option>
-                                    <option {{ (!empty($_GET['choose_fee']) == 'registration_fee' ) ? 'selected' : '' }} value="registration_fee">Registration Fee</option>
-                                    <option {{ (!empty($_GET['choose_fee']) == 'monthly_fee' ) ? 'selected' : '' }} value="monthly_fee">Monthly Fee</option>
-                                    <option {{ (!empty($_GET['choose_fee']) == 'exam_fee' ) ? 'selected' : '' }} value="exam_fee">Exam Fee</option>
+                                    <option value="registration_fee">Registration Fee</option>
+                                    <option  value="monthly_fee">Monthly Fee</option>
+                                    <option value="exam_fee">Exam Fee</option>
                                 </select>
                                 @error('choose_fee')
                                 <small class="text-danger">
@@ -71,7 +70,7 @@
                                 <select class="form-control" name="month_id" id="month_id">
                                     <option value="">Select Month</option>
                                     @foreach($months as $month)
-                                        <option {{ (!empty($_GET['month_id']) == $month->id ) ? 'selected' : '' }} value="{{ $month->id }}">{{ $month->name }}</option>
+                                        <option  value="{{ $month->id }}">{{ $month->name }}</option>
                                         @endforeach
                                 </select>
                             </div>
@@ -79,11 +78,11 @@
                         <div class="col-sm-2" style="display:none;" id="exam_type_fee">
 
                             <div class="form-group">
-                                <label for="month_id">Exam Type</label>
+                                <label for="exam_type_id">Exam Type</label>
                                 <select class="form-control" name="exam_type_id" id="exam_type_id">
                                     <option value="">Select exam type</option>
                                     @foreach($examTypes as $examType)
-                                        <option {{ (!empty($_GET['exam_type_id']) == $examType->id ) ? 'selected' : '' }} value="{{ $examType->id }}">{{ $examType->name }}</option>
+                                        <option  value="{{ $examType->id }}">{{ $examType->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -92,7 +91,7 @@
 
                             <div class="form-group">
                                 <label for="date">Date</label>
-                                <input value="{{ (!empty($_GET['date'])) ? date('Y-m-d', strtotime($_GET['date'])) : '' }}" type="date" class="form-control" name="date" id="date">
+                                <input type="date" class="form-control" name="date" id="date">
                                 @error('date')
                                 <small class="text-danger">
                                     <i>{{ $message }}</i>
@@ -107,60 +106,240 @@
                 </form>
             </div>
         </div>
-        @if(isset($assignStudents) && count($assignStudents) > 0)
-        <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
 
-                        <div class="table-respnsive">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Student ID</th>
-                                    <th>Name</th>
-                                    <th>Year</th>
-                                    <th>Class</th>
-                                    <th>Fee Category</th>
-                                    <th>Amount</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($assignStudents as $student)
+        <!-- Registration Fee -->
+        @if(isset($assignStudents) && count($assignStudents) > 0 && isset($registrationFee))
+            <form action="{{ route('accounts.student.store') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
 
-                                    @php
-                                        $discountRow = \App\Models\Discount::where([
-                                            'student_id'=>$student->student->id,
-                                            'student_year_id' => $student->year_id,
-                                            'student_class_id' => $student->class_id
-                                        ])->first();
-                                        $discount =  $discountRow->discount_percentage;
-                                        $regiFee = $registrationFee->fee_amount;
-                                        $parcentValue = ((float)$regiFee/100)*(float)$discount;
-                                        $RegiFinal = (float)$regiFee - (float)$parcentValue
-                                    @endphp
-                                <tr>
-                                    <td>{{ $student->student->id_number }}</td>
-                                    <td>{{ $student->student->name }}</td>
-                                    <td>{{ $student->year->student_year }}</td>
-                                    <td>{{ $student->class->class_name }}</td>
-                                    <td>Registration Fee</td>
-                                    <td>{{ $RegiFinal }}</td>
-                                    <td>
-                                        <input type="checkbox" name="checkBox" value="1">
-                                    </td>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                <div class="table-respnsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Student ID</th>
+                                            <th>Name</th>
+                                            <th>Year</th>
+                                            <th>Class</th>
+                                            <th>Fee Category</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($assignStudents as $key => $student)
+
+                                            @php
+                                                $discountRow = \App\Models\Discount::where([
+                                                    'student_id'=>$student->student->id,
+                                                    'student_year_id' => $student->year_id,
+                                                    'student_class_id' => $student->class_id
+                                                ])->first();
+                                                $discount =  $discountRow->discount_percentage;
+                                                $regiFee = $registrationFee->fee_amount;
+                                                $parcentValue = ((float)$regiFee/100)*(float)$discount;
+                                                $RegiFinal = (float)$regiFee - (float)$parcentValue;
+
+                                                $regiCheck = \App\Models\AccountStudentFee::where([
+                                                    'year_id' => $student->year_id,
+                                                    'class_id' => $student->class_id,
+                                                    'student_id' => $student->student->id,
+                                                    'fee_name' => 'Registration',
+                                                   // 'date' => date('m-Y', strtotime($_GET['date']))
+
+                                                ])->first();
+                                                if ($regiCheck !== NULL){
+                                                    $check = 'checked';
+                                                }else{
+                                                    $check = '';
+                                                }
+                                            @endphp
+                                        <tr>
+                                            <td>{{ $student->student->id_number }} <input type="hidden" value="{{ $student->student->id }}" name="student_id[]"></td>
+                                            <td>{{ $student->student->name }}</td>
+                                            <td>{{ $student->year->student_year }} <input type="hidden" value="{{ $student->year->id }}" name="year_id"></td>
+                                            <td>{{ $student->class->class_name }} <input type="hidden" value="{{ $student->class->id }}" name="class_id"></td>
+                                            <td>Registration Fee ({{ $discount }}% discount) <input type="hidden" name="choose_fee" value="{{ $choose_fee }}"></td>
+                                            <td>{{ $RegiFinal }} <input type="hidden" value="{{ $RegiFinal }}" name="amount[]"></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input type="date" name="date" value="{{ date('Y-m-d', strtotime($date))  }}">
+                                                            <input type="checkbox" name="checkBox[]" class="form-check-input" {{$check}} value="{{ $key}}">
+                                                            <i class="input-helper"></i></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <input class="btn btn-primary" type="submit" value="Submit to Account">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </form>
 
-            @endif
+        @endif
+    <!-- End Registration Fee -->
+
+
+        <!-- Monthly Fee -->
+        @if(isset($assignStudents) && count($assignStudents) > 0 && isset($monthlyFee))
+            <form action="{{ route('accounts.student.store') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="table-respnsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Student ID</th>
+                                            <th>Name</th>
+                                            <th>Year</th>
+                                            <th>Class</th>
+                                            <th>Fee Category</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($assignStudents as $key =>  $student)
+                                            @php
+                                                $monthlyCheck = \App\Models\AccountStudentFee::where([
+                                                    'year_id' => $student->year_id,
+                                                    'class_id' => $student->class_id,
+                                                    'student_id' => $student->student->id,
+                                                    'fee_name' => $monthlyFee->month->name,
+                                                   // 'date' => date('m-Y', strtotime($_GET['date']))
+
+                                                ])->first();
+
+                                                if ($monthlyCheck !== NULL){
+                                                    $check = 'checked';
+                                                }else{
+                                                    $check = '';
+                                                }
+                                            @endphp
+
+                                            <tr>
+                                                <td>{{ $student->student->id_number }} <input type="hidden" value="{{ $student->student->id }}" name="student_id[]"></td>
+                                                <td>{{ $student->student->name }}</td>
+                                                <td>{{ $student->year->student_year }} <input type="hidden" value="{{ $student->year->id }}" name="year_id"></td>
+                                                <td>{{ $student->class->class_name }} <input type="hidden" value="{{ $student->class->id }}" name="class_id"></td>
+                                                <td>Monthly Fee ( {{ $monthlyFee->month->name }}) <input type="hidden" name="fee_name" value="{{ $monthlyFee->month->name }}"> <input type="hidden" name="choose_fee" value="{{ $choose_fee }}"></td>
+                                                <td>{{ $monthlyFee->fee_amount }} <input type="hidden" name="amount[]" value="{{ $monthlyFee->fee_amount }}"></td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" name="checkBox[]" {{ $check }} value="{{ $key }}" class="form-check-input">
+                                                                <i class="input-helper"></i></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <input class="btn btn-primary" type="submit" value="Submit to Account">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    @endif
+    <!-- End Monthly Fee -->
+
+        <!-- Exam Fee -->
+        @if(isset($assignStudents) && count($assignStudents) > 0 && isset($examFee))
+            <form action="{{ route('accounts.student.store') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="table-respnsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Student ID</th>
+                                            <th>Name</th>
+                                            <th>Year</th>
+                                            <th>Class</th>
+                                            <th>Fee Category</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($assignStudents as $key => $student)
+                                            @php
+                                                $examCheck = \App\Models\AccountStudentFee::where([
+                                                    'year_id' => $student->year_id,
+                                                    'class_id' => $student->class_id,
+                                                    'student_id' => $student->student->id,
+                                                    'fee_name' => $examFee->exam->name,
+                                                   // 'date' => date('m-Y', strtotime($_GET['date']))
+
+                                                ])->first();
+
+                                                if ($examCheck !== NULL){
+                                                    $check = 'checked';
+                                                }else{
+                                                    $check = '';
+                                                }
+                                            @endphp
+
+                                            <tr>
+                                                <td>{{ $student->student->id_number }} <input type="hidden" value="{{ $student->student->id }}" name="student_id[]"></td>
+                                                <td>{{ $student->student->name }}</td>
+                                                <td>{{ $student->year->student_year }} <input type="hidden" value="{{ $student->year->id }}" name="year_id"></td>
+                                                <td>{{ $student->class->class_name }} <input type="hidden" value="{{ $student->class->id }}" name="class_id"></td>
+                                                <td>{{$examFee->exam->name}} <input type="hidden" name="fee_name" value="{{ $examFee->exam->name }}"></td>
+                                                <td>{{ $examFee->fee_amount }} <input type="hidden" name="amount[]" value="{{ $examFee->fee_amount }}"><input
+                                                            type="hidden" name="choose_fee" value="{{ $choose_fee }}"></td>
+                                                <td>
+                                                   <div class="form-group">
+                                                       <div class="form-check">
+                                                           <label class="form-check-label">
+                                                               <input type="checkbox" {{ $check }} name="checkBox[]" value="{{$key}}" class="form-check-input">
+                                                               <i class="input-helper"></i></label>
+                                                       </div>
+                                                   </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <input class="btn btn-primary" type="submit" value="Submit to Account">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        @endif
+    <!-- End Exam Fee -->
+
     </div>
 
     <script type="text/javascript">

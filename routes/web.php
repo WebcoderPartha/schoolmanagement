@@ -365,6 +365,7 @@ Route::prefix('accounts')->middleware('admin')->group(function (){
         Route::get('/students-fee', 'AccountStudentFeeView')->name('accounts.student_fee_view');
         Route::get('/add-student-fee', 'addStudentFees')->name('accounts.student_fee_add');
         Route::get('/search/student-fee', 'SearchStudentFee')->name('accounts.student.search');
+        Route::post('/student-fee/store', 'StudentFeeStore')->name('accounts.student.store');
     });
 
 
