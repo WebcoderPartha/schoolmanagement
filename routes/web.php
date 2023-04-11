@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Mark\MarkController;
 use App\Http\Controllers\Backend\Mark\MarksGradeController;
 use App\Http\Controllers\Backend\Accounts\AccountStudentFeeController;
+use App\Http\Controllers\Backend\Accounts\AccountEmployeeSalaryController;
 
 
 
@@ -361,6 +362,7 @@ Route::prefix('marks')->middleware('admin')->group(function (){
 
 Route::prefix('accounts')->middleware('admin')->group(function (){
 
+    // Student All Fees
     Route::controller(AccountStudentFeeController::class )->group(function(){
         Route::get('/students-fee', 'AccountStudentFeeView')->name('accounts.student_fee_view');
         Route::get('/add-student-fee', 'addStudentFees')->name('accounts.student_fee_add');
@@ -368,9 +370,19 @@ Route::prefix('accounts')->middleware('admin')->group(function (){
         Route::post('/student-fee/store', 'StudentFeeStore')->name('accounts.student.store');
     });
 
+    // Employee Salaries
+    Route::controller(AccountEmployeeSalaryController::class )->group(function(){
+        Route::get('/employee-salaries', 'AccountEmployeeSalariesView')->name('accounts.employee_salaries_view');
+        Route::get('/add-employee-salary', 'AccountEmployeeSalariesAdd')->name('accounts.employee_salary_add');
+        Route::get('/employee-salary/search', 'SearchEmployeeSalary')->name('accounts.employee_salary_search');
+        Route::post('/employee-salary/store', 'StoreEmployeeSalary')->name('accounts.store_employee_salary');
+    });
+
 
 
 });
+
+
 
 
 

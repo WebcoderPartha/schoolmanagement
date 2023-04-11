@@ -126,6 +126,7 @@
             <div class="collapse" id="manage_account">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('accounts.student_fee_view') }}">Student Fees</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('accounts.employee_salaries_view') }}">Employee Salary</a></li>
                 </ul>
             </div>
         </li>
