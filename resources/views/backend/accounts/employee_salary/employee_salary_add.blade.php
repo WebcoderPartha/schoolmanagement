@@ -60,9 +60,9 @@
                                         @foreach($employeesAttend as $key => $employeeAttend)
 
                                             @php
-                                                $accountSalary = \App\Models\AccountEmployeeSalary::where([
+                                                echo $accountSalary = \App\Models\AccountEmployeeSalary::where([
                                                                     'employee_id' => $employeeAttend->employee->id,
-                                                                    'date' => date('F', strtotime($date))
+                                                                    'date' => date('F, Y', strtotime($_GET['date']))
                                                                 ])->first();
                                                 if ($accountSalary){
                                                     $check = 'checked';
@@ -70,9 +70,9 @@
                                                     $check = '';
                                                 }
 
-                                                $present = \App\Models\EmployeeAttendance::where('employee_id', $employeeAttend->employee->id)->where('attendance_status', 'Present')->count();
+                                                $present = \App\Models\EmployeeAttendance::where('employee_id', $employeeAttend->employee->id)->where('attendance_status', 'Present')->where('date', 'LIKE', '%'.date('m-Y', strtotime($_GET['date'])).'%')->count();
                                                 $perdaySalary = $employeeAttend->employee->salary / 30;
-                                                $totalSalary = $perdaySalary * $present
+                                                $totalSalary = (float)$perdaySalary * (float)$present
                                             @endphp
 
                                             <tr>
@@ -86,7 +86,7 @@
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <label class="form-check-label">
-                                                                <input type="date" name="date" value="{{ date('Y-m-d', strtotime($date))  }}">
+                                                                <input type="date" name="date" value="{{ date('Y-m-d', strtotime($_GET['date']))  }}">
                                                                 <input type="checkbox" name="checkBox[]" class="form-check-input" {{$check}} value="{{ $key}}">
                                                                 <i class="input-helper"></i></label>
                                                         </div>

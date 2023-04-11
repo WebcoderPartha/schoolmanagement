@@ -51,7 +51,7 @@
 
                                         @php
                                         $employee_id = $attendEmployee->employee->id;
-                                            $employee_present = \App\Models\EmployeeAttendance::where('employee_id', $employee_id)->where('attendance_status', 'Present')->count();
+                                            $employee_present = \App\Models\EmployeeAttendance::where('employee_id', $employee_id)->where('attendance_status', 'Present')->where('date', 'LIKE', '%'.date('m-Y', strtotime($_GET['date'])).'%')->count();
                                         $employeeBasicSalary = $attendEmployee->employee->salary;
                                         $perDaySalary = (float)$employeeBasicSalary/30;
                                         $totalPresentSalary = (float)$perDaySalary*$employee_present

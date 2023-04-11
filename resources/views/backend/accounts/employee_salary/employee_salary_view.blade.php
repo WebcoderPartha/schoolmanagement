@@ -34,8 +34,8 @@
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $accountEmployee->employee->id_number }}</td>
                                             <td>{{ $accountEmployee->employee->name }}</td>
-                                            <td>{{ date('F', strtotime($accountEmployee->date)) }}</td>
-                                            <td>{{ $accountEmployee->amount }}</td>
+                                            <td>{{ date('F, Y', strtotime($accountEmployee->date)) }}</td>
+                                            <td>{{ number_format($accountEmployee->amount, 0) }}</td>
                                         </tr>
                                     @endforeach
                                 @else
