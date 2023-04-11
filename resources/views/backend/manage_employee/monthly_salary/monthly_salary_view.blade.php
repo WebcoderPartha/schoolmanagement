@@ -14,7 +14,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="date">Date</label>
-                                <input type="date" class="form-control" name="date" id="date">
+                                <input type="date" value="{{ (!empty($_GET['date']))? date('Y-m-d', strtotime($_GET['date'])) : '' }}" class="form-control" name="date" id="date">
                             </div>
                         </div>
                         <div class="col-sm-6">

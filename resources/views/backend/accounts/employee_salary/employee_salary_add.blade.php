@@ -39,7 +39,9 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="header p-3">
-                                <h3 class="text-center"> {{ date('F, Y', strtotime($date)) }}</h3>
+                                <h5 class="text-center">Employee Monthly Salary</h5>
+                                <hr>
+                                <h5 class="text-center"> {{ date('F, Y', strtotime($date)) }}</h5>
                             </div>
                             <div class="card-body">
 
@@ -60,7 +62,7 @@
                                         @foreach($employeesAttend as $key => $employeeAttend)
 
                                             @php
-                                                echo $accountSalary = \App\Models\AccountEmployeeSalary::where([
+                                                $accountSalary = \App\Models\AccountEmployeeSalary::where([
                                                                     'employee_id' => $employeeAttend->employee->id,
                                                                     'date' => date('F, Y', strtotime($_GET['date']))
                                                                 ])->first();
