@@ -5,8 +5,8 @@
 @section('content')
     <div class="content-wrapper">
         <div class="card">
-            <div class="card-header">
-                <h4>Add Student Fee</h4>
+            <div class="card-header text-center">
+                <h4>Add Student Fee <a href="{{ route('accounts.student_fee_view') }}" class="btn btn-sm btn-info float-right">Back</a></h4>
 
             </div>
             <div class="card-body">
@@ -241,6 +241,7 @@
                                                 <td>Monthly Fee ( {{ $monthlyFee->month->name }}) <input type="hidden" name="fee_name" value="{{ $monthlyFee->month->name }}"> <input type="hidden" name="choose_fee" value="{{ $choose_fee }}"></td>
                                                 <td>{{ $monthlyFee->fee_amount }} <input type="hidden" name="amount[]" value="{{ $monthlyFee->fee_amount }}"></td>
                                                 <td>
+                                                    <input type="hidden" name="date" value="{{ (!empty($_GET['date']))? date('Y-m-d', strtotime($_GET['date'])) : '' }}">
                                                     <div class="form-group">
                                                         <div class="form-check">
                                                             <label class="form-check-label">
@@ -316,6 +317,7 @@
                                                             type="hidden" name="choose_fee" value="{{ $choose_fee }}"></td>
                                                 <td>
                                                    <div class="form-group">
+                                                       <input type="hidden" name="date" value="{{ (!empty($_GET['date']))? date('Y-m-d', strtotime($_GET['date'])) : '' }}">
                                                        <div class="form-check">
                                                            <label class="form-check-label">
                                                                <input type="checkbox" {{ $check }} name="checkBox[]" value="{{$key}}" class="form-check-input">

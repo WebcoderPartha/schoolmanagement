@@ -34,6 +34,7 @@ use App\Http\Controllers\Backend\Mark\MarksGradeController;
 use App\Http\Controllers\Backend\Accounts\AccountStudentFeeController;
 use App\Http\Controllers\Backend\Accounts\AccountEmployeeSalaryController;
 use App\Http\Controllers\Backend\Accunts\AccountOtherCostController;
+use App\Http\Controllers\Backend\ManageReport\ProfitReportController;
 
 
 
@@ -386,6 +387,21 @@ Route::prefix('accounts')->middleware('admin')->group(function (){
         Route::get('/other-cost/edit/{id}', 'AccountOtherCostEdit')->name('accounts.other_cost_edit');
         Route::post('/other-cost/update/{id}', 'AccountOtherCostUpdate')->name('accounts.other_cost_update');
         Route::get('/delete/other-cost/{id}', 'AccountOtherCostDelete')->name('accounts.other_cost_delete');
+    });
+
+
+
+});
+
+
+// Manage Reports
+Route::prefix('reports')->middleware('admin')->group(function (){
+
+    // Profit Reports
+    Route::controller(ProfitReportController::class )->group(function(){
+        Route::get('/profit-view', 'ProfitReportView')->name('reports.profit_view');
+        Route::get('/profit/search', 'SearchProfitReport')->name('reports.profit_search');
+        Route::get('/profit/pdf/{start_date}/{end_date}', 'PDFProfitReport')->name('reports.profit_pdf');
     });
 
 

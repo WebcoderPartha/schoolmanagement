@@ -132,5 +132,18 @@
             </div>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#manage_reports" aria-expanded="false" aria-controls="manage_reports">
+                <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                <span class="menu-title">Manage Reports</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="manage_reports">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('reports.profit_view') }}">Profit Report</a></li>
+                </ul>
+            </div>
+        </li>
+
     </ul>
 </nav>

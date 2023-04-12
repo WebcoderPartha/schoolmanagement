@@ -8,8 +8,11 @@
 
             <div class="col-sm-6 mx-auto grid-margin stretch-card">
                 <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Edit Other Cost <a href="{{ route('accounts.other_cost_view') }}" class="btn float-right btn-sm btn-info">Back</a></h5>
+                    </div>
                     <div class="card-body">
-                        <h4 class="card-title">Edit Other Cost</h4>
+
                         <form action="{{ route('accounts.other_cost_update', $otherCost->id) }}" method="POST">
                             @csrf
                             <div class="row">
