@@ -33,6 +33,7 @@ use App\Http\Controllers\Backend\Mark\MarkController;
 use App\Http\Controllers\Backend\Mark\MarksGradeController;
 use App\Http\Controllers\Backend\Accounts\AccountStudentFeeController;
 use App\Http\Controllers\Backend\Accounts\AccountEmployeeSalaryController;
+use App\Http\Controllers\Backend\Accunts\AccountOtherCostController;
 
 
 
@@ -376,6 +377,15 @@ Route::prefix('accounts')->middleware('admin')->group(function (){
         Route::get('/add-employee-salary', 'AccountEmployeeSalariesAdd')->name('accounts.employee_salary_add');
         Route::get('/employee-salary/search', 'SearchEmployeeSalary')->name('accounts.employee_salary_search');
         Route::post('/employee-salary/store', 'StoreEmployeeSalary')->name('accounts.store_employee_salary');
+    });
+
+    // Other Cost
+    Route::controller(AccountOtherCostController::class )->group(function(){
+        Route::get('/other/cost-view', 'AccountOtherCostView')->name('accounts.other_cost_view');
+        Route::post('/add-other-cost', 'AccountOtherCostStore')->name('accounts.other_cost_store');
+        Route::get('/other-cost/edit/{id}', 'AccountOtherCostEdit')->name('accounts.other_cost_edit');
+        Route::post('/other-cost/update/{id}', 'AccountOtherCostUpdate')->name('accounts.other_cost_update');
+        Route::get('/delete/other-cost/{id}', 'AccountOtherCostDelete')->name('accounts.other_cost_delete');
     });
 
 
