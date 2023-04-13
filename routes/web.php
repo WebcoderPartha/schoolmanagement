@@ -35,6 +35,8 @@ use App\Http\Controllers\Backend\Accounts\AccountStudentFeeController;
 use App\Http\Controllers\Backend\Accounts\AccountEmployeeSalaryController;
 use App\Http\Controllers\Backend\Accunts\AccountOtherCostController;
 use App\Http\Controllers\Backend\ManageReport\ProfitReportController;
+use App\Http\Controllers\Backend\ManageReport\StudentMarkSheetController;
+
 
 
 
@@ -402,6 +404,13 @@ Route::prefix('reports')->middleware('admin')->group(function (){
         Route::get('/profit-view', 'ProfitReportView')->name('reports.profit_view');
         Route::get('/profit/search', 'SearchProfitReport')->name('reports.profit_search');
         Route::get('/profit/pdf/{start_date}/{end_date}', 'PDFProfitReport')->name('reports.profit_pdf');
+    });
+
+    // Marksheet Reports
+    Route::controller(StudentMarkSheetController::class )->group(function(){
+        Route::get('/marksheet-generate', 'MarksheetGenerateView')->name('reports.marksheet_view');
+        Route::get('/marksheet/generate/search', 'SearchMarksheet')->name('reports.marksheet_search');
+        Route::get('/marksheet/generate/{year_id}/{class_id}/{exam_type_id}/{id_number}', 'DownloadMarksheetPDF')->name('reports.download_marksheet');
     });
 
 

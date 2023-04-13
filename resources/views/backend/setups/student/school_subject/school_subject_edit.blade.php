@@ -56,12 +56,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Edit Subject</h4>
-                        <form class="forms-sample" method="POST" action="{{ route('school_subject.update', $subject->id) }}">
+                        <form class="forms-sample" method="POST" action="{{ route('school_subject.update', $Singlesubject->id) }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="name" class="col-sm-3 col-form-label">Subject Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="{{ $subject->name }}" name="name" id="name" placeholder="Subject name">
+                                    <input type="text" class="form-control" value="{{ $Singlesubject->name }}" name="name" id="name" placeholder="Subject name">
                                     @error('name')
                                     <small class="text-danger">
                                         <i>{{ $message }}</i>

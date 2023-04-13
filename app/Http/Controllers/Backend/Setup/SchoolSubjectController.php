@@ -34,8 +34,8 @@ class SchoolSubjectController extends Controller
 
     public function SchoolSubjectEdit($id){
         $allSubject = SchoolSubject::all();
-        $subject = SchoolSubject::find($id);
-        return view('backend.setups.student.school_subject.school_subject_edit', compact('allSubject','subject'));
+        $Singlesubject = SchoolSubject::find($id);
+        return view('backend.setups.student.school_subject.school_subject_edit', compact('allSubject','Singlesubject'));
 
     }
 

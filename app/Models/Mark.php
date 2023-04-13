@@ -22,6 +22,20 @@ class Mark extends Model
     public function class(){
         return $this->belongsTo(StudentClass::class, 'class_id', 'id');
     }
+    public function subject(){
+        return $this->belongsTo(SchoolSubject::class, 'subject_id', 'id');
+    }
+
+    public function exam(){
+        return $this->belongsTo(ExamType::class, 'exam_type_id', 'id');
+    }
+
+    public function assign_student(){
+        return $this->belongsTo(AssignStudent::class, 'student_id', 'student_id');
+    }
+
+
+
 
 
 }

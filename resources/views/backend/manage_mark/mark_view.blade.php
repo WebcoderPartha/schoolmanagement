@@ -113,7 +113,6 @@
                     success: function (data){
                         let html = '';
                         $.each(data.subjects, function(index, item){
-                            html +='<option value="">Select subject</option>';
                             html += '<option value='+item.subject_id+'>'+item.subject.name+'</option>';
                         });
                         if (data.subjects.length > 0){

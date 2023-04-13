@@ -72,21 +72,39 @@ class MarkController extends Controller
 
         }else{
 
-            $count_student_id = count($request->student_id);
+            $existMark = Mark::where([
+                'year_id' => $request->year_id,
+                'class_id' => $request->class_id,
+                'subject_id' => $request->subject_id,
+                'exam_type_id' => $request->exam_type_id,
+            ])->get();
 
-            for ($i = 0; $i < $count_student_id; $i++){
+            if (count($existMark) > 0){
 
-                $marks = new Mark();
-                $marks->student_id = $request->student_id[$i];
-                $marks->id_number = $request->id_number[$i];
-                $marks->year_id = $request->year_id;
-                $marks->class_id = $request->class_id;
-                $marks->exam_type_id = $request->exam_type_id;
-                $marks->subject_id = $request->subject_id;
-                $marks->marks = $request->marks[$i];
-                $marks->save();
+                Toastr::warning('This Subject mark already added!');
+                return Redirect::back();
 
-            } // end for loop
+            }else{
+
+
+                $count_student_id = count($request->student_id);
+
+                for ($i = 0; $i < $count_student_id; $i++){
+
+                    $marks = new Mark();
+                    $marks->student_id = $request->student_id[$i];
+                    $marks->id_number = $request->id_number[$i];
+                    $marks->year_id = $request->year_id;
+                    $marks->class_id = $request->class_id;
+                    $marks->exam_type_id = $request->exam_type_id;
+                    $marks->subject_id = $request->subject_id;
+                    $marks->marks = trim($request->marks[$i]);
+                    $marks->save();
+
+                } // end for loop
+            }
+
+
 
         } //  end if else
 
@@ -166,7 +184,7 @@ class MarkController extends Controller
                 $marks->class_id = $request->class_id;
                 $marks->exam_type_id = $request->exam_type_id;
                 $marks->subject_id = $request->subject_id;
-                $marks->marks = $request->marks[$i];
+                $marks->marks = trim($request->marks[$i]);
                 $marks->save();
 
             } // end for loop

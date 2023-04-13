@@ -141,6 +141,7 @@
             <div class="collapse" id="manage_reports">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('reports.profit_view') }}">Profit Report</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('reports.marksheet_view') }}">Marksheet Generate</a></li>
                 </ul>
             </div>
         </li>
