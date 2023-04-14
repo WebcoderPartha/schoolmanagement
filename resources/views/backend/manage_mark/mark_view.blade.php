@@ -145,7 +145,7 @@
                             html += "<td>"+item.student.name+"<input type='hidden' value="+item.student.id+" name='student_id[]'></td></td>";
                             html += "<td>"+item.year.student_year+"</td>";
                             html += "<td>"+item.class.class_name+"</td>";
-                            html += "<td><input style='width: 130px !important;' type='text' value=''  id='marks' class='form-control' placeholder='Enter mark' name='marks[]'></td>";
+                            html += "<td><input style='width: 130px !important;' type='text' value=''  id='marks' class='form-control' autocomplete='off' placeholder='Enter mark' name='marks[]'></td>";
                             html += "</tr>";
                         });
                         $('.markGenerate').html(html);

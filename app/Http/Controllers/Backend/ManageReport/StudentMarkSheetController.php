@@ -87,8 +87,42 @@ class StudentMarkSheetController extends Controller
 
 
             }else{
-                Toastr::error('Sorry! This student fail the exam!');
-                return Redirect::back();
+
+                $data['allGrades'] = MarksGrade::all();
+
+                $data['allMarks'] = Mark::with('exam', 'year', 'class', 'student','assign_student', 'subject')->where([
+                    'year_id' => $request->year_id,
+                    'class_id' => $request->class_id,
+                    'exam_type_id' => $request->exam_type_id,
+                    'id_number' => $request->id_number
+                ])->get();
+
+
+                // Total Subject
+                $data['totalSubject']= Mark::where([
+                    'year_id' => $request->year_id,
+                    'class_id' => $request->class_id,
+                    'exam_type_id' => $request->exam_type_id,
+                    'id_number' => $request->id_number
+                ])->get()->count();
+
+                // Total Mark
+                $data['total_mark'] = Mark::where([
+                    'year_id' => $request->year_id,
+                    'class_id' => $request->class_id,
+                    'exam_type_id' => $request->exam_type_id,
+                    'id_number' => $request->id_number
+                ])->sum('marks');
+
+                $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
+
+                $data['cgpa'] = MarksGrade::where([
+                    ['start_marks', '<=', (float)$data['average']],
+                    ['end_marks', '>=', (float)$data['average']]
+                ])->first();
+
+                return view('backend.manage_reports.marksheet_report.fail_marksheet_genarate', $data);
+
 
             }
 
@@ -148,9 +182,55 @@ class StudentMarkSheetController extends Controller
         $pdf = Pdf::loadView('backend.pdf.marksheet_download', $data);
         return $pdf->stream('result-marksheet.pdf');
 
+    }
 
 
+    public function DownloadFailMarksheetPDF($year_id, $class_id, $exam_type_id, $id_number){
+
+
+        // Check SID exist or not
+        $checkID = Mark::where(['id_number' => $id_number])->first();
+
+
+        $data['allGrades'] = MarksGrade::all();
+
+        $data['allMarks'] = Mark::with('exam', 'year', 'class', 'student','assign_student', 'subject')->where([
+            'year_id' => $year_id,
+            'class_id' => $class_id,
+            'exam_type_id' => $exam_type_id,
+            'id_number' => $id_number
+        ])->get();
+
+
+        // Total Subject
+        $data['totalSubject']= Mark::where([
+            'year_id' => $year_id,
+            'class_id' => $class_id,
+            'exam_type_id' => $exam_type_id,
+            'id_number' => $id_number
+        ])->get()->count();
+
+        // Total Mark
+        $data['total_mark'] = Mark::where([
+            'year_id' => $year_id,
+            'class_id' => $class_id,
+            'exam_type_id' => $exam_type_id,
+            'id_number' => $id_number
+        ])->sum('marks');
+
+        $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
+
+        $data['cgpa'] = MarksGrade::where([
+            ['start_marks', '<=', (float)$data['average']],
+            ['end_marks', '>=', (float)$data['average']]
+        ])->first();
+
+
+//        return view('backend.pdf.marksheet_download', $data);
+        $pdf = Pdf::loadView('backend.pdf.fail_marksheet_download', $data);
+        return $pdf->stream('result-marksheet.pdf');
 
     }
+
 
 }

@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Marksheet</title>
+    <title>Attendant Report</title>
     <style>
         body {
             background-color: #f8f8f8 !important;
@@ -22,7 +22,7 @@
 
         .container {
             position: relative;
-            max-width: 960px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -250,8 +250,8 @@
     <!-- Header -->
     <div id="main_header2">
         <h3><font color="white">SCHOOL MANAGEMENT SYSTEM</font></h3>
-        <h4><font color="white">{{ $allMarks[0]->exam->name }}, {{ $allMarks[0]->year->student_year }}</font></h4>
-        <h4 style="color:#fff">Academic Transcript</h4>
+        <h4 style="color:#fff">Attendant Report</h4>
+
     </div>
     <!-- End Header -->
 
@@ -260,54 +260,29 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header text-center" id="page-header">
-                    <h3>Result of {{ $allMarks[0]->exam->name }}, {{ $allMarks[0]->year->student_year }}</h3>
+
+                    <h3>Attendant Details </h3>
+                    <hr>
+                    <h3>{{ $date }}</h3>
                 </div>
             </div>
         </div>
         <div class="row">
 
             <br>
-            <div id="result_display">
+
                 <div class="table-responsive">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <table class="table table-striped table-bordered" width="100%">
                                 <tbody>
                                 <tr>
-                                    <td>Student ID</td>
-                                    <td><b>{{ $allMarks[0]->student->id_number }}</b></td>
-                                    <td>Roll Number</td>
-                                    <td>{{ $allMarks[0]->assign_student->roll_number }}</td>
+                                    <td>Employee ID</td>
+                                    <td><b>{{ $attendants[0]->employee->id_number }}</b></td>
                                 </tr>
                                 <tr>
-                                    <td>Name of Student</td>
-                                    <td colspan="3"><b>{{ $allMarks[0]->student->name }}</b></td>
-                                </tr>
-                                <tr>
-                                    <td>Father's Name</td>
-                                    <td colspan="3"><b>{{ $allMarks[0]->student->father_name }}</b></td>
-                                </tr>
-                                <tr>
-                                    <td>Mother's Name</td>
-                                    <td colspan="3"><b>{{ $allMarks[0]->student->mother_name }}</b></td>
-                                </tr>
-                                <tr>
-                                    <td>Religion</td>
-                                    <td>{{ $allMarks[0]->student->religion }}</td>
-                                    <td>Session</td>
-                                    <td>{{ $allMarks[0]->year->student_year }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Group</td>
-                                    <td>{{ $allMarks[0]->assign_student->group->student_group }}</td>
-                                    <td>Gender</td>
-                                    <td>{{ $allMarks[0]->student->gender }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Result</td>
-                                    <td>CGPA = <b>{{ $cgpa->grade_point }}</b></td>
-                                    <td>Date of Birth</td>
-                                    <td>{{ date('d-m-Y', strtotime($allMarks[0]->student->dateofbirth)) }}</td>
+                                    <td>Employee Name</td>
+                                    <td colspan="3"><b>{{ $attendants[0]->employee->name }}</b></td>
                                 </tr>
 
                                 </tbody>
@@ -317,66 +292,51 @@
                             <table class="table table-striped table-bordered" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Class Interval</th>
-                                    <th>Letter Grade</th>
-                                    <th>Grade Point</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($allGrades as $grade)
-                                    <tr>
-                                        <td class="cent-align">{{ $grade->start_marks }} - {{$grade->end_marks}}</td>
-                                        <td><span>{{ $grade->grade_name }}</span></td>
-                                        <td class="cent-align">{{ $grade->grade_point }}</td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td class="text-center">{{ $presentCount }}</td>
+                                    <td class="text-center">{{ $absentCount }}</td>
+                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
 
 
-                    <div class="text-center">
-                        <h4>Subject-Wise Grade/Marks</h4>
-                    </div>
-                    <table class="table table-striped table-bordered text-center" width="100%">
-                        <thead class="btn-success">
-                        <tr>
-                            <th>Subject Code</th>
-                            <th>Subject Name</th>
-                            <th>Marks</th>
-                            <th>Grade</th>
-                            <th>Grade Point</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($allMarks as $key => $mark)
-                            @php
-                                $gradePoint = \App\Models\MarksGrade::where('start_marks', '<=', (float)$mark->marks)->where('end_marks', '>=', (float)$mark->marks)->first();
+                  <div class="row">
 
-                            @endphp
-                            <tr>
-                                <td class="cent-align">{{ $key+1}}</td>
-                                <td class="cent-align">{{ $mark->subject->name }}</td>
-                                <td class="cent-align">{{ $mark->marks }}</td>
-                                <td class="cent-align">{{ $gradePoint->grade_name}}</td>
-                                <td class="cent-align">{{ $gradePoint->grade_point}}</td>
-                            </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="3" style="border-bottom: none !important;"></td>
-                            <td><b>Grade Point: {{ $cgpa->grade_name }}</b></td>
-                            <td><b>CGPA: {{ $cgpa->grade_point }}</b></td>
-                        </tr>
+                      <table class="table table-striped table-bordered text-center" width="100%">
+                          <thead class="btn-success">
+                          <tr>
+                              <th>Date</th>
+                              <th>Attendance Status</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+
+                          @foreach($attendants as $attendant)
+                          <tr>
+                              <td class="cent-align">{{ date('d M, Y', strtotime($attendant->date)) }}</td>
+                              <td class="cent-align">{{ $attendant->attendance_status }}</td>
+                          </tr>
+                          @endforeach
 
 
-                        </tbody>
-                    </table>
 
+                          </tbody>
+                      </table>
+
+                  </div>
                     <div class="divpadding">
 
                     </div>
-                </div>
+
             </div>
 
 

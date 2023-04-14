@@ -289,7 +289,7 @@
                                         <td>Student ID</td>
                                         <td><b>{{ $allMarks[0]->student->id_number }}</b></td>
                                         <td>Roll Number</td>
-                                        <td>{{ $allMarks[0]->student->roll_number }}</td>
+                                        <td>{{ $allMarks[0]->assign_student->roll_number }}</td>
                                     </tr>
                                     <tr>
                                         <td>Name of Student</td>

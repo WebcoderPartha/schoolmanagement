@@ -36,6 +36,8 @@ use App\Http\Controllers\Backend\Accounts\AccountEmployeeSalaryController;
 use App\Http\Controllers\Backend\Accunts\AccountOtherCostController;
 use App\Http\Controllers\Backend\ManageReport\ProfitReportController;
 use App\Http\Controllers\Backend\ManageReport\StudentMarkSheetController;
+use App\Http\Controllers\Backend\ManageReport\EmployeeAttendantReport;
+
 
 
 
@@ -192,7 +194,7 @@ Route::prefix('students')->middleware('admin')->group(function (){
 
     // Roll Generator
     Route::controller(RollController::class)->group(function (){
-        Route::get('/roll/generate', 'RoleGenerateView')->name('role.generate.view');
+        Route::get('/roll-generate', 'RoleGenerateView')->name('role.generate.view');
         Route::get('/roll/search', 'RoleGenerateSearch')->name('role.generate.search');
         Route::post('/roll/generate', 'RoleGenerateStore')->name('role.generate.store');
     });
@@ -411,6 +413,14 @@ Route::prefix('reports')->middleware('admin')->group(function (){
         Route::get('/marksheet-generate', 'MarksheetGenerateView')->name('reports.marksheet_view');
         Route::get('/marksheet/generate/search', 'SearchMarksheet')->name('reports.marksheet_search');
         Route::get('/marksheet/generate/{year_id}/{class_id}/{exam_type_id}/{id_number}', 'DownloadMarksheetPDF')->name('reports.download_marksheet');
+        Route::get('/marksheet/generate/{year_id}/{class_id}/{exam_type_id}/{id_number}/fail', 'DownloadFailMarksheetPDF')->name('reports.download_fail_marksheet');
+    });
+
+    // Employee Attendant Reports
+    Route::controller(EmployeeAttendantReport::class )->group(function(){
+        Route::get('/employee/attendant', 'EmployeeAttendantReport')->name('reports.employee_attendant');
+        Route::get('/employee/attendant-view', 'EmployeeAttendantReportView')->name('reports.employee_attendant_view');
+
     });
 
 

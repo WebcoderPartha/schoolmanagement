@@ -305,7 +305,7 @@
                                 </tr>
                                 <tr>
                                     <td>Result</td>
-                                    <td>CGPA = <b>{{ $cgpa->grade_point }}</b></td>
+                                    <td><b>Failed</b></td>
                                     <td>Date of Birth</td>
                                     <td>{{ date('d-m-Y', strtotime($allMarks[0]->student->dateofbirth)) }}</td>
                                 </tr>
@@ -365,8 +365,8 @@
                         @endforeach
                         <tr>
                             <td colspan="3" style="border-bottom: none !important;"></td>
-                            <td><b>Grade Point: {{ $cgpa->grade_name }}</b></td>
-                            <td><b>CGPA: {{ $cgpa->grade_point }}</b></td>
+                            <td><b>Grade Point: F</b></td>
+                            <td><b>CGPA:--</b></td>
                         </tr>
 
 
