@@ -339,7 +339,7 @@
                                     <tr>
                                         <td class="cent-align">{{ $grade->start_marks }} - {{$grade->end_marks}}</td>
                                         <td><span>{{ $grade->grade_name }}</span></td>
-                                        <td class="cent-align">{{ $grade->grade_point }}</td>
+                                        <td class="cent-align">{{ number_format($grade->grade_point, 2) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -375,8 +375,7 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3" style="border-bottom: none !important;"></td>
-                            <td><b>Grade Point:  F</b></td>
+                            <td colspan="4" style="border-bottom: none !important;"></td>
                             <td><b>CGPA: --</b></td>
                         </tr>
 

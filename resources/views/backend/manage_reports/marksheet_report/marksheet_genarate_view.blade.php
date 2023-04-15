@@ -9,7 +9,7 @@
                 <h4>Marksheet Generate</h4>
             </div>
             <div class="card-body">
-                <form action="{{route('reports.marksheet_search')}}" method="GET">
+                <form action="{{route('reports.marksheet_search')}}" method="GET" target="_blank">
                     <div class="row search">
                         <div class="col-sm-3">
                             <div class="form-group">

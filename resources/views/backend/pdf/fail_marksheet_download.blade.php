@@ -364,8 +364,7 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3" style="border-bottom: none !important;"></td>
-                            <td><b>Grade Point: F</b></td>
+                            <td colspan="4" style="border-bottom: none !important;"></td>
                             <td><b>CGPA:--</b></td>
                         </tr>
 

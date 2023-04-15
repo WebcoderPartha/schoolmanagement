@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('exam_type_id')->nullable();
             $table->integer('subject_id')->nullable();
             $table->double('marks')->nullable();
+            $table->double('marks_grade_point')->nullable();
             $table->timestamps();
         });
     }

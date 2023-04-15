@@ -9,7 +9,7 @@
                 <h4>Exam Result Report</h4>
             </div>
             <div class="card-body">
-                <form action="{{route('reports.get_result_report')}}" method="GET">
+                <form action="{{route('reports.get_result_report')}}" target="_blank" method="GET">
                     <div class="row search">
                         <div class="col-sm-3">
                             <div class="form-group">

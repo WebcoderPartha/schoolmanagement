@@ -67,20 +67,20 @@ class StudentMarkSheetController extends Controller
                     'id_number' => $request->id_number
                 ])->get()->count();
 
-                // Total Mark
-                $data['total_mark'] = Mark::where([
+                // Total Grade
+                $data['total_grades'] = Mark::where([
                     'year_id' => $request->year_id,
                     'class_id' => $request->class_id,
                     'exam_type_id' => $request->exam_type_id,
                     'id_number' => $request->id_number
-                ])->sum('marks');
+                ])->sum('marks_grade_point');
 
-                $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
+                $data['cgpa'] = (float)$data['total_grades'] / $data['totalSubject'];
 
-                $data['cgpa'] = MarksGrade::where([
-                    ['start_marks', '<=', $data['average']],
-                    ['end_marks', '>=', $data['average']]
-                ])->first();
+//                $data['cgpa'] = MarksGrade::where([
+//                    ['start_marks', '<=', $data['average']],
+//                    ['end_marks', '>=', $data['average']]
+//                ])->first();
 
                 return view('backend.manage_reports.marksheet_report.marksheet_genarate', $data);
 
@@ -98,28 +98,28 @@ class StudentMarkSheetController extends Controller
                 ])->get();
 
 
-                // Total Subject
-                $data['totalSubject']= Mark::where([
-                    'year_id' => $request->year_id,
-                    'class_id' => $request->class_id,
-                    'exam_type_id' => $request->exam_type_id,
-                    'id_number' => $request->id_number
-                ])->get()->count();
+//                // Total Subject
+//                $data['totalSubject']= Mark::where([
+//                    'year_id' => $request->year_id,
+//                    'class_id' => $request->class_id,
+//                    'exam_type_id' => $request->exam_type_id,
+//                    'id_number' => $request->id_number
+//                ])->get()->count();
 
-                // Total Mark
-                $data['total_mark'] = Mark::where([
-                    'year_id' => $request->year_id,
-                    'class_id' => $request->class_id,
-                    'exam_type_id' => $request->exam_type_id,
-                    'id_number' => $request->id_number
-                ])->sum('marks');
+//                // Total Mark
+//                $data['total_mark'] = Mark::where([
+//                    'year_id' => $request->year_id,
+//                    'class_id' => $request->class_id,
+//                    'exam_type_id' => $request->exam_type_id,
+//                    'id_number' => $request->id_number
+//                ])->sum('marks');
 
-                $data['average'] = $data['total_mark'] / $data['totalSubject'];
-
-                $data['cgpa'] = MarksGrade::where([
-                    ['start_marks', '<=', 30],
-                    ['end_marks', '>=', 30]
-                ])->first();
+//                $data['average'] = $data['total_mark'] / $data['totalSubject'];
+//
+//                $data['cgpa'] = MarksGrade::where([
+//                    ['start_marks', '<=', $data['average']],
+//                    ['end_marks', '>=', $data['average']]
+//                ])->first();
 
 
                 return view('backend.manage_reports.marksheet_report.fail_marksheet_genarate', $data);
@@ -163,20 +163,17 @@ class StudentMarkSheetController extends Controller
                     'id_number' => $id_number
         ])->get()->count();
 
-                // Total Mark
-        $data['total_mark'] = Mark::where([
+        // Total Grade
+        $data['total_grades'] = Mark::where([
             'year_id' => $year_id,
             'class_id' => $class_id,
             'exam_type_id' => $exam_type_id,
             'id_number' => $id_number
-        ])->sum('marks');
+        ])->sum('marks_grade_point');
 
-        $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
+        $data['cgpa'] = (float)$data['total_grades'] / $data['totalSubject'];
 
-        $data['cgpa'] = MarksGrade::where([
-            ['start_marks', '<=', (float)$data['average']],
-            ['end_marks', '>=', (float)$data['average']]
-        ])->first();
+
 
 
 //        return view('backend.pdf.marksheet_download', $data);
@@ -203,28 +200,28 @@ class StudentMarkSheetController extends Controller
         ])->get();
 
 
-        // Total Subject
-        $data['totalSubject']= Mark::where([
-            'year_id' => $year_id,
-            'class_id' => $class_id,
-            'exam_type_id' => $exam_type_id,
-            'id_number' => $id_number
-        ])->get()->count();
-
-        // Total Mark
-        $data['total_mark'] = Mark::where([
-            'year_id' => $year_id,
-            'class_id' => $class_id,
-            'exam_type_id' => $exam_type_id,
-            'id_number' => $id_number
-        ])->sum('marks');
-
-        $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
-
-        $data['cgpa'] = MarksGrade::where([
-            ['start_marks', '<=', (float)$data['average']],
-            ['end_marks', '>=', (float)$data['average']]
-        ])->first();
+//        // Total Subject
+//        $data['totalSubject']= Mark::where([
+//            'year_id' => $year_id,
+//            'class_id' => $class_id,
+//            'exam_type_id' => $exam_type_id,
+//            'id_number' => $id_number
+//        ])->get()->count();
+//
+//        // Total Mark
+//        $data['total_mark'] = Mark::where([
+//            'year_id' => $year_id,
+//            'class_id' => $class_id,
+//            'exam_type_id' => $exam_type_id,
+//            'id_number' => $id_number
+//        ])->sum('marks');
+//
+//        $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
+//
+//        $data['cgpa'] = MarksGrade::where([
+//            ['start_marks', '<=', (float)$data['average']],
+//            ['end_marks', '>=', (float)$data['average']]
+//        ])->first();
 
 
 //        return view('backend.pdf.marksheet_download', $data);

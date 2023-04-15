@@ -7,6 +7,7 @@ use App\Models\AssignStudent;
 use App\Models\AssignSubject;
 use App\Models\ExamType;
 use App\Models\Mark;
+use App\Models\MarksGrade;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
 use Brian2694\Toastr\Facades\Toastr;
@@ -91,6 +92,9 @@ class MarkController extends Controller
 
                 for ($i = 0; $i < $count_student_id; $i++){
 
+
+                    $gradePoint = MarksGrade::where('start_marks', '<=', $request->marks[$i])->where('end_marks', '>=', $request->marks[$i])->first();
+
                     $marks = new Mark();
                     $marks->student_id = $request->student_id[$i];
                     $marks->id_number = $request->id_number[$i];
@@ -98,6 +102,7 @@ class MarkController extends Controller
                     $marks->class_id = $request->class_id;
                     $marks->exam_type_id = $request->exam_type_id;
                     $marks->subject_id = $request->subject_id;
+                    $marks->marks_grade_point = $gradePoint->grade_point;
                     $marks->marks = trim($request->marks[$i]);
                     $marks->save();
 
@@ -177,6 +182,9 @@ class MarkController extends Controller
                     'id_number' => $request->id_number[$i]
                 ])->delete();
 
+                $gradePoint = MarksGrade::where('start_marks', '<=', $request->marks[$i])->where('end_marks', '>=', $request->marks[$i])->first();
+
+
                 $marks = new Mark();
                 $marks->student_id = $request->student_id[$i];
                 $marks->id_number = $request->id_number[$i];
@@ -184,6 +192,7 @@ class MarkController extends Controller
                 $marks->class_id = $request->class_id;
                 $marks->exam_type_id = $request->exam_type_id;
                 $marks->subject_id = $request->subject_id;
+                $marks->marks_grade_point = $gradePoint->grade_point;
                 $marks->marks = trim($request->marks[$i]);
                 $marks->save();
 

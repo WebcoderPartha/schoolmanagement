@@ -286,12 +286,12 @@
                                     @php
                                      $id = $result->student->id;
 
-                                        $totalMark = \App\Models\Mark::where([
+                                        $totalGrade = \App\Models\Mark::where([
                                                      'year_id' => $result->year_id,
                                                      'class_id' => $result->class_id,
                                                      'exam_type_id' => $result->exam_type_id,
                                                      'student_id' =>$result->student_id
-                                                  ])->sum('marks');
+                                                  ])->sum('marks_grade_point');
 
                                         $totalSubject = \App\Models\Mark::where([
                                                      'year_id' => $result->year_id,
@@ -300,12 +300,9 @@
                                                      'student_id' =>$result->student_id
                                                   ])->count('subject_id');
 
-                                        $averageMark = (float)$totalMark / (float)$totalSubject;
+                                        $gradePoint = (float)$totalGrade / (float)$totalSubject;
 
-                                        $gradePoint = \App\Models\MarksGrade::where([
-                                                      ['start_marks', '<=', $averageMark],
-                                                      ['end_marks', '>=', $averageMark]
-                                                  ])->first();
+
 
                                          $fail = \App\Models\Mark::where([
                                                      'year_id' => $result->year_id,
@@ -327,7 +324,7 @@
 
                                     <div class="box">
                             {{$result->student->id_number}} : @if(!(empty($fail->student_id)) == $result->student->id) <b>Failed ({{ $failSubject  }})</b> @else
-                                <b>{{$gradePoint->grade_point}}</b> @endif
+                                <b>{{number_format($gradePoint, 2)}}</b> @endif
 </div>
 
 
@@ -342,7 +339,7 @@
 
 
 
-                    <div class="divpadding">
+                    <div class="divpadding text-center">
 
                     </div>
                 </div>
@@ -355,8 +352,10 @@
 
 
         </div>
+   <div class="text-center"> <button onclick="window.print()" class="btn btn-primary">Print</button></div>
     </div>
     <div id="dev_info">
+
         <p>Developed &amp; Maintained by Partha</p>
         <p>Student Management System</p>
     </div>
