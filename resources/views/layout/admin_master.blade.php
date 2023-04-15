@@ -23,16 +23,7 @@
 
             </ul>
             <ul class="navbar-nav navbar-nav-right">
-                <li class="nav-item nav-search d-none d-md-block mr-0">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search..." aria-label="search" aria-describedby="search">
-                        <div class="input-group-prepend">
-                <span class="input-group-text" id="search">
-                  <i class="typcn typcn-zoom"></i>
-                </span>
-                        </div>
-                    </div>
-                </li>
+
             </ul>
         </div>
     </nav>

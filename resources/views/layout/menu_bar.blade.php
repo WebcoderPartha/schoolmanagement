@@ -143,6 +143,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('reports.profit_view') }}">Profit Report</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('reports.marksheet_view') }}">Marksheet Generate</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('reports.employee_attendant') }}">Attendant Report</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('reports.result_report') }}">Exam Result Report</a></li>
                 </ul>
             </div>
         </li>

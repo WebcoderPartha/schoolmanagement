@@ -37,6 +37,7 @@ use App\Http\Controllers\Backend\Accunts\AccountOtherCostController;
 use App\Http\Controllers\Backend\ManageReport\ProfitReportController;
 use App\Http\Controllers\Backend\ManageReport\StudentMarkSheetController;
 use App\Http\Controllers\Backend\ManageReport\EmployeeAttendantReport;
+use App\Http\Controllers\Backend\ManageReport\ResultReportController;
 
 
 
@@ -420,6 +421,14 @@ Route::prefix('reports')->middleware('admin')->group(function (){
     Route::controller(EmployeeAttendantReport::class )->group(function(){
         Route::get('/employee/attendant', 'EmployeeAttendantReport')->name('reports.employee_attendant');
         Route::get('/employee/attendant-view', 'EmployeeAttendantReportView')->name('reports.employee_attendant_view');
+
+    });
+
+
+    // Student Result Report
+    Route::controller(ResultReportController::class )->group(function(){
+        Route::get('/exam/results', 'ResultReport')->name('reports.result_report');
+        Route::get('/exam/result/search', 'GetResultReport')->name('reports.get_result_report');
 
     });
 
