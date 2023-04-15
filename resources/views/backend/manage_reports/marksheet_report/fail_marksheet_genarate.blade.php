@@ -364,15 +364,14 @@
                         <tbody>
                         @foreach($allMarks as $key => $mark)
                             @php
-                                $gradePoint = \App\Models\MarksGrade::where('start_marks', '<=', (float)$mark->marks)->where('end_marks', '>=', (float)$mark->marks)->first();
-
+                                 $gradePoint = \App\Models\MarksGrade::where('start_marks', '<=', $mark->marks)->where('end_marks', '>=', $mark->marks)->first();
                             @endphp
                             <tr>
                                 <td class="cent-align">{{ $key+1}}</td>
                                 <td class="cent-align">{{ $mark->subject->name }}</td>
                                 <td class="cent-align">{{ $mark->marks }}</td>
                                 <td class="cent-align">{{ $gradePoint->grade_name}}</td>
-                                <td class="cent-align">{{ $gradePoint->grade_point}}</td>
+                                <td class="cent-align">{{ number_format($gradePoint->grade_point, 2)}}</td>
                             </tr>
                         @endforeach
                         <tr>

@@ -317,7 +317,7 @@
                                     </tr>
                                     <tr>
                                         <td>Result</td>
-                                        <td>CGPA = <b>{{ $cgpa->grade_point }}</b></td>
+                                        <td>CGPA = <b>{{ number_format($cgpa->grade_point, 2) }}</b></td>
                                         <td>Date of Birth</td>
                                         <td>{{ date('d-m-Y', strtotime($allMarks[0]->student->dateofbirth)) }}</td>
                                     </tr>
@@ -339,7 +339,7 @@
                                     <tr>
                                         <td class="cent-align">{{ $grade->start_marks }} - {{$grade->end_marks}}</td>
                                         <td><span>{{ $grade->grade_name }}</span></td>
-                                        <td class="cent-align">{{ $grade->grade_point }}</td>
+                                        <td class="cent-align">{{ number_format($grade->grade_point, 2) }}</td>
                                     </tr>
                                     @endforeach
                                     </tbody>
@@ -364,7 +364,9 @@
                             <tbody>
                             @foreach($allMarks as $key => $mark)
                                 @php
-                                    $gradePoint = \App\Models\MarksGrade::where('start_marks', '<=', (float)$mark->marks)->where('end_marks', '>=', (float)$mark->marks)->first();
+
+ $gradePoint = \App\Models\MarksGrade::where('start_marks', '<=', $mark->marks)->where('end_marks', '>=', $mark->marks)->first();
+
 
                                 @endphp
                                 <tr>
@@ -372,13 +374,13 @@
                                     <td class="cent-align">{{ $mark->subject->name }}</td>
                                     <td class="cent-align">{{ $mark->marks }}</td>
                                     <td class="cent-align">{{ $gradePoint->grade_name}}</td>
-                                    <td class="cent-align">{{ $gradePoint->grade_point}}</td>
+                                    <td class="cent-align">{{ number_format($gradePoint->grade_point, 2)}}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td colspan="3" style="border-bottom: none !important;"></td>
                                 <td><b>Grade Point: {{ $cgpa->grade_name }}</b></td>
-                                <td><b>CGPA: {{ $cgpa->grade_point }}</b></td>
+                                <td><b>CGPA: {{ number_format($cgpa->grade_point, 2) }}</b></td>
                             </tr>
 
 

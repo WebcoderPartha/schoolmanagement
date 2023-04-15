@@ -78,8 +78,8 @@ class StudentMarkSheetController extends Controller
                 $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
 
                 $data['cgpa'] = MarksGrade::where([
-                    ['start_marks', '<=', (float)$data['average']],
-                    ['end_marks', '>=', (float)$data['average']]
+                    ['start_marks', '<=', $data['average']],
+                    ['end_marks', '>=', $data['average']]
                 ])->first();
 
                 return view('backend.manage_reports.marksheet_report.marksheet_genarate', $data);
@@ -114,12 +114,13 @@ class StudentMarkSheetController extends Controller
                     'id_number' => $request->id_number
                 ])->sum('marks');
 
-                $data['average'] = (float)$data['total_mark'] / $data['totalSubject'];
+                $data['average'] = $data['total_mark'] / $data['totalSubject'];
 
                 $data['cgpa'] = MarksGrade::where([
-                    ['start_marks', '<=', (float)$data['average']],
-                    ['end_marks', '>=', (float)$data['average']]
+                    ['start_marks', '<=', 30],
+                    ['end_marks', '>=', 30]
                 ])->first();
+
 
                 return view('backend.manage_reports.marksheet_report.fail_marksheet_genarate', $data);
 

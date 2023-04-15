@@ -327,7 +327,7 @@
                                     <tr>
                                         <td class="cent-align">{{ $grade->start_marks }} - {{$grade->end_marks}}</td>
                                         <td><span>{{ $grade->grade_name }}</span></td>
-                                        <td class="cent-align">{{ $grade->grade_point }}</td>
+                                        <td class="cent-align">{{ number_format($grade->grade_point, 2) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -360,7 +360,7 @@
                                 <td class="cent-align">{{ $mark->subject->name }}</td>
                                 <td class="cent-align">{{ $mark->marks }}</td>
                                 <td class="cent-align">{{ $gradePoint->grade_name}}</td>
-                                <td class="cent-align">{{ $gradePoint->grade_point}}</td>
+                                <td class="cent-align">{{ number_format($gradePoint->grade_point, 2)}}</td>
                             </tr>
                         @endforeach
                         <tr>
